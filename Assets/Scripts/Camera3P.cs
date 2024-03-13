@@ -8,7 +8,6 @@ public class Camera3P : MonoBehaviour
     public Transform orientation;
     public Transform player;
     public Transform playerObject;
-    Rigidbody rigidbody;
 
     [Header("Virables")]
     public float rotationSpeed;
