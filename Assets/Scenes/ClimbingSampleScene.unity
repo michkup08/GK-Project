@@ -1159,7 +1159,7 @@ MonoBehaviour:
   playerHeight: 0
   touchGround: 0
   readyToJump: 0
-  rigidbody: {fileID: 0}
+  rigidbody: {fileID: 1276222409}
 --- !u!114 &1276222412
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1177,6 +1177,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   playerMovement: {fileID: 1276222411}
+  climbSpeed: 1
+  maxClimbAngle: 60
+  maxClimbTimeX: 0.5
+  maxClimbTimeZ: 0.5
 --- !u!1 &1360855773
 GameObject:
   m_ObjectHideFlags: 0

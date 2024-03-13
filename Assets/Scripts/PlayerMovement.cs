@@ -30,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     bool readyToJump;
     Vector3 moveDir;
-    public Rigidbody rigidbody;
+    Rigidbody rigidbody;
 
     // Start is called before the first frame update
     void Start()

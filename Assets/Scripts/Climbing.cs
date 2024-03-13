@@ -8,35 +8,45 @@ public class Climbing : MonoBehaviour
 {
     [Header("References")]
     /// Player orientation
-    public Transform orientation;
+    [SerializeField]
+    Transform orientation;
     /// Climbable layer
-    public LayerMask climbableWall;
-    /// Player movement reference to access the rigidbody
-    public PlayerMovement playerMovement;
+    [SerializeField]
+    LayerMask climbableWall;
+    /// Player movement reference to access touchGround variable
+    [SerializeField]
+    PlayerMovement playerMovement;
 
     [Header("Climbing")]
     /// Climb speed
-    public float climbSpeed = 1.5f;
+    [SerializeField]
+    float climbSpeed = 1.5f;
     /// max climb angle (to recognize climbing and walking on the wall)
-    public float maxClimbAngle = 30.0f;
+    [SerializeField]
+    float maxClimbAngle = 30.0f;
 
     /// drag before start climbing
     private float originalDrag;
     /// climbing state
-    bool isClimbing = false;
+    private bool isClimbing = false;
 
     [Header("Climbing Timer")]
     /// max climbing times
-    public float maxClimbTimeX = 0.4f;
-    public float maxClimbTimeZ = 0.4f;
+    [SerializeField]
+    float maxClimbTimeX = 0.4f;
+    [SerializeField]
+    float maxClimbTimeZ = 0.4f;
+
     /// climbing movement timers
     private float climbTimeX = 0.0f;
     private float climbTimeZ = 0.0f;
 
+    Rigidbody rigidbody;
+
 
     void Start()
     {
-
+        rigidbody = GetComponent<Rigidbody>();
     }
 
     void Update()
@@ -44,7 +54,7 @@ public class Climbing : MonoBehaviour
         SetClimbingState();
         if (isClimbing)
         {
-            originalDrag = playerMovement.rigidbody.drag;
+            originalDrag = rigidbody.drag;
             Climb();
         }
         else
@@ -55,64 +65,55 @@ public class Climbing : MonoBehaviour
 
     private void DisableClimbing()
     {
-        playerMovement.rigidbody.useGravity = true;
+        rigidbody.useGravity = true;
 
         if (!playerMovement.touchGround)
-            playerMovement.rigidbody.drag = 0;
+            rigidbody.drag = 0;
         else
-            playerMovement.rigidbody.drag = originalDrag;
+            rigidbody.drag = originalDrag;
 
     }
 
     private void Climb()
     {
-        playerMovement.rigidbody.useGravity = false;
-        playerMovement.rigidbody.drag = 0;
+        rigidbody.useGravity = false;
+        rigidbody.drag = 0;
 
-        var currentVelocity = playerMovement.rigidbody.velocity;
+        var currentVelocity = rigidbody.velocity;
 
         if (Input.GetKey(KeyCode.W))
         {
             climbTimeX = 0.0f;
-            playerMovement.rigidbody.velocity = new Vector3(0.0f, climbSpeed, currentVelocity.z);
+            rigidbody.velocity = new Vector3(0.0f, climbSpeed, currentVelocity.z);
         }
         else if (Input.GetKey(KeyCode.S))
         {
             climbTimeX = 0.0f;
-            playerMovement.rigidbody.velocity = new Vector3(0.0f, -climbSpeed, currentVelocity.z);
+            rigidbody.velocity = new Vector3(0.0f, -climbSpeed, currentVelocity.z);
         }
-        //else
-        //{
-        //    playerMovement.rigidbody.velocity = new Vector3(0.0f, 0.0f, currentVelocity.z);
-        //    Debug.Log("velocity"+playerMovement.rigidbody.velocity);
-        //}
 
         if (Input.GetKey(KeyCode.A))
         {
             climbTimeZ = 0.0f;
-            playerMovement.rigidbody.velocity = new Vector3(0.0f, 0.0f, climbSpeed);
+            rigidbody.velocity = new Vector3(0.0f, 0.0f, climbSpeed);
         }
         else if (Input.GetKey(KeyCode.D))
         {
             climbTimeZ = 0.0f;
-            playerMovement.rigidbody.velocity = new Vector3(0.0f, 0.0f, -climbSpeed);
+            rigidbody.velocity = new Vector3(0.0f, 0.0f, -climbSpeed);
         }
-        //else
-        //{
-        //    playerMovement.rigidbody.velocity = new Vector3(0.0f, currentVelocity.y, 0.0f);
-        //}
 
         climbTimeX += Time.deltaTime;
         climbTimeZ += Time.deltaTime;
 
         if (climbTimeX > maxClimbTimeX)
         {
-            playerMovement.rigidbody.velocity = new Vector3(0.0f, 0.0f, currentVelocity.z);
+            rigidbody.velocity = new Vector3(0.0f, 0.0f, currentVelocity.z);
             climbTimeX = 0.0f;
         }
         if (climbTimeZ > maxClimbTimeZ)
         {
-            playerMovement.rigidbody.velocity = new Vector3(0.0f, currentVelocity.y, 0.0f);
+            rigidbody.velocity = new Vector3(0.0f, currentVelocity.y, 0.0f);
             climbTimeZ = 0.0f;
         }
     }
