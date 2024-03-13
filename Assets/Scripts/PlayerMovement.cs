@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
     public float jumpForce;
     public float jumpCooldown;
     public float airMultiplier;
-    
+
 
     [Header("private")]
     [SerializeField]
@@ -26,11 +26,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     float playerHeight;
     [SerializeField]
-    bool touchGround;
+    public bool touchGround;
     [SerializeField]
     bool readyToJump;
     Vector3 moveDir;
-    Rigidbody rigidbody;
+    public Rigidbody rigidbody;
 
     // Start is called before the first frame update
     void Start()
@@ -42,8 +42,8 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        touchGround = Physics.Raycast(transform.position, Vector3.down, 1f , isGround);
-        
+        touchGround = Physics.SphereCast(transform.position, 0.3f, Vector3.down, out RaycastHit hit, 1f, isGround);
+
         inputControl();
         speedLimit();
 
@@ -51,33 +51,32 @@ public class PlayerMovement : MonoBehaviour
         {
             rigidbody.drag = groundDrag;
         }
-        else
-        {
-            rigidbody.drag = 0;
-        }
     }
 
     private void FixedUpdate()
     {
-        groundMovement();
+        if (touchGround)
+            groundMovement();
 
     }
 
     private void LateUpdate()
     {
-        
+
     }
+
     private void inputControl()
     {
         horizontalI = Input.GetAxisRaw("Horizontal");
         verticalI = Input.GetAxisRaw("Vertical");
-        if(Input.GetKeyDown(KeyCode.Space) && touchGround && readyToJump)
+        if (Input.GetKeyDown(KeyCode.Space) && touchGround && readyToJump)
         {
             readyToJump = false;
             jump();
             Invoke(nameof(afterJump), jumpCooldown);
         }
     }
+
     private void speedLimit()
     {
         Vector2 rbSpeed = new Vector2(rigidbody.velocity.x, rigidbody.velocity.z);
@@ -87,11 +86,11 @@ public class PlayerMovement : MonoBehaviour
             rigidbody.velocity = new Vector3(rbSpeed.x, rigidbody.velocity.y, rbSpeed.y);
         }
     }
+
     private void groundMovement()
     {
         moveDir = orientation.forward * verticalI + orientation.right * horizontalI;
         rigidbody.AddForce(moveDir.normalized * moveSpeedMultipler, ForceMode.Force);
-        
     }
 
     private void jump()
