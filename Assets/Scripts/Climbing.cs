@@ -57,10 +57,6 @@ public class Climbing : MonoBehaviour
             originalDrag = rigidbody.drag;
             Climb();
         }
-        else
-        {
-            DisableClimbing();
-        }
     }
 
     private void DisableClimbing()
@@ -71,7 +67,6 @@ public class Climbing : MonoBehaviour
             rigidbody.drag = 0;
         else
             rigidbody.drag = originalDrag;
-
     }
 
     private void Climb()
@@ -123,13 +118,19 @@ public class Climbing : MonoBehaviour
         bool onWall = Physics.SphereCast(transform.position, 0.3f, orientation.forward, out RaycastHit hitWall, 1f, climbableWall);
         float angle = Vector3.Angle(orientation.forward, -hitWall.normal);
 
-        if (!onWall)
+        if (!onWall && isClimbing)
         {
+            DisableClimbing();
             isClimbing = false;
         }
         else if (!playerMovement.touchGround && onWall && angle <= maxClimbAngle)
         {
             isClimbing = true;
+        }
+        else if (isClimbing)
+        {
+            DisableClimbing();
+            isClimbing = false;
         }
         else
         {

@@ -51,13 +51,16 @@ public class PlayerMovement : MonoBehaviour
         {
             rigidbody.drag = groundDrag;
         }
+        else
+        {
+            rigidbody.drag = 0;
+        }
     }
 
     private void FixedUpdate()
     {
         if (touchGround)
             groundMovement();
-
     }
 
     private void LateUpdate()
@@ -74,6 +77,7 @@ public class PlayerMovement : MonoBehaviour
             readyToJump = false;
             jump();
             Invoke(nameof(afterJump), jumpCooldown);
+            touchGround = false;
         }
     }
 
