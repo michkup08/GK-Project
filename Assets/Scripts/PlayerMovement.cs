@@ -97,11 +97,19 @@ public class PlayerMovement : MonoBehaviour
     private void groundMovement()
     {
         moveDir = orientation.forward * verticalI + orientation.right * horizontalI;
+        if (moveDir != Vector3.zero && transform.parent != null)
+        {
+            transform.parent = null;
+        }
         rigidbody.AddForce(moveDir.normalized * moveSpeedMultipler, ForceMode.Force);
     }
 
     private void jump()
     {
+        if (transform.parent != null)
+        {
+            transform.parent = null;
+        }
         rigidbody.AddForce(transform.up * jumpForce, ForceMode.Impulse);
     }
 
