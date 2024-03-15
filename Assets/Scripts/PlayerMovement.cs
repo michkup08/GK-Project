@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
     public float jumpCooldown;
     public float airMultiplier;
 
+    public float velocity; //for ui purpose
 
     [Header("private")]
     [SerializeField]
@@ -55,6 +56,8 @@ public class PlayerMovement : MonoBehaviour
         {
             rigidbody.drag = 0;
         }
+
+        velocity = rigidbody.velocity.magnitude;
     }
 
     private void FixedUpdate()
