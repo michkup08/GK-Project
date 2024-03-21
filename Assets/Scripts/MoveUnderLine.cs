@@ -1,15 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using Vector3 = UnityEngine.Vector3;
 
-public class MoveUnderRope : MonoBehaviour
+public class MoveUnderLine : MonoBehaviour
 {
-    [Header("Player Ref")]
-    [SerializeField]
-    private GameObject player;
-
-    Rigidbody playerRigidbody;
-
     [Header("Drop Rope Timer")]
     private float doubleSpaceKeyPressTime = 0.0f;
     [SerializeField]
@@ -23,22 +16,22 @@ public class MoveUnderRope : MonoBehaviour
     [Header("Speed")]
     [SerializeField]
     private float speed = 3.0f;
+    bool isMovingUnderLine = false;
 
-    bool isMovingUnderRope = false;
+    private Rigidbody playerRigidbody;
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.contacts.Length > 0)
+        if (collision.gameObject.CompareTag("movableUnderLine"))
         {
-            ContactPoint contact = collision.contacts[0];
-            if (Vector3.Dot(contact.normal, Vector3.up) > 0.5)
+            if (collision.contacts.Length > 0)
             {
-                if (collision.gameObject == player)
+                ContactPoint contact = collision.GetContact(0);
+                if (Vector3.Dot(contact.normal, Vector3.down) > 0.5)
                 {
                     playerRigidbody.useGravity = false;
                     playerRigidbody.drag = 0;
-                    playerRigidbody.rotation = Quaternion.Euler(0, 0, 0);
-                    isMovingUnderRope = true;
+                    isMovingUnderLine = true;
                 }
             }
         }
@@ -46,21 +39,21 @@ public class MoveUnderRope : MonoBehaviour
 
     private void OnCollisionExit(Collision collision)
     {
-        if (collision.gameObject == player)
+        if (collision.gameObject.CompareTag("movableUnderLine"))
         {
             playerRigidbody.useGravity = true;
-            isMovingUnderRope = false;
+            isMovingUnderLine = false;
         }
     }
 
     void Start()
     {
-        playerRigidbody = player.GetComponent<Rigidbody>();
+        playerRigidbody = GetComponent<Rigidbody>();
     }
 
     void Update()
     {
-        if (isMovingUnderRope)
+        if (isMovingUnderLine)
         {
             if (Input.GetKey(KeyCode.W))
             {
