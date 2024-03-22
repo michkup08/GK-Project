@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
     public Transform orientation;
     public LayerMask isGround;
 
-    [Header("Virables")]
+    [Header("Variables")]
     public float moveSpeedMultipler;
     public float moveSpeedLimit;
     public float groundDrag;
