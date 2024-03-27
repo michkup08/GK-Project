@@ -30,6 +30,9 @@ public class Grappling : MonoBehaviour
     [SerializeField]
     private float massScale = 4.5f;
 
+    private MultipleTags tags;
+    private string checkTag = "grappable";
+
     void Start()
     {
         lineRenderer = GetComponent<LineRenderer>();
@@ -67,21 +70,23 @@ public class Grappling : MonoBehaviour
     {
         if (Physics.Raycast(playerCamera.position, playerCamera.forward, out RaycastHit hitPoint, maxGrapplingDistance, ~(1 << LayerMask.NameToLayer("Player"))))
         {
-            if (hitPoint.transform.CompareTag("grappable"))
-            {
-                grapplePoint = hitPoint.point;
-                grappling = true;
-                lineRenderer.positionCount = 2;
+            hitPoint.transform.TryGetComponent<MultipleTags>(out var multipleTags);
+            if (multipleTags != null)
+                if (multipleTags.HasTag(checkTag))
+                {
+                    grapplePoint = hitPoint.point;
+                    grappling = true;
+                    lineRenderer.positionCount = 2;
 
-                SpringJoint springJoint = playerObject.AddComponent<SpringJoint>();
-                springJoint.autoConfigureConnectedAnchor = false;
-                springJoint.connectedAnchor = grapplePoint;
-                springJoint.maxDistance = Vector3.Distance(playerObject.position, grapplePoint) * 0.8f;
-                springJoint.minDistance = Vector3.Distance(playerObject.position, grapplePoint) * 0.1f;
-                springJoint.spring = spring;
-                springJoint.damper = damper;
-                springJoint.massScale = massScale;
-            }
+                    SpringJoint springJoint = playerObject.AddComponent<SpringJoint>();
+                    springJoint.autoConfigureConnectedAnchor = false;
+                    springJoint.connectedAnchor = grapplePoint;
+                    springJoint.maxDistance = Vector3.Distance(playerObject.position, grapplePoint) * 0.8f;
+                    springJoint.minDistance = Vector3.Distance(playerObject.position, grapplePoint) * 0.1f;
+                    springJoint.spring = spring;
+                    springJoint.damper = damper;
+                    springJoint.massScale = massScale;
+                }
         }
     }
 
