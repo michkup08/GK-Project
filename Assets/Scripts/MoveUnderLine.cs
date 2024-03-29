@@ -3,8 +3,9 @@ using Vector3 = UnityEngine.Vector3;
 
 public class MoveUnderLine : MonoBehaviour
 {
-    [Header("Drop Rope Timer")]
+    [Header("Drop Line Timer")]
     private float doubleSpaceKeyPressTime = 0.0f;
+
     [SerializeField]
     private float doubleSpaceKeyPressTimeMax = 0.5f;
     private bool spaceKeyPressed = false;
@@ -18,7 +19,12 @@ public class MoveUnderLine : MonoBehaviour
     private float speed = 3.0f;
     bool isMovingUnderLine = false;
 
+    [Header("ObjectsRef")]
+    [SerializeField]
+    private Transform playerOrientation;
+
     private Rigidbody playerRigidbody;
+    private int direction = 1;
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -55,15 +61,17 @@ public class MoveUnderLine : MonoBehaviour
     {
         if (isMovingUnderLine)
         {
+            var angle = Vector3.Angle(playerOrientation.forward, Vector3.forward);
+            direction = angle > 90 ? -1 : 1;
             if (Input.GetKey(KeyCode.W))
             {
                 moveTime = 0.0f;
-                playerRigidbody.velocity = new Vector3(0.0f, 0.0f, speed);
+                playerRigidbody.velocity = new Vector3(0.0f, 0.0f, speed * direction);
             }
             else if (Input.GetKey(KeyCode.S))
             {
                 moveTime = 0.0f;
-                playerRigidbody.velocity = new Vector3(0.0f, 0.0f, -speed);
+                playerRigidbody.velocity = new Vector3(0.0f, 0.0f, -speed * direction);
             }
 
             if (Input.GetKeyUp(KeyCode.Space))
