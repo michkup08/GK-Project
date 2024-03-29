@@ -1,7 +1,7 @@
 using UnityEngine;
 using Vector3 = UnityEngine.Vector3;
 
-public class MoveUnderLine : MonoBehaviour
+public class LineMovement : MonoBehaviour
 {
     [Header("Drop Line Timer")]
     private float doubleSpaceKeyPressTime = 0.0f;
@@ -17,7 +17,7 @@ public class MoveUnderLine : MonoBehaviour
     [Header("Speed")]
     [SerializeField]
     private float speed = 3.0f;
-    bool isMovingUnderLine = false;
+    bool isMovingOnLine = false;
 
     [Header("ObjectsRef")]
     [SerializeField]
@@ -25,6 +25,7 @@ public class MoveUnderLine : MonoBehaviour
 
     private Rigidbody playerRigidbody;
     private int direction = 1;
+    private bool isOnLine = false;
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -33,11 +34,12 @@ public class MoveUnderLine : MonoBehaviour
             if (collision.contacts.Length > 0)
             {
                 ContactPoint contact = collision.GetContact(0);
-                if (Vector3.Dot(contact.normal, Vector3.down) > 0.5)
+                isOnLine = (Vector3.Dot(contact.normal, Vector3.up) > 0.5);
+                isMovingOnLine = (Vector3.Dot(contact.normal, Vector3.down) > 0.5) || (Vector3.Dot(contact.normal, Vector3.up) > 0.5);
+                if (isMovingOnLine)
                 {
                     playerRigidbody.useGravity = false;
                     playerRigidbody.drag = 0;
-                    isMovingUnderLine = true;
                 }
             }
         }
@@ -48,7 +50,7 @@ public class MoveUnderLine : MonoBehaviour
         if (collision.gameObject.CompareTag("movableUnderLine"))
         {
             playerRigidbody.useGravity = true;
-            isMovingUnderLine = false;
+            isMovingOnLine = false;
         }
     }
 
@@ -59,7 +61,7 @@ public class MoveUnderLine : MonoBehaviour
 
     void Update()
     {
-        if (isMovingUnderLine)
+        if (isMovingOnLine)
         {
             var angle = Vector3.Angle(playerOrientation.forward, Vector3.forward);
             direction = angle > 90 ? -1 : 1;
