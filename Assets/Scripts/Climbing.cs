@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
@@ -40,6 +41,8 @@ public class Climbing : MonoBehaviour
     /// climbing movement timers
     private float climbTimeX = 0.0f;
     private float climbTimeZ = 0.0f;
+
+    private bool climbingLock = false;
 
     Rigidbody rigidbody;
 
@@ -98,6 +101,14 @@ public class Climbing : MonoBehaviour
             rigidbody.velocity = new Vector3(0.0f, 0.0f, -climbSpeed);
         }
 
+        // release climbing
+        if (Input.GetKey(KeyCode.E))
+        {
+            DisableClimbing();
+            isClimbing = false;
+            climbingLock = true;
+        }
+
         climbTimeX += Time.deltaTime;
         climbTimeZ += Time.deltaTime;
 
@@ -118,12 +129,14 @@ public class Climbing : MonoBehaviour
         bool onWall = Physics.SphereCast(transform.position, 0.3f, orientation.forward, out RaycastHit hitWall, 1f, climbableWall);
         float angle = Vector3.Angle(orientation.forward, -hitWall.normal);
 
+        SetClimbingLock();
+
         if (!onWall && isClimbing)
         {
             DisableClimbing();
             isClimbing = false;
         }
-        else if (!playerMovement.touchGround && onWall && angle <= maxClimbAngle)
+        else if (!playerMovement.touchGround && onWall && angle <= maxClimbAngle && !climbingLock)
         {
             isClimbing = true;
         }
@@ -135,6 +148,21 @@ public class Climbing : MonoBehaviour
         else
         {
             isClimbing = false;
+        }
+    }
+
+    private void SetClimbingLock()
+    {
+        if (climbingLock)
+        {
+            if (playerMovement.touchGround)
+            {
+                climbingLock = false;
+            }
+            else if (Input.GetKey(KeyCode.W))
+            {
+                climbingLock = false;
+            }
         }
     }
 }
