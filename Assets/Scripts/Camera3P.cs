@@ -10,7 +10,7 @@ public class Camera3P : MonoBehaviour
     public Transform player;
     public Transform playerObject;
 
-    [Header("Virables")]
+    [Header("Variables")]
     public float rotationSpeed;
     public Transform lookDir;
 

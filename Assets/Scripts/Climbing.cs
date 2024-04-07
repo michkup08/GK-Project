@@ -44,12 +44,12 @@ public class Climbing : MonoBehaviour
 
     private bool climbingLock = false;
 
-    Rigidbody rigidbody;
+    Rigidbody playerRigidbody;
 
 
     void Start()
     {
-        rigidbody = GetComponent<Rigidbody>();
+        playerRigidbody = GetComponent<Rigidbody>();
     }
 
     void Update()
@@ -57,48 +57,48 @@ public class Climbing : MonoBehaviour
         SetClimbingState();
         if (isClimbing)
         {
-            originalDrag = rigidbody.drag;
+            originalDrag = playerRigidbody.drag;
             Climb();
         }
     }
 
     private void DisableClimbing()
     {
-        rigidbody.useGravity = true;
+        playerRigidbody.useGravity = true;
 
         if (!playerMovement.touchGround)
-            rigidbody.drag = 0;
+            playerRigidbody.drag = 0;
         else
-            rigidbody.drag = originalDrag;
+            playerRigidbody.drag = originalDrag;
     }
 
     private void Climb()
     {
-        rigidbody.useGravity = false;
-        rigidbody.drag = 0;
+        playerRigidbody.useGravity = false;
+        playerRigidbody.drag = 0;
 
-        var currentVelocity = rigidbody.velocity;
+        var currentVelocity = playerRigidbody.velocity;
 
         if (Input.GetKey(KeyCode.W))
         {
             climbTimeX = 0.0f;
-            rigidbody.velocity = new Vector3(0.0f, climbSpeed, currentVelocity.z);
+            playerRigidbody.velocity = new Vector3(0.0f, climbSpeed, currentVelocity.z);
         }
         else if (Input.GetKey(KeyCode.S))
         {
             climbTimeX = 0.0f;
-            rigidbody.velocity = new Vector3(0.0f, -climbSpeed, currentVelocity.z);
+            playerRigidbody.velocity = new Vector3(0.0f, -climbSpeed, currentVelocity.z);
         }
 
         if (Input.GetKey(KeyCode.A))
         {
             climbTimeZ = 0.0f;
-            rigidbody.velocity = new Vector3(0.0f, 0.0f, climbSpeed);
+            playerRigidbody.velocity = new Vector3(0.0f, 0.0f, climbSpeed);
         }
         else if (Input.GetKey(KeyCode.D))
         {
             climbTimeZ = 0.0f;
-            rigidbody.velocity = new Vector3(0.0f, 0.0f, -climbSpeed);
+            playerRigidbody.velocity = new Vector3(0.0f, 0.0f, -climbSpeed);
         }
 
         // release climbing
@@ -114,12 +114,12 @@ public class Climbing : MonoBehaviour
 
         if (climbTimeX > maxClimbTimeX)
         {
-            rigidbody.velocity = new Vector3(0.0f, 0.0f, currentVelocity.z);
+            playerRigidbody.velocity = new Vector3(0.0f, 0.0f, currentVelocity.z);
             climbTimeX = 0.0f;
         }
         if (climbTimeZ > maxClimbTimeZ)
         {
-            rigidbody.velocity = new Vector3(0.0f, currentVelocity.y, 0.0f);
+            playerRigidbody.velocity = new Vector3(0.0f, currentVelocity.y, 0.0f);
             climbTimeZ = 0.0f;
         }
     }

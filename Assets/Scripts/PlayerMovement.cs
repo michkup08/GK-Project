@@ -31,13 +31,13 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     bool readyToJump;
     Vector3 moveDir;
-    Rigidbody rigidbody;
+    Rigidbody playerRigidbody;
 
     // Start is called before the first frame update
     void Start()
     {
         readyToJump = true;
-        rigidbody = GetComponent<Rigidbody>();
+        playerRigidbody = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -50,25 +50,20 @@ public class PlayerMovement : MonoBehaviour
 
         if (touchGround)
         {
-            rigidbody.drag = groundDrag;
+            playerRigidbody.drag = groundDrag;
         }
         else
         {
-            rigidbody.drag = 0;
+            playerRigidbody.drag = 0;
         }
 
-        velocity = rigidbody.velocity.magnitude;
+        velocity = playerRigidbody.velocity.magnitude;
     }
 
     private void FixedUpdate()
     {
         if (touchGround)
             groundMovement();
-    }
-
-    private void LateUpdate()
-    {
-
     }
 
     private void inputControl()
@@ -86,11 +81,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void speedLimit()
     {
-        Vector2 rbSpeed = new Vector2(rigidbody.velocity.x, rigidbody.velocity.z);
+        Vector2 rbSpeed = new Vector2(playerRigidbody.velocity.x, playerRigidbody.velocity.z);
         if (rbSpeed.magnitude > moveSpeedLimit)
         {
             rbSpeed = rbSpeed.normalized * moveSpeedMultipler;
-            rigidbody.velocity = new Vector3(rbSpeed.x, rigidbody.velocity.y, rbSpeed.y);
+            playerRigidbody.velocity = new Vector3(rbSpeed.x, playerRigidbody.velocity.y, rbSpeed.y);
         }
     }
 
@@ -101,7 +96,7 @@ public class PlayerMovement : MonoBehaviour
         {
             transform.parent = null;
         }
-        rigidbody.AddForce(moveDir.normalized * moveSpeedMultipler, ForceMode.Force);
+        playerRigidbody.AddForce(moveDir.normalized * moveSpeedMultipler, ForceMode.Force);
     }
 
     private void jump()
@@ -110,7 +105,7 @@ public class PlayerMovement : MonoBehaviour
         {
             transform.parent = null;
         }
-        rigidbody.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+        playerRigidbody.AddForce(transform.up * jumpForce, ForceMode.Impulse);
     }
 
     private void afterJump()
