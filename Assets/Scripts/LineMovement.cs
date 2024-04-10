@@ -68,11 +68,13 @@ public class LineMovement : MonoBehaviour
             if (Input.GetKey(KeyCode.W))
             {
                 moveTime = 0.0f;
+                playerRigidbody.rotation = Quaternion.Slerp(playerRigidbody.rotation, Quaternion.Euler(0.0f, 90.0f * direction, 0.0f), Time.deltaTime);
                 playerRigidbody.velocity = new Vector3(0.0f, 0.0f, speed * direction);
             }
             else if (Input.GetKey(KeyCode.S))
             {
                 moveTime = 0.0f;
+                playerRigidbody.rotation = Quaternion.Slerp(playerRigidbody.rotation, Quaternion.Euler(0.0f, 90.0f * direction, 0.0f), Time.deltaTime);
                 playerRigidbody.velocity = new Vector3(0.0f, 0.0f, -speed * direction);
             }
 
@@ -83,6 +85,7 @@ public class LineMovement : MonoBehaviour
                     if (doubleSpaceKeyPressTime <= doubleSpaceKeyPressTimeMax)
                     {
                         playerRigidbody.useGravity = true;
+                        isMovingOnLine = false;
                     }
                 }
                 spaceKeyPressed = true;
