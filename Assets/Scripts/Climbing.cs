@@ -38,6 +38,10 @@ public class Climbing : MonoBehaviour
     [SerializeField]
     float maxClimbTimeZ = 0.4f;
 
+    [Header("UI")]
+    [SerializeField]
+    private TextAsset climbingButtonsPrompts;
+
     /// climbing movement timers
     private float climbTimeX = 0.0f;
     private float climbTimeZ = 0.0f;
@@ -46,10 +50,12 @@ public class Climbing : MonoBehaviour
 
     Rigidbody playerRigidbody;
 
+    ScreenHints buttonPromptsController;
 
     void Start()
     {
         playerRigidbody = GetComponent<Rigidbody>();
+        buttonPromptsController = GetComponent<ScreenHints>();
     }
 
     void Update()
@@ -139,6 +145,7 @@ public class Climbing : MonoBehaviour
         else if (!playerMovement.touchGround && onWall && angle <= maxClimbAngle && !climbingLock)
         {
             isClimbing = true;
+            buttonPromptsController.LoadMessagesFromFile(climbingButtonsPrompts);
         }
         else if (isClimbing)
         {
