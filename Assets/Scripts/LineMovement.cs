@@ -3,13 +3,6 @@ using Vector3 = UnityEngine.Vector3;
 
 public class LineMovement : MonoBehaviour
 {
-    [Header("Drop Line Timer")]
-    private float doubleSpaceKeyPressTime = 0.0f;
-
-    [SerializeField]
-    private float doubleSpaceKeyPressTimeMax = 0.5f;
-    private bool spaceKeyPressed = false;
-
     [Header("Moving Timer")]
     private float moveTime = 0.0f;
     private float moveTimeMax = 0.1f;
@@ -17,7 +10,7 @@ public class LineMovement : MonoBehaviour
     [Header("Speed")]
     [SerializeField]
     private float speed = 3.0f;
-    bool isMovingOnLine = false;
+    private bool isMovingOnLine = false;
 
     [Header("ObjectsRef")]
     [SerializeField]
@@ -35,7 +28,8 @@ public class LineMovement : MonoBehaviour
             {
                 ContactPoint contact = collision.GetContact(0);
                 isOnLine = (Vector3.Dot(contact.normal, Vector3.up) > 0.5);
-                isMovingOnLine = (Vector3.Dot(contact.normal, Vector3.down) > 0.5) || (Vector3.Dot(contact.normal, Vector3.up) > 0.5);
+                bool isUnderLine = (Vector3.Dot(contact.normal, Vector3.down) > 0.5);
+                isMovingOnLine = isUnderLine || isOnLine;
                 if (isMovingOnLine)
                 {
                     playerRigidbody.useGravity = false;
@@ -78,17 +72,10 @@ public class LineMovement : MonoBehaviour
                 playerRigidbody.velocity = new Vector3(0.0f, 0.0f, -speed * direction);
             }
 
-            if (Input.GetKeyUp(KeyCode.Space))
+            if (Input.GetKeyUp(KeyCode.E))
             {
-                if (spaceKeyPressed)
-                {
-                    if (doubleSpaceKeyPressTime <= doubleSpaceKeyPressTimeMax)
-                    {
-                        playerRigidbody.useGravity = true;
-                        isMovingOnLine = false;
-                    }
-                }
-                spaceKeyPressed = true;
+                playerRigidbody.useGravity = true;
+                isMovingOnLine = false;
             }
 
             if (moveTime >= moveTimeMax)
@@ -96,15 +83,6 @@ public class LineMovement : MonoBehaviour
                 playerRigidbody.velocity = Vector3.zero;
             }
 
-            if (spaceKeyPressed)
-            {
-                doubleSpaceKeyPressTime += Time.deltaTime;
-                if (doubleSpaceKeyPressTime > doubleSpaceKeyPressTimeMax)
-                {
-                    spaceKeyPressed = false;
-                    doubleSpaceKeyPressTime = 0.0f;
-                }
-            }
             moveTime += Time.deltaTime;
         }
     }

@@ -1,22 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Ziplining : MonoBehaviour
 {
-    [SerializeField]
-    private float doubleSpaceKeyPressTimeMax = 0.5f;
-    private bool spaceKeyPressed = false;
-
     [Header("Speed")]
     [SerializeField]
     private float speed = 3.0f;
 
     private Rigidbody playerRigidbody;
-    private float doubleSpaceKeyPressTime = 0.0f;
     private bool isZiplining = false;
 
-    Vector3 minPoint;
+    private Vector3 minPoint;
 
     void Start()
     {
@@ -30,9 +23,9 @@ public class Ziplining : MonoBehaviour
             if (collision.contacts.Length > 0)
             {
                 ContactPoint contact = collision.GetContact(0);
-                isZiplining = (Vector3.Dot(contact.normal, Vector3.up) > 0.7);
+                isZiplining = Vector3.Dot(contact.normal, Vector3.up) > 0.7f;
                 playerRigidbody.useGravity = false;
-                playerRigidbody.drag = 0;
+                playerRigidbody.drag = 0f;
                 isZiplining = true;
                 minPoint = collision.gameObject.GetComponent<MeshRenderer>().bounds.min;
             }
@@ -62,27 +55,11 @@ public class Ziplining : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyUp(KeyCode.Space))
+        if (Input.GetKeyUp(KeyCode.E))
         {
-            if (spaceKeyPressed)
-            {
-                if (doubleSpaceKeyPressTime <= doubleSpaceKeyPressTimeMax)
-                {
-                    playerRigidbody.useGravity = true;
-                    isZiplining = false;
-                }
-            }
-            spaceKeyPressed = true;
+            playerRigidbody.useGravity = true;
+            isZiplining = false;
         }
 
-        if (spaceKeyPressed)
-        {
-            doubleSpaceKeyPressTime += Time.deltaTime;
-            if (doubleSpaceKeyPressTime > doubleSpaceKeyPressTimeMax)
-            {
-                spaceKeyPressed = false;
-                doubleSpaceKeyPressTime = 0.0f;
-            }
-        }
     }
 }
