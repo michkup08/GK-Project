@@ -16,6 +16,19 @@ public class LineMovement : MonoBehaviour
     [SerializeField]
     private Transform playerOrientation;
 
+    ScreenHints buttonPromptsController;
+
+    private readonly string[] movingAboveLineButtonPrompts =
+    {
+        "press <sprite name=\"W\"> and <sprite name=\"S\"> to move forward and backward"
+    };
+
+    private readonly string[] movingUnderLineButtonPrompts =
+    {
+        "press <sprite name=\"E\"> to let go",
+        "press <sprite name=\"W\"> and <sprite name=\"S\"> to move forward and backward"
+    };
+
     private Rigidbody playerRigidbody;
     private int direction = 1;
     private bool isAboveLine = false;
@@ -34,6 +47,11 @@ public class LineMovement : MonoBehaviour
                 {
                     playerRigidbody.useGravity = false;
                     playerRigidbody.drag = 0;
+                    buttonPromptsController.LoadMessage(movingAboveLineButtonPrompts, "aboveLineMovement");
+                }
+                else
+                {
+                    buttonPromptsController.LoadMessage(movingUnderLineButtonPrompts, "underLineMovement");
                 }
             }
         }
@@ -51,6 +69,7 @@ public class LineMovement : MonoBehaviour
     void Start()
     {
         playerRigidbody = GetComponent<Rigidbody>();
+        buttonPromptsController = GetComponent<ScreenHints>();
     }
 
     void Update()

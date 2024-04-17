@@ -1,2 +1,0 @@
-press <sprite name="E"> to let go
-move with <sprite name="W"> <sprite name="A"> <sprite name="S"> <sprite name="D">

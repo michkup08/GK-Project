@@ -11,9 +11,17 @@ public class Ziplining : MonoBehaviour
 
     private Vector3 minPoint;
 
+    private readonly string[] zipliningButtonsPrompts =
+    {
+        "press <sprite name=\"E\"> to let go"
+    };
+
+    ScreenHints buttonPromptsController;
+
     void Start()
     {
         playerRigidbody = GetComponent<Rigidbody>();
+        buttonPromptsController = GetComponent<ScreenHints>();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -28,6 +36,7 @@ public class Ziplining : MonoBehaviour
                 playerRigidbody.drag = 0f;
                 isZiplining = true;
                 minPoint = collision.gameObject.GetComponent<MeshRenderer>().bounds.min;
+                buttonPromptsController.LoadMessage(zipliningButtonsPrompts, "ziplining");
             }
         }
     }

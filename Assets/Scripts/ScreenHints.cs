@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ScreenHints : MonoBehaviour
@@ -13,7 +14,7 @@ public class ScreenHints : MonoBehaviour
     private bool messageShown = false;
     private bool isDisplaying = false;
 
-    private string lastFileName = "";
+    private HashSet<string> loadedMessages = new HashSet<string>();
 
     [SerializeField]
     private TMP_Text canvasText;
@@ -46,16 +47,16 @@ public class ScreenHints : MonoBehaviour
         }
     }
 
-    public void LoadMessagesFromFile(TextAsset file)
+    public void LoadMessage(string[] messages, string name)
     {
         if (isDisplaying)
             return;
 
-        if (file.name == lastFileName)
+        if (loadedMessages.Contains(name))
             return;
-                
-        messages = file.text.Split('\n');
-        lastFileName = file.name;
+
+        this.messages = messages;
+        loadedMessages.Add(name);
         isDisplaying = true;
         messageShown = false;
     }
