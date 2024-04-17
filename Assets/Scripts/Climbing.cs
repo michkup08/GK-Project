@@ -14,9 +14,6 @@ public class Climbing : MonoBehaviour
     /// Climbable layer
     [SerializeField]
     LayerMask climbableWall;
-    /// Player movement reference to access touchGround variable
-    [SerializeField]
-    PlayerMovement playerMovement;
 
     [Header("Climbing")]
     /// Climb speed
@@ -46,6 +43,9 @@ public class Climbing : MonoBehaviour
     private float climbTimeX = 0.0f;
     private float climbTimeZ = 0.0f;
 
+    /// Player movement reference to access touchGround variable
+    PlayerMovement playerMovement;
+
     private bool climbingLock = false;
 
     Rigidbody playerRigidbody;
@@ -56,6 +56,7 @@ public class Climbing : MonoBehaviour
     {
         playerRigidbody = GetComponent<Rigidbody>();
         buttonPromptsController = GetComponent<ScreenHints>();
+        playerMovement = GetComponent<PlayerMovement>();
     }
 
     void Update()

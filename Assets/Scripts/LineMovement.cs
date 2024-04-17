@@ -12,13 +12,13 @@ public class LineMovement : MonoBehaviour
     private float speed = 3.0f;
     private bool isMovingOnLine = false;
 
-    [Header("ObjectsRef")]
+    [Header("References")]
     [SerializeField]
     private Transform playerOrientation;
 
     private Rigidbody playerRigidbody;
     private int direction = 1;
-    private bool isOnLine = false;
+    private bool isAboveLine = false;
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -27,9 +27,9 @@ public class LineMovement : MonoBehaviour
             if (collision.contacts.Length > 0)
             {
                 ContactPoint contact = collision.GetContact(0);
-                isOnLine = (Vector3.Dot(contact.normal, Vector3.up) > 0.5);
+                isAboveLine = (Vector3.Dot(contact.normal, Vector3.up) > 0.5);
                 bool isUnderLine = (Vector3.Dot(contact.normal, Vector3.down) > 0.5);
-                isMovingOnLine = isUnderLine || isOnLine;
+                isMovingOnLine = isUnderLine || isAboveLine;
                 if (isMovingOnLine)
                 {
                     playerRigidbody.useGravity = false;
@@ -74,8 +74,11 @@ public class LineMovement : MonoBehaviour
 
             if (Input.GetKeyUp(KeyCode.E))
             {
-                playerRigidbody.useGravity = true;
-                isMovingOnLine = false;
+                if (!isAboveLine)
+                {
+                    playerRigidbody.useGravity = true;
+                    isMovingOnLine = false;
+                }
             }
 
             if (moveTime >= moveTimeMax)
