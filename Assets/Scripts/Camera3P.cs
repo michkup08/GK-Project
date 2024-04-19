@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Cinemachine;
 
 public class Camera3P : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class Camera3P : MonoBehaviour
     public Transform orientation;
     public Transform player;
     public Transform playerObject;
+    public Camera cam;
 
     [Header("Variables")]
     public float rotationSpeed;
@@ -21,12 +23,15 @@ public class Camera3P : MonoBehaviour
     public bool aim;
     public Image aimImage;
 
-    public GameObject defaultCinemachine, aimCinemachine;
+    public CinemachineFreeLook defaultCinemachine, aimCinemachine;
 
     void Start()
     {
         aim = false;
         aimImage.enabled = aim;
+        defaultCinemachine.Priority = 1;
+        aimCinemachine.Priority = 0;
+
     }
 
     // Update is called once per frame
@@ -35,8 +40,20 @@ public class Camera3P : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             aim = !aim;
-            defaultCinemachine.SetActive(!aim);
-            aimCinemachine.SetActive(aim);
+            
+            
+            //defaultCinemachine.SetActive(!aim);
+            //aimCinemachine.SetActive(aim);
+            if(aim)
+            {
+                defaultCinemachine.Priority = 0;
+                aimCinemachine.Priority = 1;
+            }
+            else
+            {
+                defaultCinemachine.Priority = 1;
+                aimCinemachine.Priority = 0;
+            }
             aimImage.enabled = aim;
         }
 
