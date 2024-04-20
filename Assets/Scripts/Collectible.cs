@@ -5,6 +5,12 @@ using UnityEngine;
 public class Collectible : MonoBehaviour
 {
     public int collectedCounter = 0;
+    LevelStatistics levelStatistics;
+
+    void Start()
+    {
+        levelStatistics = GetComponent<LevelStatistics>();
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -12,6 +18,7 @@ public class Collectible : MonoBehaviour
         {
             Destroy(other.gameObject);
             collectedCounter++;
+            levelStatistics.collectedCount = collectedCounter;
         }
     }
 }
