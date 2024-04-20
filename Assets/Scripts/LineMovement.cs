@@ -35,7 +35,7 @@ public class LineMovement : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("movableUnderLine"))
+        if (collision.gameObject.CompareTag("movableLine"))
         {
             if (collision.contacts.Length > 0)
             {
@@ -59,7 +59,7 @@ public class LineMovement : MonoBehaviour
 
     private void OnCollisionExit(Collision collision)
     {
-        if (collision.gameObject.CompareTag("movableUnderLine"))
+        if (collision.gameObject.CompareTag("movableLine"))
         {
             playerRigidbody.useGravity = true;
             isMovingOnLine = false;

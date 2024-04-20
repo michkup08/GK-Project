@@ -4,11 +4,11 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - movableUnderLine
   - Collectible
   - grappable
   - zippableLine
   - Interaction
+  - movableLine
   layers:
   - Default
   - TransparentFX
