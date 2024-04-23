@@ -13,6 +13,8 @@ public class NPCController : MonoBehaviour
     [SerializeField]
     private TMP_Text canvasText;
 
+    public Animator animator;
+
     private int currentLine = 0;
     private List<string> dialogue = new List<string>();
     private bool dialogueActive = false;
@@ -22,6 +24,8 @@ public class NPCController : MonoBehaviour
 
     void Start()
     {
+        animator = GetComponent<Animator>();
+
         string[] lines = fileWithDialogue.text.Split('\n');
         foreach (string line in lines)
         {
@@ -31,6 +35,7 @@ public class NPCController : MonoBehaviour
 
     void Update()
     {
+
         if (playerInRange && currentLine == 0 && Input.GetKeyDown(KeyCode.E))
         {
             dialogueActive = true;
@@ -42,6 +47,10 @@ public class NPCController : MonoBehaviour
         {
             if (currentLine < dialogue.Count)
             {
+                if(animator)
+                {
+                    animator.SetBool("isTalking", true);
+                }
                 if (currentLineDisplayTime >= lineDisplayTimeSec)
                 {
                     currentLineDisplayTime = 0.0f;
@@ -55,6 +64,10 @@ public class NPCController : MonoBehaviour
             }
             else if (currentLine == dialogue.Count && currentLineDisplayTime >= lineDisplayTimeSec)
             {
+                if (animator)
+                {
+                    animator.SetBool("isTalking", false);
+                }
                 dialogueActive = false;
                 currentLine = 0;
                 canvasText.gameObject.SetActive(false);
