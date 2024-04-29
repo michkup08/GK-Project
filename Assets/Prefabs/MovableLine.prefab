@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 3566500028968273204}
   - component: {fileID: 3566500028968273207}
   m_Layer: 0
-  m_Name: Line
-  m_TagString: movableUnderLine
+  m_Name: MovableLine
+  m_TagString: movableLine
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
