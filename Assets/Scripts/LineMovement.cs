@@ -1,3 +1,4 @@
+using System.IO.Pipes;
 using UnityEngine;
 using Vector3 = UnityEngine.Vector3;
 
@@ -16,6 +17,8 @@ public class LineMovement : MonoBehaviour
     [SerializeField]
     private Transform playerOrientation;
 
+    private Vector3 lineDirection;
+
     ScreenHints buttonPromptsController;
 
     private readonly string[] movingAboveLineButtonPrompts =
@@ -33,10 +36,40 @@ public class LineMovement : MonoBehaviour
     private int direction = 1;
     private bool isAboveLine = false;
 
+    private void calculateLineDirection(Collision collision)
+    {
+        CapsuleCollider lineCollider = collision.gameObject.GetComponent<CapsuleCollider>();
+
+        // Get the line's length (subtract the diameter of the end cap spheres)
+        float lineLength = lineCollider.height - lineCollider.radius * 2;
+
+        // Calculate the start and end points
+        Vector3 startPoint = Vector3.zero, endPoint = Vector3.zero;
+        switch (lineCollider.direction)
+        {
+            case 0: // X-axis
+                startPoint = collision.transform.position - collision.transform.right * lineLength / 2;
+                endPoint = collision.transform.position + collision.transform.right * lineLength / 2;
+                break;
+            case 1: // Y-axis
+                startPoint = collision.transform.position - collision.transform.up * lineLength / 2;
+                endPoint = collision.transform.position + collision.transform.up * lineLength / 2;
+                break;
+            case 2: // Z-axis
+                startPoint = collision.transform.position - collision.transform.forward * lineLength / 2;
+                endPoint = collision.transform.position + collision.transform.forward * lineLength / 2;
+                break;
+        }
+
+        // Calculate the direction of the line
+        lineDirection = (endPoint - startPoint).normalized;
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("movableLine"))
         {
+            calculateLineDirection(collision);
             if (collision.contacts.Length > 0)
             {
                 ContactPoint contact = collision.GetContact(0);
@@ -76,19 +109,19 @@ public class LineMovement : MonoBehaviour
     {
         if (isMovingOnLine)
         {
-            var angle = Vector3.Angle(playerOrientation.forward, Vector3.forward);
+            var angle = Vector3.Angle(playerOrientation.forward, lineDirection);
             direction = angle > 90 ? -1 : 1;
             if (Input.GetKey(KeyCode.W))
             {
                 moveTime = 0.0f;
-                playerRigidbody.rotation = Quaternion.Slerp(playerRigidbody.rotation, Quaternion.Euler(0.0f, 90.0f * direction, 0.0f), Time.deltaTime);
-                playerRigidbody.velocity = new Vector3(0.0f, 0.0f, speed * direction);
+                playerRigidbody.rotation = Quaternion.Slerp(playerRigidbody.rotation, Quaternion.LookRotation(lineDirection), Time.deltaTime);
+                playerRigidbody.velocity = lineDirection * speed * direction;
             }
             else if (Input.GetKey(KeyCode.S))
             {
                 moveTime = 0.0f;
-                playerRigidbody.rotation = Quaternion.Slerp(playerRigidbody.rotation, Quaternion.Euler(0.0f, 90.0f * direction, 0.0f), Time.deltaTime);
-                playerRigidbody.velocity = new Vector3(0.0f, 0.0f, -speed * direction);
+                playerRigidbody.rotation = Quaternion.Slerp(playerRigidbody.rotation, Quaternion.LookRotation(lineDirection), Time.deltaTime);
+                playerRigidbody.velocity = -lineDirection * speed * direction;
             }
 
             if (Input.GetKeyUp(KeyCode.E))
