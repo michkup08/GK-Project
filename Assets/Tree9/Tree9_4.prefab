@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 19339622}
   - component: {fileID: 3335006}
   - component: {fileID: 2346822}
+  - component: {fileID: 5092473220136675788}
   m_Layer: 0
   m_Name: Tree9_4
   m_TagString: Untagged
@@ -94,6 +95,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &5092473220136675788
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 114418}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.44, y: 22.460054, z: 3.15}
+  m_Center: {x: 0, y: 11.230027, z: -0.1}
 --- !u!21 &2129798
 Material:
   serializedVersion: 8
@@ -110,7 +124,7 @@ Material:
   m_LightmapFlags: 5
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2000
+  m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
   m_LockedProperties: 
@@ -379,7 +393,7 @@ MonoBehaviour:
   m_Name: Tree Data
   m_EditorClassIdentifier: 
   _uniqueID: 173
-  materialHash: f97624dc71b6b95dd2d302178b955347215482368
+  materialHash: 663a8f35af96688c33b4d1186c66ce2d215482368
   root:
     _uniqueID: 1
     seed: 3000
