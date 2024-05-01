@@ -1,3 +1,5 @@
+using System.IO.Pipes;
+using System.Net;
 using UnityEngine;
 
 public class Ziplining : MonoBehaviour
@@ -9,7 +11,8 @@ public class Ziplining : MonoBehaviour
     private Rigidbody playerRigidbody;
     private bool isZiplining = false;
 
-    private Vector3 minPoint;
+    private Vector3 startPoint, endPoint;
+    private Vector3 endLine;
 
     private readonly string[] zipliningButtonsPrompts =
     {
@@ -24,6 +27,39 @@ public class Ziplining : MonoBehaviour
         buttonPromptsController = GetComponent<ScreenHints>();
     }
 
+    private void calculateLineDirection(Collision collision)
+    {
+        CapsuleCollider lineCollider = collision.gameObject.GetComponent<CapsuleCollider>();
+
+        // Get the line's length (subtract the diameter of the end cap spheres)
+        float lineLength = lineCollider.height - lineCollider.radius * 2;
+
+        // Calculate the start and end points
+        switch (lineCollider.direction)
+        {
+            case 0: // X-axis
+                startPoint = collision.transform.position - collision.transform.right * lineLength / 2;
+                endPoint = collision.transform.position + collision.transform.right * lineLength / 2;
+                break;
+            case 1: // Y-axis
+                startPoint = collision.transform.position - collision.transform.up * lineLength / 2;
+                endPoint = collision.transform.position + collision.transform.up * lineLength / 2;
+                break;
+            case 2: // Z-axis
+                startPoint = collision.transform.position - collision.transform.forward * lineLength / 2;
+                endPoint = collision.transform.position + collision.transform.forward * lineLength / 2;
+                break;
+        }
+
+        // Check if end point is below start point
+        if (endPoint.y > startPoint.y)
+        {
+            Vector3 temp = startPoint;
+            startPoint = endPoint;
+            endPoint = temp;
+        }
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("zippableLine"))
@@ -35,7 +71,8 @@ public class Ziplining : MonoBehaviour
                 playerRigidbody.useGravity = false;
                 playerRigidbody.drag = 0f;
                 isZiplining = true;
-                minPoint = collision.gameObject.GetComponent<MeshRenderer>().bounds.min;
+                endLine = collision.gameObject.GetComponent<MeshRenderer>().bounds.min;
+                calculateLineDirection(collision);
                 buttonPromptsController.LoadMessage(zipliningButtonsPrompts, "ziplining");
             }
         }
@@ -54,21 +91,20 @@ public class Ziplining : MonoBehaviour
     {
         if (isZiplining)
         {
-            Vector3 direction = (minPoint - transform.position).normalized;
+            Vector3 direction = (endPoint - startPoint).normalized;
             playerRigidbody.velocity = speed * direction;
 
-            if (Vector3.Distance(transform.position, minPoint) < 1.5f)
+            if (Vector3.Distance(transform.position, endLine) < 1.6f)
+            {
+                playerRigidbody.useGravity = true;
+                isZiplining = false;
+            }
+
+            if (Input.GetKeyUp(KeyCode.E))
             {
                 playerRigidbody.useGravity = true;
                 isZiplining = false;
             }
         }
-
-        if (Input.GetKeyUp(KeyCode.E))
-        {
-            playerRigidbody.useGravity = true;
-            isZiplining = false;
-        }
-
     }
 }
