@@ -20,7 +20,7 @@ public class LevelStatistics : MonoBehaviour
 
     void Start()
     {
-
+        totalCollectibleCount = GameObject.FindGameObjectsWithTag("Collectible").Length;
     }
 
     void LateUpdate()
