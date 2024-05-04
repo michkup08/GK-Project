@@ -15,7 +15,7 @@ public class PlayerMovement : MonoBehaviour
 
     public float jumpForce;
     public float jumpCooldown;
-    public float airMultiplier;
+    public float airMovementMultiplier = 0.1f;
 
     public float velocity; //for ui purpose
 
@@ -64,6 +64,8 @@ public class PlayerMovement : MonoBehaviour
     {
         if (touchGround)
             groundMovement();
+        else
+            airMovement();
     }
 
     private void inputControl()
@@ -97,6 +99,12 @@ public class PlayerMovement : MonoBehaviour
             transform.parent = null;
         }
         playerRigidbody.AddForce(moveDir.normalized * moveSpeedMultipler, ForceMode.Force);
+    }
+
+    private void airMovement()
+    {
+        moveDir = orientation.forward * verticalI + orientation.right * horizontalI;
+        playerRigidbody.AddForce(moveDir.normalized * moveSpeedMultipler * airMovementMultiplier, ForceMode.Force);
     }
 
     private void jump()
