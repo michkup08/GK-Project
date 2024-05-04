@@ -19,6 +19,8 @@ public class PlayerMovement : MonoBehaviour
 
     public float velocity; //for ui purpose
 
+    private bool airMovementActive = true;
+
     [Header("private")]
     [SerializeField]
     float horizontalI;
@@ -63,9 +65,13 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         if (touchGround)
+        {
             groundMovement();
-        else
+        }
+        else if (airMovementActive)
+        {
             airMovement();
+        }
     }
 
     private void inputControl()
@@ -119,5 +125,15 @@ public class PlayerMovement : MonoBehaviour
     private void afterJump()
     {
         readyToJump = true;
+    }
+
+    public void enableAirMovement()
+    {
+        airMovementActive = true;
+    }
+
+    public void disableAirMovement()
+    {
+        airMovementActive = false;
     }
 }

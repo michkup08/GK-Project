@@ -17,6 +17,8 @@ public class LineMovement : MonoBehaviour
     [SerializeField]
     private Transform playerOrientation;
 
+    private PlayerMovement playerMovement;
+
     private Vector3 lineDirection;
 
     ScreenHints buttonPromptsController;
@@ -72,6 +74,7 @@ public class LineMovement : MonoBehaviour
             calculateLineDirection(collision);
             if (collision.contacts.Length > 0)
             {
+                playerMovement.disableAirMovement();
                 ContactPoint contact = collision.GetContact(0);
                 isAboveLine = (Vector3.Dot(contact.normal, Vector3.up) > 0.5);
                 bool isUnderLine = (Vector3.Dot(contact.normal, Vector3.down) > 0.5);
@@ -96,6 +99,7 @@ public class LineMovement : MonoBehaviour
         {
             playerRigidbody.useGravity = true;
             isMovingOnLine = false;
+            playerMovement.enableAirMovement();
         }
     }
 
@@ -103,6 +107,7 @@ public class LineMovement : MonoBehaviour
     {
         playerRigidbody = GetComponent<Rigidbody>();
         buttonPromptsController = GetComponent<ScreenHints>();
+        playerMovement = playerOrientation.parent.GetComponent<PlayerMovement>();
     }
 
     void Update()

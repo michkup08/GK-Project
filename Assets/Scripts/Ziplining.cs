@@ -14,6 +14,8 @@ public class Ziplining : MonoBehaviour
     private Vector3 startPoint, endPoint;
     private Vector3 endLine;
 
+    private PlayerMovement playerMovement;
+
     private readonly string[] zipliningButtonsPrompts =
     {
         "press <sprite name=\"E\"> to let go"
@@ -25,6 +27,7 @@ public class Ziplining : MonoBehaviour
     {
         playerRigidbody = GetComponent<Rigidbody>();
         buttonPromptsController = GetComponent<ScreenHints>();
+        playerMovement = playerRigidbody.GetComponent<PlayerMovement>();
     }
 
     private void calculateLineDirection(Collision collision)
@@ -66,6 +69,7 @@ public class Ziplining : MonoBehaviour
         {
             if (collision.contacts.Length > 0)
             {
+                playerMovement.disableAirMovement();
                 ContactPoint contact = collision.GetContact(0);
                 isZiplining = Vector3.Dot(contact.normal, Vector3.up) > 0.7f;
                 playerRigidbody.useGravity = false;
@@ -84,6 +88,7 @@ public class Ziplining : MonoBehaviour
         {
             playerRigidbody.useGravity = true;
             isZiplining = false;
+            playerMovement.enableAirMovement();
         }
     }
 
