@@ -37,8 +37,7 @@ public class Level4WaterResetPlayerPosition : MonoBehaviour
             underWaterText.gameObject.SetActive(true);
             if (timeElapsed >= numberOfSecondsToWait)
             {
-                player.GetComponent<Rigidbody>().velocity = Vector3.zero;
-                player.transform.position = startPoint.position;
+                ResetPlayerPosition();
                 timeElapsed = 0;
             }
         }
@@ -47,5 +46,13 @@ public class Level4WaterResetPlayerPosition : MonoBehaviour
             underWaterText.gameObject.SetActive(false);
             timeElapsed = 0;
         }
+    }
+
+    private void ResetPlayerPosition()
+    {
+        var rigidBody = player.GetComponent<Rigidbody>();
+        rigidBody.velocity = Vector3.zero;
+        player.transform.position = startPoint.position;
+        rigidBody.MovePosition(startPoint.position);
     }
 }
