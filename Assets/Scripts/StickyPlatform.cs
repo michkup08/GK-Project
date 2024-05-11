@@ -4,22 +4,27 @@ using UnityEngine;
 
 public class StickyPlatform : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject stickedObject;
+    private GameObject objectToStick;
+
+    private void Start()
+    {
+        objectToStick = GameObject.Find("Player");
+    }
+
 
     private void OnCollisionStay(Collision collision)
     {
-        if(collision.gameObject == stickedObject)
+        if(collision.gameObject == objectToStick)
         {
-            stickedObject.transform.SetParent(transform);
+            objectToStick.transform.SetParent(transform);
         }
     }
 
     private void OnCollisionExit(Collision collision)
     {
-        if(collision.gameObject == stickedObject)
+        if(collision.gameObject == objectToStick)
         {
-            stickedObject.transform.SetParent(null);
+            objectToStick.transform.SetParent(null);
         }
     }
 }
