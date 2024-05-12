@@ -1,13 +1,13 @@
 using TMPro;
 using UnityEngine;
 
-public class Level4WaterResetPlayerPosition : MonoBehaviour
+public class Level5LavaReset : MonoBehaviour
 {
-    private double waterLevel;
+    private double lavaLevel;
     private double playerHeight;
 
     [SerializeField]
-    private TMP_Text underWaterText;
+    private TMP_Text textGUI;
 
     private GameObject player;
 
@@ -17,24 +17,27 @@ public class Level4WaterResetPlayerPosition : MonoBehaviour
     [SerializeField]
     private float numberOfSecondsToWait = 5;
 
+    [SerializeField]
+    private GameObject lavaObject;
+
     private float timeElapsed = 0;
     private int secondsElapsed = 0;
 
     void Start()
     {
-        waterLevel = GameObject.Find("Water Specular").transform.position.y;
         player = GameObject.Find("Player");
-        playerHeight = player.transform.Find("PlayerObject").GetComponent<CapsuleCollider>().height;
+        playerHeight = player.transform.position.y;
+        lavaLevel = lavaObject.transform.position.y;
     }
 
     void Update()
     {
-        if (waterLevel > (player.transform.position.y + playerHeight / 2) + 0.1)
+        if (player.transform.position.y - playerHeight / 2 - 0.1f <= lavaLevel)
         {
             timeElapsed += Time.deltaTime;
             secondsElapsed = (int)timeElapsed % 60;
-            underWaterText.text = "Underwater!\n" + (numberOfSecondsToWait - secondsElapsed) + "\nseconds to reset";
-            underWaterText.gameObject.SetActive(true);
+            textGUI.text = (numberOfSecondsToWait - secondsElapsed) + "\nseconds to reset";
+            textGUI.gameObject.SetActive(true);
             if (timeElapsed >= numberOfSecondsToWait)
             {
                 ResetPlayerPosition();
@@ -43,7 +46,7 @@ public class Level4WaterResetPlayerPosition : MonoBehaviour
         }
         else
         {
-            underWaterText.gameObject.SetActive(false);
+            textGUI.gameObject.SetActive(false);
             timeElapsed = 0;
         }
     }
