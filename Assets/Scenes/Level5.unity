@@ -132,6 +132,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1434415610360586669, guid: ea728b16e713f414b92baafe78841238, type: 3}
+      propertyPath: movingSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1434415610360586669, guid: ea728b16e713f414b92baafe78841238, type: 3}
       propertyPath: waypoints.Array.data[0]
       value: 
       objectReference: {fileID: 323458950}
@@ -430,6 +434,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1434415610360586669, guid: ea728b16e713f414b92baafe78841238, type: 3}
+      propertyPath: movingSpeed
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 3637982821047931430, guid: ea728b16e713f414b92baafe78841238, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -772,6 +780,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1434415610360586669, guid: ea728b16e713f414b92baafe78841238, type: 3}
+      propertyPath: movingSpeed
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 3637982821047931430, guid: ea728b16e713f414b92baafe78841238, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -1474,6 +1486,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1434415610360586669, guid: ea728b16e713f414b92baafe78841238, type: 3}
+      propertyPath: movingSpeed
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 1434415610360586669, guid: ea728b16e713f414b92baafe78841238, type: 3}
       propertyPath: waypoints.Array.data[0]
       value: 
@@ -2446,6 +2462,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1434415610360586669, guid: ea728b16e713f414b92baafe78841238, type: 3}
+      propertyPath: movingSpeed
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 3637982821047931430, guid: ea728b16e713f414b92baafe78841238, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -3136,6 +3156,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1434415610360586669, guid: ea728b16e713f414b92baafe78841238, type: 3}
+      propertyPath: movingSpeed
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 3637982821047931430, guid: ea728b16e713f414b92baafe78841238, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -3214,6 +3238,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1434415610360586669, guid: ea728b16e713f414b92baafe78841238, type: 3}
+      propertyPath: movingSpeed
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 1434415610360586669, guid: ea728b16e713f414b92baafe78841238, type: 3}
       propertyPath: waypoints.Array.data[0]
       value: 
@@ -4231,16 +4259,16 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   capsuleCollider: {fileID: 131623920}
-  walkSpeedMultiplier: 0
-  sprintSpeedMultiplier: 0
-  crouchSpeedMultiplier: 0
+  walkSpeedMultiplier: 20
+  sprintSpeedMultiplier: 30
+  crouchSpeedMultiplier: 10
   moveSpeedLimit: 25
   groundDrag: 1.5
   jumpForce: 7
   jumpCooldown: 0.1
   airMovementMultiplier: 0.1
   velocity: 0
-  maxSlopeAngle: 0
+  maxSlopeAngle: 30
   horizontalI: 0
   verticalI: 0
   playerHeight: 0
@@ -4292,6 +4320,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
+  isMovingOnLine: 0
   playerOrientation: {fileID: 1810865393}
 --- !u!114 &1276222415
 MonoBehaviour:
@@ -6430,6 +6459,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1434415610360586669, guid: ea728b16e713f414b92baafe78841238, type: 3}
+      propertyPath: movingSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1434415610360586669, guid: ea728b16e713f414b92baafe78841238, type: 3}
       propertyPath: waypoints.Array.data[0]
       value: 
       objectReference: {fileID: 1534980321}
@@ -6606,7 +6639,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1434415610360586669, guid: ea728b16e713f414b92baafe78841238, type: 3}
       propertyPath: movingSpeed
-      value: 3
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 3637982821047931430, guid: ea728b16e713f414b92baafe78841238, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -7559,6 +7592,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1434415610360586669, guid: ea728b16e713f414b92baafe78841238, type: 3}
+      propertyPath: movingSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1434415610360586669, guid: ea728b16e713f414b92baafe78841238, type: 3}
       propertyPath: waypoints.Array.data[0]
       value: 
       objectReference: {fileID: 41055069}
@@ -7786,6 +7823,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1434415610360586669, guid: ea728b16e713f414b92baafe78841238, type: 3}
+      propertyPath: movingSpeed
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 3637982821047931430, guid: ea728b16e713f414b92baafe78841238, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
