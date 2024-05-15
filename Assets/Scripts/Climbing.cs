@@ -35,6 +35,8 @@ public class Climbing : MonoBehaviour
     [SerializeField]
     float maxClimbTimeZ = 0.4f;
 
+    private RaycastHit hitWall;
+
     private readonly string[] climbingButtonsPrompts =
     {
         "press <sprite name=\"E\"> to let go",
@@ -86,31 +88,29 @@ public class Climbing : MonoBehaviour
         playerRigidbody.useGravity = false;
         playerRigidbody.drag = 0;
 
-        var currentVelocity = playerRigidbody.velocity;
+        // Get the normal of the wall hit
+        Vector3 wallNormal = hitWall.normal;
+
+        // Calculate movement direction perpendicular to the wall
+        Vector3 rightDirection = Vector3.Cross(Vector3.up, wallNormal);
+        Vector3 forwardDirection = Vector3.Cross(wallNormal, rightDirection);
+
+        // Calculate player's movement based on input
+        Vector3 moveDirection = Vector3.zero;
 
         if (Input.GetKey(KeyCode.W))
-        {
-            climbTimeX = 0.0f;
-            playerRigidbody.velocity = new Vector3(0.0f, climbSpeed, currentVelocity.z);
-        }
-        else if (Input.GetKey(KeyCode.S))
-        {
-            climbTimeX = 0.0f;
-            playerRigidbody.velocity = new Vector3(0.0f, -climbSpeed, currentVelocity.z);
-        }
-
+            moveDirection += forwardDirection;
+        if (Input.GetKey(KeyCode.S))
+            moveDirection -= forwardDirection;
         if (Input.GetKey(KeyCode.A))
-        {
-            climbTimeZ = 0.0f;
-            playerRigidbody.velocity = new Vector3(0.0f, 0.0f, climbSpeed);
-        }
-        else if (Input.GetKey(KeyCode.D))
-        {
-            climbTimeZ = 0.0f;
-            playerRigidbody.velocity = new Vector3(0.0f, 0.0f, -climbSpeed);
-        }
+            moveDirection += rightDirection;
+        if (Input.GetKey(KeyCode.D))
+            moveDirection -= rightDirection;
 
-        // release climbing
+        // Apply movement along the wall
+        playerRigidbody.velocity = moveDirection.normalized * climbSpeed;
+
+        // Release climbing
         if (Input.GetKey(KeyCode.E))
         {
             DisableClimbing();
@@ -123,19 +123,19 @@ public class Climbing : MonoBehaviour
 
         if (climbTimeX > maxClimbTimeX)
         {
-            playerRigidbody.velocity = new Vector3(0.0f, 0.0f, currentVelocity.z);
+            playerRigidbody.velocity = new Vector3(0.0f, playerRigidbody.velocity.y, playerRigidbody.velocity.z);
             climbTimeX = 0.0f;
         }
         if (climbTimeZ > maxClimbTimeZ)
         {
-            playerRigidbody.velocity = new Vector3(0.0f, currentVelocity.y, 0.0f);
+            playerRigidbody.velocity = new Vector3(playerRigidbody.velocity.x, playerRigidbody.velocity.y, 0.0f);
             climbTimeZ = 0.0f;
         }
     }
 
     private void SetClimbingState()
     {
-        bool onWall = Physics.SphereCast(transform.position, 0.3f, orientation.forward, out RaycastHit hitWall, 1f, climbableWall);
+        bool onWall = Physics.SphereCast(transform.position, 0.3f, orientation.forward, out hitWall, 1f, climbableWall);
         float angle = Vector3.Angle(orientation.forward, -hitWall.normal);
 
         SetClimbingLock();
