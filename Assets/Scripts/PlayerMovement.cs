@@ -24,6 +24,10 @@ public class PlayerMovement : MonoBehaviour
 
     private bool airMovementActive = true;
 
+    [Header("Slope Handling")]
+    public float maxSlopeAngle;
+    private RaycastHit slopeHit;
+
     [Header("private")]
     [SerializeField]
     float horizontalI;
@@ -86,46 +90,41 @@ public class PlayerMovement : MonoBehaviour
     {
         horizontalI = Input.GetAxisRaw("Horizontal");
         verticalI = Input.GetAxisRaw("Vertical");
-        if (Input.GetKeyDown(KeyCode.Space) && touchGround && readyToJump)
+        if (Input.GetKeyDown(KeyCode.Space) && touchGround && readyToJump && !onSteepSlope())
         {
             readyToJump = false;
             jump();
             Invoke(nameof(afterJump), jumpCooldown);
             touchGround = false;
         }
-        if (touchGround)
-        {
-            if (Input.GetKeyDown(KeyCode.LeftShift))
-            {
-                sprinting = true;
-                moveSpeedMultiplier = sprintSpeedMultiplier;
-            }
-            if (Input.GetKeyUp(KeyCode.LeftShift))
-            {
-                sprinting = false;
-                moveSpeedMultiplier = walkSpeedMultiplier;
-            }
 
-            if (Input.GetKeyDown(KeyCode.LeftControl))
-            { 
-                capsuleCollider.height = capsuleCollider.height / 2;
-                playerRigidbody.AddForce(Vector3.down * 5f, ForceMode.Impulse);
-                readyToJump = false;
-                crouching = true;
-                moveSpeedMultiplier = crouchSpeedMultiplier;
-            }
-            if (Input.GetKeyUp(KeyCode.LeftControl))
-            {
-                capsuleCollider.height = capsuleCollider.height * 2;
-                readyToJump = true;
-                crouching = false;
-                moveSpeedMultiplier = walkSpeedMultiplier;
-            }
+        if (Input.GetKey(KeyCode.LeftShift) && touchGround)
+        {
+            sprinting = true;
+            moveSpeedMultiplier = sprintSpeedMultiplier;
+        }
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            sprinting = false;
+            moveSpeedMultiplier = walkSpeedMultiplier;
         }
 
+        if (Input.GetKeyDown(KeyCode.LeftControl) && touchGround)
+        { 
+            capsuleCollider.height = capsuleCollider.height / 2;
+            playerRigidbody.AddForce(Vector3.down * 5f, ForceMode.Impulse);
+            readyToJump = false;
+            crouching = true;
+            moveSpeedMultiplier = crouchSpeedMultiplier;
+        }
+        if (Input.GetKeyUp(KeyCode.LeftControl) && crouching)
+        {
+            capsuleCollider.height = capsuleCollider.height * 2;
+            readyToJump = true;
+            crouching = false;
+            moveSpeedMultiplier = walkSpeedMultiplier;
+        }
     }
-
-
 
     private void speedLimit()
     {
@@ -144,7 +143,20 @@ public class PlayerMovement : MonoBehaviour
         {
             transform.parent = null;
         }
-        playerRigidbody.AddForce(moveDir.normalized * moveSpeedMultiplier, ForceMode.Force);
+
+        if(onSlope())
+        {
+            playerRigidbody.AddForce(getSlopeMoveDirection() * moveSpeedMultiplier * 0.75f, ForceMode.Force);
+        }
+        else if(onSteepSlope())
+        {
+            playerRigidbody.AddForce(getSteepSlopeSlideDirection() * moveSpeedMultiplier * 0.75f, ForceMode.Force);
+            playerRigidbody.AddForce(moveDir.normalized * moveSpeedMultiplier * 0.5f, ForceMode.Force);
+        }
+        else
+        {
+            playerRigidbody.AddForce(moveDir.normalized * moveSpeedMultiplier, ForceMode.Force);
+        }
     }
 
     private void airMovement()
@@ -165,6 +177,11 @@ public class PlayerMovement : MonoBehaviour
     private void afterJump()
     {
         readyToJump = true;
+        if (!Input.GetKey(KeyCode.LeftShift))
+        {
+            sprinting = false;
+            moveSpeedMultiplier = walkSpeedMultiplier;
+        }
     }
 
     public void enableAirMovement()
@@ -175,5 +192,35 @@ public class PlayerMovement : MonoBehaviour
     public void disableAirMovement()
     {
         airMovementActive = false;
+    }
+
+    private bool onSlope()
+    {
+        if(Physics.Raycast(transform.position, Vector3.down, out slopeHit, capsuleCollider.height * 0.5f + 0.3f))
+        {
+            float angle = Vector3.Angle(Vector3.up, slopeHit.normal);
+            return angle < maxSlopeAngle && angle != 0;
+        }
+        return false;
+    }
+
+    private bool onSteepSlope()
+    {
+        if (Physics.Raycast(transform.position, Vector3.down, out slopeHit, capsuleCollider.height * 0.5f + 0.3f))
+        {
+            float angle = Vector3.Angle(Vector3.up, slopeHit.normal);
+            return angle > maxSlopeAngle && angle != 0;
+        }
+        return false;
+    }
+
+    private Vector3 getSlopeMoveDirection()
+    {
+        return Vector3.ProjectOnPlane(moveDir, slopeHit.normal).normalized;
+    }
+
+    private Vector3 getSteepSlopeSlideDirection()
+    {
+        return Vector3.Cross(Vector3.Cross(slopeHit.normal, Vector3.down), slopeHit.normal).normalized;
     }
 }
