@@ -618,7 +618,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 968fcec20967a054686ff70bde994f21, type: 2}
+  - {fileID: 2100000, guid: c642aa644c6d2724aa329b883838fd21, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4230,13 +4230,17 @@ MonoBehaviour:
   isGround:
     serializedVersion: 2
     m_Bits: 8
-  moveSpeedMultipler: 30
+  capsuleCollider: {fileID: 131623920}
+  walkSpeedMultiplier: 0
+  sprintSpeedMultiplier: 0
+  crouchSpeedMultiplier: 0
   moveSpeedLimit: 25
   groundDrag: 1.5
   jumpForce: 7
   jumpCooldown: 0.1
   airMovementMultiplier: 0.1
   velocity: 0
+  maxSlopeAngle: 0
   horizontalI: 0
   verticalI: 0
   playerHeight: 0
@@ -4354,6 +4358,8 @@ MonoBehaviour:
   Handler:
     serializedVersion: 2
     m_Bits: 256
+  canHandle: 0
+  stopHolding: 0
 --- !u!114 &1276222419
 MonoBehaviour:
   m_ObjectHideFlags: 0
