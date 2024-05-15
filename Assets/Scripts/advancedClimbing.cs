@@ -16,7 +16,7 @@ public class advancedClimbing : MonoBehaviour
     public LayerMask Handler;
     RaycastHit hit;
 
-    bool canHandle, stopHolding;
+    public bool canHandle, stopHolding;
     
 
     // Start is called before the first frame update
@@ -31,40 +31,51 @@ public class advancedClimbing : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        CheckHandler();
 
         if(canHandle)
         {
-            rigidbody.useGravity = false;
-            rigidbody.velocity = Vector3.zero;
+            if(rigidbody.useGravity==true)
+            {
+                rigidbody.useGravity = false;
+                rigidbody.velocity = Vector3.zero;
+            }
+            
             if(Input.GetKeyDown(KeyCode.Space) )
             {
-                stopHolding = true;
                 canHandle = false;
                 rigidbody.useGravity = true;
                 rigidbody.AddForce(cam.gameObject.transform.forward * afterHandleJumpForce, ForceMode.Impulse);
                 
-                Invoke(nameof(resetHoldingAbility), handleAfterJumpDelay);
+                
             }
         }
-
-        
-        
-    }
-
-    void resetHoldingAbility()
-    {
-        stopHolding = false;
-    }
-
-    private void CheckHandler()
-    {
-        if(Physics.SphereCast(transform.position, sphereCastR, transform.forward, out hit, hitingLenght, Handler ) && !stopHolding)
+        else
         {
+            if(rigidbody.useGravity == false)
+            {
+                canHandle = false;
+                rigidbody.useGravity = true;
+            }
+            
+        }
+        
+        
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.layer == 8)
+        {
+            
             canHandle = true;
         }
-        else 
+    }
+
+    private void OnCollisionExit(Collision other)
+    {
+        if (other.gameObject.layer == 8)
         {
+
             canHandle = false;
         }
     }
