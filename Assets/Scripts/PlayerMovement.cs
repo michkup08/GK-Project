@@ -7,10 +7,12 @@ public class PlayerMovement : MonoBehaviour
     [Header("Objects Ref")]
     public Transform orientation;
     public LayerMask isGround;
+    public CapsuleCollider capsuleCollider;
 
     [Header("Variables")]
     public float walkSpeedMultiplier;
     public float sprintSpeedMultiplier;
+    public float crouchSpeedMultiplier;
     public float moveSpeedLimit;
     public float groundDrag;
 
@@ -37,7 +39,8 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody playerRigidbody;
 
     private float moveSpeedMultiplier;
-
+    private bool sprinting = false;
+    private bool crouching = false;
 
     // Start is called before the first frame update
     void Start()
@@ -90,14 +93,36 @@ public class PlayerMovement : MonoBehaviour
             Invoke(nameof(afterJump), jumpCooldown);
             touchGround = false;
         }
-        if (Input.GetKey(KeyCode.LeftShift) && touchGround)
+        if (touchGround)
         {
-            moveSpeedMultiplier = sprintSpeedMultiplier;
+            if (Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                sprinting = true;
+                moveSpeedMultiplier = sprintSpeedMultiplier;
+            }
+            if (Input.GetKeyUp(KeyCode.LeftShift))
+            {
+                sprinting = false;
+                moveSpeedMultiplier = walkSpeedMultiplier;
+            }
+
+            if (Input.GetKeyDown(KeyCode.LeftControl))
+            { 
+                capsuleCollider.height = capsuleCollider.height / 2;
+                playerRigidbody.AddForce(Vector3.down * 5f, ForceMode.Impulse);
+                readyToJump = false;
+                crouching = true;
+                moveSpeedMultiplier = crouchSpeedMultiplier;
+            }
+            if (Input.GetKeyUp(KeyCode.LeftControl))
+            {
+                capsuleCollider.height = capsuleCollider.height * 2;
+                readyToJump = true;
+                crouching = false;
+                moveSpeedMultiplier = walkSpeedMultiplier;
+            }
         }
-        else
-        {
-            moveSpeedMultiplier = walkSpeedMultiplier;
-        }
+
     }
 
 
