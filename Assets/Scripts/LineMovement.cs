@@ -11,7 +11,7 @@ public class LineMovement : MonoBehaviour
     [Header("Speed")]
     [SerializeField]
     private float speed = 3.0f;
-    private bool isMovingOnLine = false;
+    public bool isMovingOnLine = false;
 
     [Header("References")]
     [SerializeField]
@@ -76,16 +76,23 @@ public class LineMovement : MonoBehaviour
             {
                 playerMovement.disableAirMovement();
                 ContactPoint contact = collision.GetContact(0);
-                isAboveLine = (Vector3.Dot(contact.normal, Vector3.up) > 0.5);
-                bool isUnderLine = (Vector3.Dot(contact.normal, Vector3.down) > 0.5);
+                float dotUp = Vector3.Dot(contact.normal, Vector3.up);
+                float dotDown = Vector3.Dot(contact.normal, Vector3.down);
+                isAboveLine = (dotUp > 0.5f);
+                bool isUnderLine = (dotDown > 0.5f);
                 isMovingOnLine = isUnderLine || isAboveLine;
+
                 if (isMovingOnLine)
                 {
                     playerRigidbody.useGravity = false;
                     playerRigidbody.drag = 0;
+                }
+
+                if (isAboveLine)
+                {
                     buttonPromptsController.LoadMessage(movingAboveLineButtonPrompts, "aboveLineMovement");
                 }
-                else
+                else if (isUnderLine)
                 {
                     buttonPromptsController.LoadMessage(movingUnderLineButtonPrompts, "underLineMovement");
                 }
@@ -120,13 +127,13 @@ public class LineMovement : MonoBehaviour
             {
                 moveTime = 0.0f;
                 playerRigidbody.rotation = Quaternion.Slerp(playerRigidbody.rotation, Quaternion.LookRotation(lineDirection), Time.deltaTime);
-                playerRigidbody.velocity = lineDirection * speed * direction;
+                playerRigidbody.velocity = direction * speed * lineDirection;
             }
             else if (Input.GetKey(KeyCode.S))
             {
                 moveTime = 0.0f;
                 playerRigidbody.rotation = Quaternion.Slerp(playerRigidbody.rotation, Quaternion.LookRotation(lineDirection), Time.deltaTime);
-                playerRigidbody.velocity = -lineDirection * speed * direction;
+                playerRigidbody.velocity = direction * speed * -lineDirection;
             }
 
             if (Input.GetKeyUp(KeyCode.E))

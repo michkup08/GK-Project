@@ -16,13 +16,16 @@ public class advancedClimbing : MonoBehaviour
     public LayerMask Handler;
     RaycastHit hit;
 
+    private LineMovement lineMovement;
+
     public bool canHandle, stopHolding;
-    
+
 
     // Start is called before the first frame update
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
+        lineMovement = GetComponent<LineMovement>();
 
         canHandle = false;
         stopHolding = false;
@@ -32,41 +35,38 @@ public class advancedClimbing : MonoBehaviour
     void Update()
     {
 
-        if(canHandle)
+        if (canHandle)
         {
-            if(rigidbody.useGravity==true)
+            if (rigidbody.useGravity == true)
             {
                 rigidbody.useGravity = false;
                 rigidbody.velocity = Vector3.zero;
             }
-            
-            if(Input.GetKeyDown(KeyCode.Space) )
+
+            if (Input.GetKeyDown(KeyCode.Space))
             {
                 canHandle = false;
                 rigidbody.useGravity = true;
                 rigidbody.AddForce(cam.gameObject.transform.forward * afterHandleJumpForce, ForceMode.Impulse);
-                
-                
+
+
             }
         }
-        else
+        else if (!lineMovement.isMovingOnLine)
         {
-            if(rigidbody.useGravity == false)
+            if (rigidbody.useGravity == false)
             {
                 canHandle = false;
                 rigidbody.useGravity = true;
             }
-            
+
         }
-        
-        
     }
 
     private void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.layer == 8)
         {
-            
             canHandle = true;
         }
     }
@@ -75,7 +75,6 @@ public class advancedClimbing : MonoBehaviour
     {
         if (other.gameObject.layer == 8)
         {
-
             canHandle = false;
         }
     }
