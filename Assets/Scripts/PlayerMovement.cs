@@ -9,7 +9,8 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask isGround;
 
     [Header("Variables")]
-    public float moveSpeedMultipler;
+    public float walkSpeedMultiplier;
+    public float sprintSpeedMultiplier;
     public float moveSpeedLimit;
     public float groundDrag;
 
@@ -35,11 +36,15 @@ public class PlayerMovement : MonoBehaviour
     Vector3 moveDir;
     Rigidbody playerRigidbody;
 
+    private float moveSpeedMultiplier;
+
+
     // Start is called before the first frame update
     void Start()
     {
         readyToJump = true;
         playerRigidbody = GetComponent<Rigidbody>();
+        moveSpeedMultiplier = walkSpeedMultiplier;
     }
 
     // Update is called once per frame
@@ -85,14 +90,24 @@ public class PlayerMovement : MonoBehaviour
             Invoke(nameof(afterJump), jumpCooldown);
             touchGround = false;
         }
+        if (Input.GetKey(KeyCode.LeftShift) && touchGround)
+        {
+            moveSpeedMultiplier = sprintSpeedMultiplier;
+        }
+        else
+        {
+            moveSpeedMultiplier = walkSpeedMultiplier;
+        }
     }
+
+
 
     private void speedLimit()
     {
         Vector2 rbSpeed = new Vector2(playerRigidbody.velocity.x, playerRigidbody.velocity.z);
         if (rbSpeed.magnitude > moveSpeedLimit)
         {
-            rbSpeed = rbSpeed.normalized * moveSpeedMultipler;
+            rbSpeed = rbSpeed.normalized * moveSpeedMultiplier;
             playerRigidbody.velocity = new Vector3(rbSpeed.x, playerRigidbody.velocity.y, rbSpeed.y);
         }
     }
@@ -104,13 +119,13 @@ public class PlayerMovement : MonoBehaviour
         {
             transform.parent = null;
         }
-        playerRigidbody.AddForce(moveDir.normalized * moveSpeedMultipler, ForceMode.Force);
+        playerRigidbody.AddForce(moveDir.normalized * moveSpeedMultiplier, ForceMode.Force);
     }
 
     private void airMovement()
     {
         moveDir = orientation.forward * verticalI + orientation.right * horizontalI;
-        playerRigidbody.AddForce(moveDir.normalized * moveSpeedMultipler * airMovementMultiplier, ForceMode.Force);
+        playerRigidbody.AddForce(moveDir.normalized * moveSpeedMultiplier * airMovementMultiplier, ForceMode.Force);
     }
 
     private void jump()

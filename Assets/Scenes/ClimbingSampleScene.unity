@@ -1947,7 +1947,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 620028247}
-  m_LocalRotation: {x: 0.09999325, y: 0.13303106, z: -0.013491596, w: 0.9859625}
+  m_LocalRotation: {x: 0.09999325, y: 0.13303107, z: -0.013491597, w: 0.9859625}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2571,7 +2571,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 765472163}
-  m_LocalRotation: {x: -0.043766662, y: 0.00000001922329, z: 8.4214613e-10, w: 0.9990418}
+  m_LocalRotation: {x: -0.04376668, y: 0.000000019216678, z: 8.41857e-10, w: 0.9990418}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3929,12 +3929,13 @@ MonoBehaviour:
   isGround:
     serializedVersion: 2
     m_Bits: 8
-  moveSpeedMultipler: 30
+  walkSpeedMultiplier: 20
+  sprintSpeedMultiplier: 30
   moveSpeedLimit: 25
   groundDrag: 1.5
   jumpForce: 7
   jumpCooldown: 0.1
-  airMultiplier: 0.3
+  airMovementMultiplier: 0.1
   velocity: 0
   horizontalI: 0
   verticalI: 0
@@ -4196,7 +4197,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1dfb1314aa725504f8dbc94010dc2692, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stickedObject: {fileID: 1276222408}
 --- !u!54 &1317079097
 Rigidbody:
   m_ObjectHideFlags: 0
