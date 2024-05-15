@@ -3042,7 +3042,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: c65436c94dfbf3445a2b806efd9505c2, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.35
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -4396,7 +4396,7 @@ MonoBehaviour:
   jumpCooldown: 0.1
   airMovementMultiplier: 0.1
   velocity: 0
-  maxSlopeAngle: 30
+  maxSlopeAngle: 40
   horizontalI: 0
   verticalI: 0
   playerHeight: 0

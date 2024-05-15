@@ -12569,7 +12569,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 765472163}
-  m_LocalRotation: {x: -0.043744057, y: -0.03216243, z: -0.001408995, w: 0.99852395}
+  m_LocalRotation: {x: -0.043744057, y: -0.03216247, z: -0.0014089966, w: 0.99852395}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -14754,13 +14754,17 @@ MonoBehaviour:
   isGround:
     serializedVersion: 2
     m_Bits: 8
-  moveSpeedMultipler: 30
+  capsuleCollider: {fileID: 131623920}
+  walkSpeedMultiplier: 20
+  sprintSpeedMultiplier: 30
+  crouchSpeedMultiplier: 10
   moveSpeedLimit: 25
   groundDrag: 1.5
   jumpForce: 7
   jumpCooldown: 0.1
   airMovementMultiplier: 0.1
   velocity: 0
+  maxSlopeAngle: 40
   horizontalI: 0
   verticalI: 0
   playerHeight: 0
@@ -14812,6 +14816,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
+  isMovingOnLine: 0
   playerOrientation: {fileID: 1810865393}
 --- !u!114 &1276222415
 MonoBehaviour:
@@ -14878,6 +14883,8 @@ MonoBehaviour:
   Handler:
     serializedVersion: 2
     m_Bits: 256
+  canHandle: 0
+  stopHolding: 0
 --- !u!114 &1276222419
 MonoBehaviour:
   m_ObjectHideFlags: 0
