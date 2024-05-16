@@ -4332,8 +4332,8 @@ GameObject:
   - component: {fileID: 1276222416}
   - component: {fileID: 1276222417}
   - component: {fileID: 1276222418}
-  - component: {fileID: 1276222420}
   - component: {fileID: 1276222419}
+  - component: {fileID: 1276222420}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -4545,12 +4545,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1276222408}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2c83a84b1f846743821c40642b770c7, type: 3}
+  m_Script: {fileID: 11500000, guid: ce0e1280f07d3294e877de7527d9ff64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   textGUI: {fileID: 1089019318}
   startPoint: {fileID: 1530169640}
-  numberOfSecondsToWait: 2
+  numberOfSecondsToWait: 1
   lavaObject: {fileID: 1974982926}
 --- !u!1 &1339732105
 GameObject:
