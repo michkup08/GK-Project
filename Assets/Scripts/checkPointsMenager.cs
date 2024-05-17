@@ -4,21 +4,26 @@ using UnityEngine;
 
 public class checkPointsMenager : MonoBehaviour
 {
-    Transform AfterDeadPosition;
+    Vector3 AfterDeadPosition;
     public Transform Player;
 
     void Start()
     {
-        AfterDeadPosition = Player.transform;
+        AfterDeadPosition = Player.transform.position;
     }
 
-    public Transform getTransform()
+    public Vector3 getPosition()
     {
         return AfterDeadPosition;
     }
 
-    public void setTransform(Transform transform)
+    public void setPosition(Vector3 position)
     {
-        AfterDeadPosition = transform;
+        AfterDeadPosition = position;
+    }
+
+    private void Update()
+    {
+        Debug.Log("position: " + AfterDeadPosition.x + AfterDeadPosition.y + AfterDeadPosition.z);
     }
 }

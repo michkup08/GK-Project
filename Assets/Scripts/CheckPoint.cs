@@ -9,7 +9,7 @@ public class CheckPoint : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("Check point saved");
-        menager.setTransform(transform);
+        menager.setPosition(new Vector3(transform.position.x, transform.position.y, transform.position.z));
         Destroy(gameObject);
     }
 }

@@ -10,10 +10,9 @@ public class GoToLastCheckpoint : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("reset");
-        
-            
-        player.transform.position = menager.getTransform().position;
-        //player.transform.rotation = menager.getTransform().rotation;
+
+
+        player.transform.position = menager.getPosition();
         
     }
 }
