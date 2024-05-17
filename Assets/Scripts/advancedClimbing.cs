@@ -17,6 +17,7 @@ public class advancedClimbing : MonoBehaviour
     RaycastHit hit;
 
     private LineMovement lineMovement;
+    private Ziplining ziplining;
 
     public bool canHandle, stopHolding;
 
@@ -26,6 +27,7 @@ public class advancedClimbing : MonoBehaviour
     {
         rigidbody = GetComponent<Rigidbody>();
         lineMovement = GetComponent<LineMovement>();
+        ziplining = GetComponent<Ziplining>();
 
         canHandle = false;
         stopHolding = false;
@@ -52,7 +54,7 @@ public class advancedClimbing : MonoBehaviour
 
             }
         }
-        else if (!lineMovement.isMovingOnLine)
+        else if (!lineMovement.IsMovingOnLine() && !ziplining.IsZiplining())
         {
             if (rigidbody.useGravity == false)
             {

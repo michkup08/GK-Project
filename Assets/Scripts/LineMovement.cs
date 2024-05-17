@@ -1,3 +1,4 @@
+using System;
 using System.IO.Pipes;
 using UnityEngine;
 using Vector3 = UnityEngine.Vector3;
@@ -11,7 +12,7 @@ public class LineMovement : MonoBehaviour
     [Header("Speed")]
     [SerializeField]
     private float speed = 3.0f;
-    public bool isMovingOnLine = false;
+    private bool isMovingOnLine = false;
 
     [Header("References")]
     [SerializeField]
@@ -152,5 +153,10 @@ public class LineMovement : MonoBehaviour
 
             moveTime += Time.deltaTime;
         }
+    }
+
+    public bool IsMovingOnLine()
+    {
+        return isMovingOnLine;
     }
 }

@@ -112,4 +112,9 @@ public class Ziplining : MonoBehaviour
             }
         }
     }
+
+    public bool IsZiplining()
+    {
+        return isZiplining;
+    }
 }
