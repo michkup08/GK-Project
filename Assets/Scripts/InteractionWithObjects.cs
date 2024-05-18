@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro;
 using Unity.VisualScripting;
 
@@ -11,6 +12,7 @@ public class InteractionWithObjects : MonoBehaviour
     public LayerMask interactable;
     public LayerMask defaultLayer;
     public GameObject playerObject;
+    public string interaction = "animate";
 
     [Header("Variables")]
     public float rayDistance;
@@ -28,14 +30,21 @@ public class InteractionWithObjects : MonoBehaviour
     {
         if(Physics.Raycast(playerObject.transform.position, playerObject.transform.forward, out hit, rayDistance, interactable))
         {
+            Debug.Log("can interact");
             Interactinfo.gameObject.SetActive(true);
             GameObject hitted = hit.collider.transform.root.gameObject;
             Animator animator = hitted.GetComponent<Animator>();
             if(Input.GetKeyDown(KeyCode.E))
             {
-
-                animator.SetTrigger("interact");
-                hitted.layer = defaultLayer;
+                if(interaction == "animate")
+                {
+                    animator.SetTrigger("interact");
+                    hitted.layer = defaultLayer;
+                }
+                else if(interaction == "exit map")
+                {
+                    SceneManager.LoadScene("MainLocation");
+                }
             }
         }
         else
