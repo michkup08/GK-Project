@@ -2,27 +2,46 @@ using System.IO.Pipes;
 using System.Net;
 using UnityEngine;
 
+/// <summary>
+/// The Ziplining class handles the player's interaction with ziplines in the game.
+/// </summary>
 public class Ziplining : MonoBehaviour
 {
     [Header("Speed")]
     [SerializeField]
+    /// <value><c>speed</c> is the speed at which the player moves along the zipline.</value>
     private float speed = 3.0f;
 
+    /// <value><c>playerRigidbody</c> is the player's Rigidbody component.</value>
     private Rigidbody playerRigidbody;
+
+    /// <value><c>isZiplining</c> is a flag indicating whether the player is currently ziplining.</value>
     private bool isZiplining = false;
 
-    private Vector3 startPoint, endPoint;
+    /// <value><c>startPoint</c> is the start point needed to calculate the direction of the zipline.</value>
+    private Vector3 startPoint;
+
+    /// <value><c>endPoint</c> is the end point needed to calculate the direction of the zipline.</value>
+    private Vector3 endPoint;
+
+    /// <value><c>endLine</c> is the end (lowest) point of the zipline.</value>
     private Vector3 endLine;
 
+    /// <value><c>playerMovement</c> is the player's movement component.</value>
     private PlayerMovement playerMovement;
 
+    /// <value><c>zipliningButtonsPrompts</c> is the button prompt displayed to the player when they are ziplining.</value>
     private readonly string[] zipliningButtonsPrompts =
     {
         "press <sprite name=\"E\"> to let go"
     };
 
-    ScreenHints buttonPromptsController;
+    /// <value><c>buttonPromptsController</c> is the controller for the button prompts displayed to the player.</value>
+    private ScreenHints buttonPromptsController;
 
+    /// <summary>
+    /// It initializes the player's Rigidbody, ScreenHints, and PlayerMovement components at the start of the game.
+    /// </summary>
     void Start()
     {
         playerRigidbody = GetComponent<Rigidbody>();
@@ -30,6 +49,9 @@ public class Ziplining : MonoBehaviour
         playerMovement = playerRigidbody.GetComponent<PlayerMovement>();
     }
 
+    /// <summary>
+    /// Calculates the direction of the zipline based on the collision.
+    /// </summary>
     private void calculateLineDirection(Collision collision)
     {
         CapsuleCollider lineCollider = collision.gameObject.GetComponent<CapsuleCollider>();
@@ -63,6 +85,10 @@ public class Ziplining : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Checks if the player is in contact with a zipline.
+    /// It sets the ziplining.
+    /// </summary>
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("zippableLine"))
@@ -82,6 +108,9 @@ public class Ziplining : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Handles the player's disengagement from the zipline.
+    /// </summary>
     private void OnCollisionExit(Collision collision)
     {
         if (collision.gameObject.CompareTag("zippableLine"))
@@ -92,6 +121,9 @@ public class Ziplining : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Handles the player's movement along the zipline and disengagement from the zipline.
+    /// </summary>
     void Update()
     {
         if (isZiplining)
@@ -113,6 +145,9 @@ public class Ziplining : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Checks if the player is currently ziplining.
+    /// </summary>
     public bool IsZiplining()
     {
         return isZiplining;
