@@ -52,6 +52,7 @@ public class PlayerMovement : MonoBehaviour
         readyToJump = true;
         playerRigidbody = GetComponent<Rigidbody>();
         moveSpeedMultiplier = walkSpeedMultiplier;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
