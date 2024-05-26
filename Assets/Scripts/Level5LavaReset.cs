@@ -57,7 +57,7 @@ public class Level5LavaReset : MonoBehaviour
     {
         if (player.transform.position.y - playerHeight / 2 - 0.2f <= lavaLevel)
         {
-            player.transform.Find("PlayerObject/PlayerFire").gameObject.SetActive(true);
+            player.transform.Find("Ch24_nonPBR/PlayerFire").gameObject.SetActive(true);
             timeElapsed += Time.deltaTime;
             secondsElapsed = (int)timeElapsed % 60;
             textGUI.text = (numberOfSecondsToWait - secondsElapsed) + "\nseconds to reset";
@@ -80,7 +80,7 @@ public class Level5LavaReset : MonoBehaviour
     /// </summary>
     private void ResetPlayerPosition()
     {
-        player.transform.Find("PlayerObject/PlayerFire").gameObject.SetActive(false);
+        player.transform.Find("Ch24_nonPBR/PlayerFire").gameObject.SetActive(false);
         var rigidBody = player.GetComponent<Rigidbody>();
         rigidBody.velocity = Vector3.zero;
         player.transform.position = startPoint.position;
