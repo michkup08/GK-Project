@@ -42,7 +42,7 @@ public class Level4WaterReset : MonoBehaviour
     {
         waterLevel = GameObject.Find("Water Specular").transform.position.y;
         player = GameObject.Find("Player");
-        playerHeight = player.transform.Find("PlayerObject").GetComponent<CapsuleCollider>().height;
+        playerHeight = player.transform.Find("Ch24_nonPBR").GetComponent<CapsuleCollider>().height;
     }
 
     /// <summary>
