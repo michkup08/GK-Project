@@ -565,7 +565,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f4a3808d42d132a4fb4e41c4230e9bfb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.875
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f4a3808d42d132a4fb4e41c4230e9bfb, type: 3}
       propertyPath: m_LocalPosition.z
@@ -648,10 +648,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
+  m_Radius: 0.3
   m_Height: 1.75
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.875, z: 0}
 --- !u!95 &6581600037370739338
 Animator:
   serializedVersion: 4
@@ -660,7 +660,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3100672541324822397}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 2f698719bf8a20a458954f1382210c7b, type: 2}
   m_CullingMode: 0
