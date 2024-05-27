@@ -1009,7 +1009,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 808713759}
-  m_LocalRotation: {x: 0.15051281, y: -0.000000017010366, z: 0.0000000025897804, w: 0.98860806}
+  m_LocalRotation: {x: 0.15051281, y: 0.000000017010366, z: -0.0000000025897804, w: 0.98860806}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2489,7 +2489,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 151.77, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1589003459
 MonoBehaviour:
@@ -2511,7 +2511,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a3e86ed021edd9547bd12662615f6056, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 09a114098b9d7a648b6e5ada8722d9c1, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2924,7 +2924,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1852329969}
-  m_LocalRotation: {x: -0.04376669, y: -0.000000019875966, z: -8.7073954e-10, w: 0.9990418}
+  m_LocalRotation: {x: -0.043766692, y: 0.000000016688169, z: 7.3108647e-10, w: 0.9990418}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
