@@ -92,6 +92,7 @@ MonoBehaviour:
   playerHeight: 0
   touchGround: 0
   readyToJump: 0
+  crouching: 0
 --- !u!114 &5616247939067976522
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -672,3 +673,17 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1925419643177921676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3100672541324822397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c71d2608129cc65458a8699a247c9448, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerMovement: {fileID: 5616247939067975856}
+  orientation: {fileID: 0}

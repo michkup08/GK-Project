@@ -43,8 +43,8 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody playerRigidbody;
 
     private float moveSpeedMultiplier;
-    private bool sprinting = false;
-    private bool crouching = false;
+    public bool sprinting = false;
+    public bool crouching = false;
 
     // Start is called before the first frame update
     void Start()
@@ -111,8 +111,9 @@ public class PlayerMovement : MonoBehaviour
         }
 
         if (Input.GetKeyDown(KeyCode.LeftControl) && touchGround)
-        { 
-            capsuleCollider.height = capsuleCollider.height / 2;
+        {
+            capsuleCollider.height -= 0.6f;
+            capsuleCollider.center -= Vector3.up * 0.3f;
             playerRigidbody.AddForce(Vector3.down * 5f, ForceMode.Impulse);
             readyToJump = false;
             crouching = true;
@@ -120,7 +121,8 @@ public class PlayerMovement : MonoBehaviour
         }
         if (Input.GetKeyUp(KeyCode.LeftControl) && crouching)
         {
-            capsuleCollider.height = capsuleCollider.height * 2;
+            capsuleCollider.height += 0.6f;
+            capsuleCollider.center += Vector3.up * 0.3f;
             readyToJump = true;
             crouching = false;
             moveSpeedMultiplier = walkSpeedMultiplier;
