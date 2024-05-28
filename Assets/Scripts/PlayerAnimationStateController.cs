@@ -7,35 +7,53 @@ public class PlayerAnimationStateController : MonoBehaviour
     Animator animator;
     [SerializeField]
     public PlayerMovement playerMovement;
-    Transform orientation;
     int isCrouchingHash;
+    int velocityHash;
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
         isCrouchingHash = Animator.StringToHash("isCrouching");
+        velocityHash = Animator.StringToHash("Velocity");
     }
 
     // Update is called once per frame
     void Update()
     {
         bool isCrouching = animator.GetBool(isCrouchingHash);
-        if(playerMovement.crouching && playerMovement.touchGround)
+        if (playerMovement.touchGround)
         {
-            if (!isCrouching)
+            if (playerMovement.crouching)
             {
-                animator.SetBool(isCrouchingHash, true);
+                if (!isCrouching)
+                {
+                    animator.SetBool(isCrouchingHash, true);
+                }
+            }
+            else
+            {
+                if (isCrouching)
+                {
+                    animator.SetBool(isCrouchingHash, false);
+                }
+                else
+                {
+                    if(playerMovement.velocity > 0.1)
+                    {
+                        animator.SetFloat(velocityHash, playerMovement.velocity);
+                    }
+                    else
+                    {
+                        if (animator.GetFloat(velocityHash) != 0)
+                        {
+                            animator.SetFloat(velocityHash, 0f);
+                        }
+                    }
+
+                }
             }
 
         }
-        else
-        {
-            if (isCrouching)
-            {
-                animator.SetBool(isCrouchingHash, false);
-
-            }
-
-        }
+        
     }
 }
