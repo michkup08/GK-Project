@@ -36,24 +36,20 @@ public class PlayerAnimationStateController : MonoBehaviour
                 {
                     animator.SetBool(isCrouchingHash, false);
                 }
-                else
-                {
-                    if(playerMovement.velocity > 0.1)
-                    {
-                        animator.SetFloat(velocityHash, playerMovement.velocity);
-                    }
-                    else
-                    {
-                        if (animator.GetFloat(velocityHash) != 0)
-                        {
-                            animator.SetFloat(velocityHash, 0f);
-                        }
-                    }
 
+            }
+            if (playerMovement.velocity > 0.1)
+            {
+                animator.SetFloat(velocityHash, playerMovement.velocity);
+            }
+            else
+            {
+                if (animator.GetFloat(velocityHash) != 0)
+                {
+                    animator.SetFloat(velocityHash, 0f);
                 }
             }
-
         }
-        
+
     }
 }
