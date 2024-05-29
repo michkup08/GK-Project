@@ -7,6 +7,7 @@ public class EnemyMovement : MonoBehaviour
 {
     public NavMeshAgent agent;
     private bool playerInRange;
+    private bool fighting;
     public Transform playerTransform;
 
     // Start is called before the first frame update
@@ -23,11 +24,15 @@ public class EnemyMovement : MonoBehaviour
             float dist = Vector3.Distance(other.transform.position, transform.position);
             if(dist>2)
             {
+                fighting = false;
                 playerInRange = true;
                 Debug.Log("Enemy set agro");
                 agent.SetDestination(playerTransform.position + (transform.position.normalized*1.5f));
             }
-            
+            else 
+            {
+                fighting = true;
+            }
         }
     }
 }
