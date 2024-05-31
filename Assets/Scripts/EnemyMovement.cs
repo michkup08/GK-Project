@@ -10,7 +10,12 @@ public class EnemyMovement : MonoBehaviour
     private bool fighting;
     public Transform playerTransform;
 
+    private Animator animator;
+
     // Start is called before the first frame update
+    private void start(){
+        animator = GetComponent<Animator>();
+    }
 
     private void Update()
     {
@@ -22,6 +27,7 @@ public class EnemyMovement : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
             float dist = Vector3.Distance(other.transform.position, transform.position);
+           // animator.SetBool("isInRange", false);
             if(dist>2)
             {
                 fighting = false;
@@ -32,6 +38,7 @@ public class EnemyMovement : MonoBehaviour
             else 
             {
                 fighting = true;
+                
             }
         }
     }
