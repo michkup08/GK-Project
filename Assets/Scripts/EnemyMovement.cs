@@ -9,25 +9,33 @@ public class EnemyMovement : MonoBehaviour
     private bool playerInRange;
     private bool fighting;
     public Transform playerTransform;
+    private bool stand;
 
-    private Animator animator;
+    public Animator animator;
 
-    // Start is called before the first frame update
-    private void start(){
-        animator = GetComponent<Animator>();
-    }
-
+  
     private void Update()
-    {
-        
+    { 
+        if(playerInRange){
+        animator.SetBool("isInRange", true); 
+        }else{
+        animator.SetBool("isInRange", false); 
+        }
+
+        if(fighting){
+        animator.SetBool("fight", true); 
+        }else{
+        animator.SetBool("fight", false); 
+        }
     }
 
     private void OnTriggerStay(Collider other)
     {
+       
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
             float dist = Vector3.Distance(other.transform.position, transform.position);
-           // animator.SetBool("isInRange", false);
+            Debug.Log(dist);
             if(dist>2)
             {
                 fighting = false;
@@ -38,8 +46,9 @@ public class EnemyMovement : MonoBehaviour
             else 
             {
                 fighting = true;
-                
+                playerInRange = false;
             }
+          
         }
     }
 }
