@@ -34,6 +34,7 @@ public class EnemyMovement : MonoBehaviour
        
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
+            
             float dist = Vector3.Distance(other.transform.position, transform.position);
             Debug.Log(dist);
             if(dist>2)
