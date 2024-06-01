@@ -7,7 +7,7 @@ using UnityEngine;
 /// </summary>
 public class Ziplining : MonoBehaviour
 {
-    [Header("Speed")]
+    [Header("Ziplining Parameters")]
     [SerializeField]
     /// <value><c>speed</c> is the speed at which the player moves along the zipline.</value>
     private float speed = 3.0f;

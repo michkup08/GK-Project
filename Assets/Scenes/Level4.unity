@@ -674,7 +674,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 225241647}
-  m_LocalRotation: {x: 0.17341298, y: -0.031705055, z: 0.0055856337, w: 0.9843229}
+  m_LocalRotation: {x: 0.17341298, y: -0.03170502, z: 0.0055856276, w: 0.9843229}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5933,7 +5933,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 292654332}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 239.88457, y: 142.549, z: 233.8654}
+  m_LocalPosition: {x: 239.88457, y: 143.99, z: 233.8654}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6520,7 +6520,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5616247939067975859, guid: e6291e133664247499f495df5236d1f7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 141.049
+      value: 142.49
       objectReference: {fileID: 0}
     - target: {fileID: 5616247939067975859, guid: e6291e133664247499f495df5236d1f7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6554,6 +6554,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5616247939067976521, guid: e6291e133664247499f495df5236d1f7, type: 3}
+      propertyPath: speed
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 5616247939067976524, guid: e6291e133664247499f495df5236d1f7, type: 3}
       propertyPath: cam
       value: 
@@ -6570,6 +6574,10 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 963194228}
+    - target: {fileID: 5616247940113191737, guid: e6291e133664247499f495df5236d1f7, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 15303, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 5616247940113191742, guid: e6291e133664247499f495df5236d1f7, type: 3}
       propertyPath: playerCamera
       value: 
@@ -6578,6 +6586,10 @@ PrefabInstance:
       propertyPath: playerObject
       value: 
       objectReference: {fileID: 198168451}
+    - target: {fileID: 5616247940113191743, guid: e6291e133664247499f495df5236d1f7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.247
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: e6291e133664247499f495df5236d1f7, type: 3}
@@ -11779,7 +11791,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 593726700}
   m_LocalRotation: {x: 0, y: 0.9396927, z: 0, w: -0.3420201}
-  m_LocalPosition: {x: 239.581, y: 141.049, z: 236.85}
+  m_LocalPosition: {x: 239.581, y: 142.49, z: 236.85}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -12537,7 +12549,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 761248189}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 239.93494, y: 143.049, z: 231.3614}
+  m_LocalPosition: {x: 239.93494, y: 144.49, z: 231.3614}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -12616,7 +12628,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 765472163}
-  m_LocalRotation: {x: -0.043744057, y: -0.03216247, z: -0.0014089966, w: 0.99852395}
+  m_LocalRotation: {x: -0.043744057, y: -0.03216243, z: -0.001408995, w: 0.99852395}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -13533,7 +13545,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.15043476, y: -0.031826556, z: 0.004845503, w: 0.9880956}
-  m_LocalPosition: {x: 239.93494, y: 143.049, z: 231.3614}
+  m_LocalPosition: {x: 239.93494, y: 144.49, z: 231.3614}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
