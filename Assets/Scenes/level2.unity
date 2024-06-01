@@ -2095,6 +2095,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 4995539750808808680, guid: e6291e133664247499f495df5236d1f7, type: 3}
+      propertyPath: playerCamera
+      value: 
+      objectReference: {fileID: 968054102}
     - target: {fileID: 5616247939067975857, guid: e6291e133664247499f495df5236d1f7, type: 3}
       propertyPath: m_Name
       value: Player
@@ -3110,7 +3114,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2071451444}
-  m_LocalRotation: {x: 0.114043854, y: 0.35419855, z: -0.043567292, w: 0.92716736}
+  m_LocalRotation: {x: 0.11404386, y: 0.35419855, z: -0.04356729, w: 0.92716736}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
