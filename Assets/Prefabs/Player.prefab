@@ -83,7 +83,7 @@ MonoBehaviour:
   moveSpeedLimit: 25
   groundDrag: 1.5
   jumpForce: 7
-  jumpCooldown: 0.1
+  jumpCooldown: 2
   airMovementMultiplier: 0.1
   velocity: 0
   maxSlopeAngle: 50

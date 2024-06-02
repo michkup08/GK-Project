@@ -9,20 +9,24 @@ public class PlayerAnimationStateController : MonoBehaviour
     public PlayerMovement playerMovement;
     int isCrouchingHash;
     int velocityHash;
+    int isJumpingHash;
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
         isCrouchingHash = Animator.StringToHash("isCrouching");
         velocityHash = Animator.StringToHash("Velocity");
+        isJumpingHash = Animator.StringToHash("isJumping");
     }
 
     // Update is called once per frame
     void Update()
     {
         bool isCrouching = animator.GetBool(isCrouchingHash);
+        bool isJumping = animator.GetBool(isJumpingHash);
         if (playerMovement.touchGround)
         {
+            animator.SetBool(isJumpingHash, false);
             if (playerMovement.crouching)
             {
                 if (!isCrouching)
@@ -36,11 +40,11 @@ public class PlayerAnimationStateController : MonoBehaviour
                 {
                     animator.SetBool(isCrouchingHash, false);
                 }
-
             }
+
             if (playerMovement.velocity > 0.1)
             {
-                animator.SetFloat(velocityHash, playerMovement.velocity);
+                animator.SetFloat(velocityHash, playerMovement.velocity / 16);
             }
             else
             {
@@ -50,6 +54,9 @@ public class PlayerAnimationStateController : MonoBehaviour
                 }
             }
         }
-
+        else
+        {
+            animator.SetBool(isJumpingHash, true);
+        }
     }
 }

@@ -96,7 +96,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && touchGround && readyToJump && !onSteepSlope())
         {
             readyToJump = false;
-            jump();
+            Invoke(nameof(jump), 0.2f);
             Invoke(nameof(afterJump), jumpCooldown);
             touchGround = false;
         }
