@@ -101,12 +101,12 @@ public class PlayerMovement : MonoBehaviour
             touchGround = false;
         }
 
-        if (Input.GetKey(KeyCode.LeftShift) && touchGround)
+        if (Input.GetKey(KeyCode.LeftShift) && touchGround && !crouching)
         {
             sprinting = true;
             moveSpeedMultiplier = sprintSpeedMultiplier;
         }
-        if (Input.GetKeyUp(KeyCode.LeftShift))
+        if (Input.GetKeyUp(KeyCode.LeftShift) && !crouching)
         {
             sprinting = false;
             moveSpeedMultiplier = walkSpeedMultiplier;

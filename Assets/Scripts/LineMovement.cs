@@ -20,7 +20,7 @@ public class LineMovement : MonoBehaviour
     private float speed = 3.0f;
 
     /// <value><c>isMovingOnLine</c> is a flag indicating whether the player is currently moving on the line.</value>
-    private bool isMovingOnLine = false;
+    public bool isMovingOnLine = false;
 
     [Header("References")]
     [SerializeField]
@@ -56,7 +56,7 @@ public class LineMovement : MonoBehaviour
     private int direction = 1;
 
     /// <value><c>isAboveLine</c> is a flag indicating whether the player is currently above the line.</value>
-    private bool isAboveLine = false;
+    public bool isAboveLine = false;
 
     /// <summary>
     /// Calculates the direction of the line based on the collision.

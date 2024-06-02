@@ -140,6 +140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
+  isMovingOnLine: 0
   playerOrientation: {fileID: 5616247940638229114}
 --- !u!114 &5616247939067976521
 MonoBehaviour:
@@ -480,6 +481,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerMovement: {fileID: 5616247939067975856}
+  lineMovement: {fileID: 5616247939067976520}
 --- !u!1001 &3423255285610555655
 PrefabInstance:
   m_ObjectHideFlags: 0
