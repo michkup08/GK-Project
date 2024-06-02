@@ -665,7 +665,7 @@ MonoBehaviour:
   maxGrapplingDistance: 50
   playerCamera: {fileID: 0}
   playerObject: {fileID: 5616247939067975859}
-  spring: 120
+  spring: 130
   damper: 1
   massScale: 1
 --- !u!4 &3423255285610689415 stripped
