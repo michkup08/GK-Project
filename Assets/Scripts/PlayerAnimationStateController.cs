@@ -8,10 +8,12 @@ public class PlayerAnimationStateController : MonoBehaviour
     [SerializeField]
     public PlayerMovement playerMovement;
     public LineMovement lineMovement;
+    public advancedClimbing advancedClimbing;
     int isCrouchingHash;
     int velocityHash;
     int isJumpingHash;
     int isWalkingOnLineHash;
+    int isHangingHash;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +22,7 @@ public class PlayerAnimationStateController : MonoBehaviour
         velocityHash = Animator.StringToHash("Velocity");
         isJumpingHash = Animator.StringToHash("isJumping");
         isWalkingOnLineHash = Animator.StringToHash("isWalkingOnLine");
+        isHangingHash = Animator.StringToHash("isHanging");
     }
 
     // Update is called once per frame
@@ -27,7 +30,8 @@ public class PlayerAnimationStateController : MonoBehaviour
     {
         bool isCrouching = animator.GetBool(isCrouchingHash);
         bool isJumping = animator.GetBool(isJumpingHash);
-        if (playerMovement.touchGround || lineMovement.isMovingOnLine)
+        bool isHanging = animator.GetBool(isHangingHash);
+        if (playerMovement.touchGround || lineMovement.isMovingOnLine || advancedClimbing.canHandle)
         {
             animator.SetBool(isJumpingHash, false);
             if (playerMovement.crouching)
@@ -64,6 +68,14 @@ public class PlayerAnimationStateController : MonoBehaviour
             else
             {
                 animator.SetBool(isWalkingOnLineHash, false);
+            }
+            if (advancedClimbing.canHandle)
+            {
+                animator.SetBool(isHangingHash, true);
+            }
+            else
+            {
+                animator.SetBool(isHangingHash, false);
             }
         }
         else

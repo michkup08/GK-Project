@@ -142,6 +142,7 @@ MonoBehaviour:
   speed: 3
   isMovingOnLine: 0
   playerOrientation: {fileID: 5616247940638229114}
+  isAboveLine: 0
 --- !u!114 &5616247939067976521
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -482,6 +483,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerMovement: {fileID: 5616247939067975856}
   lineMovement: {fileID: 5616247939067976520}
+  advancedClimbing: {fileID: 5616247939067976524}
 --- !u!1001 &3423255285610555655
 PrefabInstance:
   m_ObjectHideFlags: 0
