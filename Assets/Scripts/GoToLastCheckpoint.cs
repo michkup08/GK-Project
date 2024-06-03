@@ -11,8 +11,11 @@ public class GoToLastCheckpoint : MonoBehaviour
     {
         Debug.Log("reset");
 
-
-        player.transform.position = menager.getPosition();
+        if(other.tag=="Player")
+        {
+            player.transform.position = menager.getPosition();
+        }
+        
         
     }
 }
