@@ -69,6 +69,13 @@ public class advancedClimbing : MonoBehaviour
     {
         if (other.gameObject.layer == 8)
         {
+            Vector3 direction = other.transform.position - transform.position;
+            Vector3 currentRotation = transform.rotation.eulerAngles;
+
+            Quaternion targetRotation = Quaternion.LookRotation(direction);
+            float targetYRotation = targetRotation.eulerAngles.y;
+            transform.rotation = Quaternion.Euler(currentRotation.x, targetYRotation, currentRotation.z);
+
             canHandle = true;
         }
     }

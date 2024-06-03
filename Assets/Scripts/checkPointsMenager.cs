@@ -9,7 +9,7 @@ public class checkPointsMenager : MonoBehaviour
 
     void Start()
     {
-        AfterDeadPosition = Player.transform.position;
+        AfterDeadPosition = Player.position;
     }
 
     public Vector3 getPosition()
