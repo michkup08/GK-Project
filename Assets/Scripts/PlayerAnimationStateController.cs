@@ -81,6 +81,7 @@ public class PlayerAnimationStateController : MonoBehaviour
         else
         {
             animator.SetBool(isJumpingHash, true);
+            animator.SetBool(isHangingHash, false);
         }
     }
 }
