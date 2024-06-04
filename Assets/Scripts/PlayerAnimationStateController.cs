@@ -30,6 +30,7 @@ public class PlayerAnimationStateController : MonoBehaviour
     {
         bool isCrouching = animator.GetBool(isCrouchingHash);
         bool isJumping = animator.GetBool(isJumpingHash);
+        bool isWalkingOnLine = animator.GetBool(isWalkingOnLineHash);
         bool isHanging = animator.GetBool(isHangingHash);
         if (playerMovement.touchGround || lineMovement.isMovingOnLine || advancedClimbing.canHandle)
         {
@@ -48,7 +49,6 @@ public class PlayerAnimationStateController : MonoBehaviour
                     animator.SetBool(isCrouchingHash, false);
                 }
             }
-
             if (playerMovement.velocity > 0.1)
             {
                 animator.SetFloat(velocityHash, playerMovement.velocity / 16);
@@ -60,14 +60,19 @@ public class PlayerAnimationStateController : MonoBehaviour
                     animator.SetFloat(velocityHash, 0f);
                 }
             }
-
             if (lineMovement.isMovingOnLine && lineMovement.isAboveLine)
             {
-                animator.SetBool(isWalkingOnLineHash, true);
+                if(!isWalkingOnLine)
+                {
+                    animator.SetBool(isWalkingOnLineHash, true);
+                }
             }
             else
             {
-                animator.SetBool(isWalkingOnLineHash, false);
+                if (isWalkingOnLine)
+                {
+                    animator.SetBool(isWalkingOnLineHash, false);
+                }
             }
             if (advancedClimbing.canHandle)
             {
