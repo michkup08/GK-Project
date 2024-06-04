@@ -13,6 +13,7 @@ public class InteractionWithObjects : MonoBehaviour
     public LayerMask defaultLayer;
     public GameObject playerObject;
     public string interaction = "animate";
+    public LevelStatistics ls;
 
     [Header("Variables")]
     public float rayDistance;
@@ -43,6 +44,7 @@ public class InteractionWithObjects : MonoBehaviour
                 }
                 else if(interaction == "exit map")
                 {
+                    SaveSystem.updateLevel(2, ls.collectedCount);
                     SceneManager.LoadScene("MainLocation");
                 }
             }

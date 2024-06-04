@@ -4,6 +4,10 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 public static class SaveSystem
 {
+    public static void Reset()
+    {
+        Save(1, new int[5] { 0,0,0,0,0 });
+    }
     public static void Save (int level, int[] points)
     {
         BinaryFormatter formatter = new BinaryFormatter();
