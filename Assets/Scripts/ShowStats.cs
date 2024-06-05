@@ -18,11 +18,11 @@ public class ShowStats : MonoBehaviour
             if(currentLevel > level)
             {
                 int points = SaveSystem.Load().points[level - 1];
-                levelInfo.text = "Level " + level + " succeed with " + points + "/" + maxPoints;
+                levelInfo.text = "Level " + level + " completed with " + points + "/" + maxPoints;
             }
             else
             {
-                levelInfo.text = "Level " + level + " not succeed";
+                levelInfo.text = "Level " + level + " incomplete";
             }
             
         }
