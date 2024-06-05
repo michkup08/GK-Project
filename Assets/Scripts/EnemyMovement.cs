@@ -36,16 +36,29 @@ public class EnemyMovement : MonoBehaviour
         {
             
             float dist = Vector3.Distance(other.transform.position, transform.position);
-            Debug.Log(dist);
-            if(dist>2)
+            
+            if(dist>1)
             {
                 fighting = false;
                 playerInRange = true;
                 Debug.Log("Enemy set agro");
-                agent.SetDestination(playerTransform.position + (transform.position.normalized*1.5f));
+                AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+                int stateHash = stateInfo.shortNameHash;
+                if (stateHash == Animator.StringToHash("Standing Melee Attack Horizontal"))
+                {
+                    
+                    agent.SetDestination(transform.position);
+                }
+                else
+                {
+                    
+                    agent.SetDestination(playerTransform.position);// + (transform.position.normalized*0.8f));
+                }
+                
             }
             else 
             {
+                agent.SetDestination(transform.position);
                 fighting = true;
                 playerInRange = false;
             }
