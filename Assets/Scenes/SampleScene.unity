@@ -2310,7 +2310,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 16383
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -2924,7 +2924,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1852329969}
-  m_LocalRotation: {x: -0.043766692, y: 0.000000016688169, z: 7.3108647e-10, w: 0.9990418}
+  m_LocalRotation: {x: -0.04376669, y: 0.000000019875966, z: 8.7073954e-10, w: 0.9990418}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2991,6 +2991,8 @@ MonoBehaviour:
   playerHeight: 0
   touchGround: 0
   readyToJump: 0
+  sprinting: 0
+  crouching: 0
 --- !u!4 &1973244450
 Transform:
   m_ObjectHideFlags: 0
@@ -3103,7 +3105,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
+  isMovingOnLine: 0
   playerOrientation: {fileID: 180896021}
+  isAboveLine: 0
 --- !u!114 &1973244457
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -59,7 +59,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("level: " + SaveSystem.Load().currentLevel);
+        //Debug.Log("level: " + SaveSystem.Load().currentLevel);
         touchGround = Physics.SphereCast(transform.position, 0.3f, Vector3.down, out RaycastHit hit, 1f, isGround);
 
         inputControl();
