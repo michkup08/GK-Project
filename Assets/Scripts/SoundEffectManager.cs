@@ -5,6 +5,7 @@ using UnityEngine;
 public class SoundEffectManager : MonoBehaviour
 {
     public Animator animator;
+    public checkPointsMenager checkpointsmenager;
     public PlayerMovement playerMovement;
     int lastState;
     float oldVelocity;
@@ -14,6 +15,7 @@ public class SoundEffectManager : MonoBehaviour
     public AudioClip runing;
     public AudioClip jumping;
     public AudioClip hanging;
+    public AudioClip death;
 
     public float walkRunLimit = 10;
 
@@ -69,6 +71,15 @@ public class SoundEffectManager : MonoBehaviour
                 
             }
         }
-        
+
+        if (checkpointsmenager)
+        {
+            if (checkpointsmenager.trigger)
+            {
+                checkpointsmenager.trigger = false;
+                source.clip = death;
+                source.PlayOneShot(death);
+            }
+        }
     }
 }

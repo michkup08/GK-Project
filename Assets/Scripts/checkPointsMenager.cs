@@ -6,7 +6,7 @@ public class checkPointsMenager : MonoBehaviour
 {
     Vector3 AfterDeadPosition;
     public Transform Player;
-
+    public bool trigger = false;
     void Start()
     {
         AfterDeadPosition = Player.position;
@@ -14,8 +14,10 @@ public class checkPointsMenager : MonoBehaviour
 
     public Vector3 getPosition()
     {
+        trigger = true;
         return AfterDeadPosition;
-    }
+        
+}
 
     public void setPosition(Vector3 position)
     {
@@ -24,6 +26,6 @@ public class checkPointsMenager : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log("position: " + AfterDeadPosition.x + AfterDeadPosition.y + AfterDeadPosition.z);
+        
     }
 }

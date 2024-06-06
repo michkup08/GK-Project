@@ -82,9 +82,12 @@ public static class SaveSystem
 
             for(int i = 0; i<5; i++ )
             {
-                if((i+1)==level)
+                if((i+2)==level)
                 {
+                    Debug.Log("points updated on level: " + (level-1) );
+                    Debug.Log("old: " + currentPoints[i]);
                     currentPoints[i] = currentPoints[i] > points ? currentPoints[i] : points;
+                    Debug.Log("new: " + currentPoints[i]);
                 }
             }
 
