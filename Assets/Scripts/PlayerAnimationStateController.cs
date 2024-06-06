@@ -88,5 +88,12 @@ public class PlayerAnimationStateController : MonoBehaviour
             animator.SetBool(isJumpingHash, true);
             animator.SetBool(isHangingHash, false);
         }
+
+        if( Input.GetMouseButtonDown(0) ){
+            animator.SetBool("isKicking", true); 
+        }else{
+            animator.SetBool("isKicking", false); 
+        }
+
     }
 }
