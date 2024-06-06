@@ -6149,6 +6149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 1464028124}
+  trigger: 0
 --- !u!4 &614626220
 Transform:
   m_ObjectHideFlags: 0
@@ -19506,12 +19507,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 1010864703}
+  checkpointsmenager: {fileID: 614626219}
   playerMovement: {fileID: 1464028122}
   source: {fileID: 1919763131}
   walking: {fileID: 8300000, guid: bacae225f89f35849a7cefd1d0dc13fd, type: 3}
   runing: {fileID: 8300000, guid: 6c038b9467f76a347b3db52c5efa2ea5, type: 3}
   jumping: {fileID: 8300000, guid: d1e5a7dc4d4937d4b98fd02489a5e445, type: 3}
   hanging: {fileID: 8300000, guid: 8b193db1d8357604fa1e473763cbe577, type: 3}
+  death: {fileID: 8300000, guid: 5dda460d70e54d748bff28956f62bddd, type: 3}
   walkRunLimit: 10
 --- !u!1 &1935160814
 GameObject:
