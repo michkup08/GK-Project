@@ -95,5 +95,13 @@ public class PlayerAnimationStateController : MonoBehaviour
             animator.SetBool("isKicking", false); 
         }
 
+        if( Input.GetKey(KeyCode.X) ){
+            Debug.Log("true");
+            animator.SetBool("isFliping", true); 
+        }else{
+            Debug.Log("false");
+            animator.SetBool("isFliping", false); 
+        }
+
     }
 }
