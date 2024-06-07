@@ -7082,6 +7082,8 @@ MonoBehaviour:
   lineDisplayTimeSec: 5
   canvasText: {fileID: 1419173911}
   animator: {fileID: 683768169}
+  dialogueActive: 0
+  soundEffectManager: {fileID: 1919763133}
 --- !u!95 &683768169
 Animator:
   serializedVersion: 4
@@ -8480,6 +8482,8 @@ MonoBehaviour:
   lineDisplayTimeSec: 5
   canvasText: {fileID: 1419173911}
   animator: {fileID: 812546696}
+  dialogueActive: 0
+  soundEffectManager: {fileID: 1919763133}
 --- !u!95 &812546696
 Animator:
   serializedVersion: 4
@@ -11505,6 +11509,8 @@ MonoBehaviour:
   lineDisplayTimeSec: 5
   canvasText: {fileID: 1419173911}
   animator: {fileID: 1114553759}
+  dialogueActive: 0
+  soundEffectManager: {fileID: 1919763133}
 --- !u!95 &1114553759
 Animator:
   serializedVersion: 4
@@ -11793,6 +11799,8 @@ MonoBehaviour:
   lineDisplayTimeSec: 5
   canvasText: {fileID: 1419173911}
   animator: {fileID: 1123944988}
+  dialogueActive: 0
+  soundEffectManager: {fileID: 1919763133}
 --- !u!95 &1123944988
 Animator:
   serializedVersion: 4
@@ -13927,7 +13935,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1302863142}
-  m_LocalRotation: {x: -0.034094177, y: 0.6264242, z: 0.027442783, w: 0.77825266}
+  m_LocalRotation: {x: -0.034094173, y: 0.6264242, z: 0.027442776, w: 0.77825266}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -19509,12 +19517,14 @@ MonoBehaviour:
   animator: {fileID: 1010864703}
   checkpointsmenager: {fileID: 614626219}
   playerMovement: {fileID: 1464028122}
+  npcController: {fileID: 2117002330}
   source: {fileID: 1919763131}
   walking: {fileID: 8300000, guid: bacae225f89f35849a7cefd1d0dc13fd, type: 3}
   runing: {fileID: 8300000, guid: 6c038b9467f76a347b3db52c5efa2ea5, type: 3}
   jumping: {fileID: 8300000, guid: d1e5a7dc4d4937d4b98fd02489a5e445, type: 3}
   hanging: {fileID: 8300000, guid: 8b193db1d8357604fa1e473763cbe577, type: 3}
   death: {fileID: 8300000, guid: 5dda460d70e54d748bff28956f62bddd, type: 3}
+  talk: {fileID: 8300000, guid: c802020a8d104664ba36b72133f3ccac, type: 3}
   walkRunLimit: 10
 --- !u!1 &1935160814
 GameObject:
@@ -22376,6 +22386,8 @@ MonoBehaviour:
   lineDisplayTimeSec: 5
   canvasText: {fileID: 1419173911}
   animator: {fileID: 2117002331}
+  dialogueActive: 0
+  soundEffectManager: {fileID: 1919763133}
 --- !u!95 &2117002331
 Animator:
   serializedVersion: 4
