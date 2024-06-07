@@ -60,9 +60,14 @@ public class EnemyMovement : MonoBehaviour
             {
                 agent.SetDestination(transform.position);
                 fighting = true;
-                playerInRange = false;
+                
             }
           
         }
+        
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        playerInRange = false;
     }
 }

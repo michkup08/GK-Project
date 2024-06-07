@@ -33,13 +33,15 @@ public class NPCController : MonoBehaviour
     private List<string> dialogue = new List<string>();
 
     /// <value><c>dialogueActive</c> is a flag indicating whether the dialogue is currently active.</value>
-    private bool dialogueActive = false;
+    public bool dialogueActive = false;
 
     /// <value><c>playerInRange</c> is a flag indicating whether the player is in range to interact with the NPC.</value>
     private bool playerInRange = false;
 
     /// <value><c>currentLineDisplayTime</c> is the current display time of the line of dialogue.</value>
     private float currentLineDisplayTime = 0.0f;
+
+    public SoundEffectManager soundEffectManager;
 
     /// <summary>
     /// It initializes the NPC's Animator component and dialogue lines at the start of the game.
@@ -110,6 +112,11 @@ public class NPCController : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
+            if(soundEffectManager)
+            {
+                soundEffectManager.npcController = this;
+            }
+            
             playerInRange = true;
             canvasText.gameObject.SetActive(true);
             canvasText.text = "Press E to talk to " + npcName;

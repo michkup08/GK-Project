@@ -7,8 +7,10 @@ public class SoundEffectManager : MonoBehaviour
     public Animator animator;
     public checkPointsMenager checkpointsmenager;
     public PlayerMovement playerMovement;
+    public NPCController npcController;
     int lastState;
     float oldVelocity;
+    bool letTalk = false;
     public AudioSource source;
 
     public AudioClip walking;
@@ -16,6 +18,7 @@ public class SoundEffectManager : MonoBehaviour
     public AudioClip jumping;
     public AudioClip hanging;
     public AudioClip death;
+    public AudioClip talk;
 
     public float walkRunLimit = 10;
 
@@ -79,6 +82,25 @@ public class SoundEffectManager : MonoBehaviour
                 checkpointsmenager.trigger = false;
                 source.clip = death;
                 source.PlayOneShot(death);
+            }
+        }
+
+        if (npcController)
+        {
+            if (npcController.dialogueActive)
+            {
+                source.clip = talk;
+                if (!letTalk)
+                {
+                    letTalk = true;
+                    
+                    source.Play();
+                }
+                
+            }
+            else
+            {
+                letTalk = false;
             }
         }
     }
