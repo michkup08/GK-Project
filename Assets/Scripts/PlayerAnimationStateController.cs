@@ -96,10 +96,10 @@ public class PlayerAnimationStateController : MonoBehaviour
         }
 
         if( Input.GetKey(KeyCode.X) ){
-            Debug.Log("true");
+            //Debug.Log("true");
             animator.SetBool("isFliping", true); 
         }else{
-            Debug.Log("false");
+            //Debug.Log("false");
             animator.SetBool("isFliping", false); 
         }
 

@@ -41,6 +41,9 @@ public class WaypointsFollower : MonoBehaviour
         {
             nextWaypoint = 0;
         }
+
+        // set the object's rotation to look at the next waypoint
+        transform.LookAt(waypoints[nextWaypoint]);
     }
 
     /// <summary>
