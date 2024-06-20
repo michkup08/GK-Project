@@ -9,11 +9,13 @@ public class PlayerAnimationStateController : MonoBehaviour
     public PlayerMovement playerMovement;
     public LineMovement lineMovement;
     public advancedClimbing advancedClimbing;
+    public Ziplining ziplining;
     int isCrouchingHash;
     int velocityHash;
     int isJumpingHash;
     int isWalkingOnLineHash;
     int isHangingHash;
+    int isZipLiningHash;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +25,7 @@ public class PlayerAnimationStateController : MonoBehaviour
         isJumpingHash = Animator.StringToHash("isJumping");
         isWalkingOnLineHash = Animator.StringToHash("isWalkingOnLine");
         isHangingHash = Animator.StringToHash("isHanging");
+        isZipLiningHash = Animator.StringToHash("isZipLining");
     }
 
     // Update is called once per frame
@@ -32,7 +35,8 @@ public class PlayerAnimationStateController : MonoBehaviour
         bool isJumping = animator.GetBool(isJumpingHash);
         bool isWalkingOnLine = animator.GetBool(isWalkingOnLineHash);
         bool isHanging = animator.GetBool(isHangingHash);
-        if (playerMovement.touchGround || lineMovement.isMovingOnLine || advancedClimbing.canHandle)
+        bool isZipLining = animator.GetBool(isZipLiningHash);
+        if (playerMovement.touchGround || lineMovement.isMovingOnLine || advancedClimbing.canHandle || ziplining.isZiplining)
         {
             animator.SetBool(isJumpingHash, false);
             if (playerMovement.crouching)
@@ -82,12 +86,24 @@ public class PlayerAnimationStateController : MonoBehaviour
             {
                 animator.SetBool(isHangingHash, false);
             }
+            if (ziplining.isZiplining)
+            {
+                animator.SetBool(isZipLiningHash, true);
+            }
+            else
+            {
+                animator.SetBool(isZipLiningHash, false);
+            }
         }
         else
         {
             animator.SetBool(isJumpingHash, true);
             animator.SetBool(isHangingHash, false);
         }
+
+
+
+
 
         if( Input.GetMouseButtonDown(0) ){
             animator.SetBool("isKicking", true); 

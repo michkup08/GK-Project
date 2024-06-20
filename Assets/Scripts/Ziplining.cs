@@ -16,7 +16,7 @@ public class Ziplining : MonoBehaviour
     private Rigidbody playerRigidbody;
 
     /// <value><c>isZiplining</c> is a flag indicating whether the player is currently ziplining.</value>
-    private bool isZiplining = false;
+    public bool isZiplining = false;
 
     /// <value><c>startPoint</c> is the start point needed to calculate the direction of the zipline.</value>
     private Vector3 startPoint;
