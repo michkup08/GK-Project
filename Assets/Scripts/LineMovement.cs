@@ -25,6 +25,10 @@ public class LineMovement : MonoBehaviour
     /// <value><c>playerOrientation</c> is the player's orientation in the game world.</value>
     private Transform playerOrientation;
 
+    [SerializeField]
+    /// <value><c>camera3P</c> is reference to the Camera3P component, which is used to block the player's rotation when moving on the line.</value>
+    public Camera3P camera3P;
+
     /// <value><c>playerMovement</c> is the player's movement component, which is used to disable and enable the player's air movement.</value>
     private PlayerMovement playerMovement;
 
@@ -62,27 +66,30 @@ public class LineMovement : MonoBehaviour
     private void calculateLineDirection(Collision collision)
     {
         CapsuleCollider lineCollider = collision.gameObject.GetComponent<CapsuleCollider>();
+        if (lineCollider == null) return; // Early exit if the collider is not found
 
-        // Get the line's length (subtract the diameter of the end cap spheres)
-        float lineLength = lineCollider.height - (lineCollider.radius * 2);
-
-        // Calculate the start and end points
-        Vector3 startPoint = Vector3.zero, endPoint = Vector3.zero;
+        // Calculate the line's direction based on its orientation
+        Vector3 lineVector = Vector3.zero;
         switch (lineCollider.direction)
         {
             case 0: // X-axis
-                startPoint = collision.transform.position - (collision.transform.right * lineLength / 2);
-                endPoint = collision.transform.position + (collision.transform.right * lineLength / 2);
+                lineVector = collision.transform.right;
                 break;
             case 1: // Y-axis
-                startPoint = collision.transform.position - (collision.transform.up * lineLength / 2);
-                endPoint = collision.transform.position + (collision.transform.up * lineLength / 2);
+                lineVector = collision.transform.up;
                 break;
             case 2: // Z-axis
-                startPoint = collision.transform.position - (collision.transform.forward * lineLength / 2);
-                endPoint = collision.transform.position + (collision.transform.forward * lineLength / 2);
+                lineVector = collision.transform.forward;
                 break;
         }
+
+        // Calculate the start and end points of the line
+        Vector3 startPoint = collision.transform.position - (lineVector * lineCollider.height / 2);
+        Vector3 endPoint = collision.transform.position + (lineVector * lineCollider.height / 2);
+
+        // Adjust for the collider's center offset
+        startPoint += lineCollider.center;
+        endPoint += lineCollider.center;
 
         // Calculate the direction of the line
         lineDirection = (endPoint - startPoint).normalized;
@@ -122,6 +129,11 @@ public class LineMovement : MonoBehaviour
                     buttonPromptsController.LoadMessage(movingUnderLineButtonPrompts, "underLineMovement");
                 }
             }
+
+            // disable player rotation towards the camera and set player rotation 80 degrees in z axis to the line direction
+            camera3P.disableRotation = true;
+            var playerObject = transform.Find("Ch24_nonPBR");
+            playerObject.transform.rotation = Quaternion.LookRotation(lineDirection) * Quaternion.Euler(0, 80, 0);
         }
     }
 
@@ -136,6 +148,7 @@ public class LineMovement : MonoBehaviour
             playerRigidbody.useGravity = true;
             isMovingOnLine = false;
             playerMovement.enableAirMovement();
+            camera3P.disableRotation = false;
         }
     }
 
@@ -161,13 +174,13 @@ public class LineMovement : MonoBehaviour
             if (Input.GetKey(KeyCode.W))
             {
                 moveTime = 0.0f;
-                playerRigidbody.rotation = Quaternion.Slerp(playerRigidbody.rotation, Quaternion.LookRotation(lineDirection), Time.deltaTime);
+                // playerRigidbody.rotation = Quaternion.Slerp(playerRigidbody.rotation, Quaternion.LookRotation(lineDirection), Time.deltaTime);
                 playerRigidbody.velocity = direction * speed * lineDirection;
             }
             else if (Input.GetKey(KeyCode.S))
             {
                 moveTime = 0.0f;
-                playerRigidbody.rotation = Quaternion.Slerp(playerRigidbody.rotation, Quaternion.LookRotation(lineDirection), Time.deltaTime);
+                //playerRigidbody.rotation = Quaternion.Slerp(playerRigidbody.rotation, Quaternion.LookRotation(lineDirection), Time.deltaTime);
                 playerRigidbody.velocity = direction * speed * -lineDirection;
             }
 

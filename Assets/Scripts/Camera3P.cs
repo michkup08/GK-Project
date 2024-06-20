@@ -21,6 +21,8 @@ public class Camera3P : MonoBehaviour
     public bool aim;
     public Image aimImage;
 
+    public bool disableRotation;
+
     public CinemachineFreeLook defaultCinemachine, aimCinemachine;
 
     void Start()
@@ -64,7 +66,7 @@ public class Camera3P : MonoBehaviour
             verticalI = Input.GetAxis("Vertical");
 
             Vector3 inputDir = (orientation.forward * verticalI) + (orientation.right * horizontalI);
-            if (inputDir.magnitude != 0)
+            if (inputDir.magnitude != 0 && !disableRotation)
             {
                 playerObject.forward = Vector3.Slerp(playerObject.forward, inputDir.normalized, Time.deltaTime * rotationSpeed);
             }
