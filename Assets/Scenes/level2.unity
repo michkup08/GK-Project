@@ -4696,6 +4696,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5616247939067976520, guid: e6291e133664247499f495df5236d1f7, type: 3}
+      propertyPath: camera3P
+      value: 
+      objectReference: {fileID: 968054104}
+    - target: {fileID: 5616247939067976521, guid: e6291e133664247499f495df5236d1f7, type: 3}
+      propertyPath: camera3P
+      value: 
+      objectReference: {fileID: 968054104}
     - target: {fileID: 5616247939067976521, guid: e6291e133664247499f495df5236d1f7, type: 3}
       propertyPath: playerRigidbody
       value: 
@@ -5934,7 +5942,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1471789760}
-  m_LocalRotation: {x: -0.00080328697, y: 0.99887353, z: 0.043759305, w: 0.018336263}
+  m_LocalRotation: {x: -0.0008032866, y: 0.99887353, z: 0.043759283, w: 0.018336266}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
