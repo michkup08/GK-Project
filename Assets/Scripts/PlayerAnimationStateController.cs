@@ -14,6 +14,8 @@ public class PlayerAnimationStateController : MonoBehaviour
     int velocityHash;
     int isJumpingHash;
     int isWalkingOnLineHash;
+    int isWalkingUnderLineHash;
+    int isWalkingUnderLineDirectionHash;
     int isHangingHash;
     int isZipLiningHash;
     // Start is called before the first frame update
@@ -24,6 +26,8 @@ public class PlayerAnimationStateController : MonoBehaviour
         velocityHash = Animator.StringToHash("Velocity");
         isJumpingHash = Animator.StringToHash("isJumping");
         isWalkingOnLineHash = Animator.StringToHash("isWalkingOnLine");
+        isWalkingUnderLineHash = Animator.StringToHash("isWalkingUnderLine");
+        isWalkingUnderLineDirectionHash = Animator.StringToHash("isWalkingUnderLineDirection");
         isHangingHash = Animator.StringToHash("isHanging");
         isZipLiningHash = Animator.StringToHash("isZipLining");
     }
@@ -34,6 +38,8 @@ public class PlayerAnimationStateController : MonoBehaviour
         bool isCrouching = animator.GetBool(isCrouchingHash);
         bool isJumping = animator.GetBool(isJumpingHash);
         bool isWalkingOnLine = animator.GetBool(isWalkingOnLineHash);
+        bool isWalkingUnderLine = animator.GetBool(isWalkingUnderLineHash);
+        bool isWalkingUnderLineDirection = animator.GetBool(isWalkingUnderLineDirectionHash);
         bool isHanging = animator.GetBool(isHangingHash);
         bool isZipLining = animator.GetBool(isZipLiningHash);
         if (playerMovement.touchGround || lineMovement.isMovingOnLine || advancedClimbing.canHandle || ziplining.isZiplining)
@@ -64,18 +70,37 @@ public class PlayerAnimationStateController : MonoBehaviour
                     animator.SetFloat(velocityHash, 0f);
                 }
             }
-            if (lineMovement.isMovingOnLine && lineMovement.isAboveLine)
+            if (lineMovement.isMovingOnLine)
             {
-                if(!isWalkingOnLine)
+                if (lineMovement.isAboveLine)
                 {
-                    animator.SetBool(isWalkingOnLineHash, true);
+                    if (!isWalkingOnLine)
+                    {
+                        animator.SetBool(isWalkingOnLineHash, true);
+                    }
+                }
+                else
+                {
+                    if (!isWalkingUnderLine)
+                    {
+                        animator.SetBool(isWalkingUnderLineHash, true);
+                    }
+                    if (lineMovement.direction == 1)
+                    {
+                        animator.SetBool(isWalkingUnderLineDirectionHash, true);
+                    }
+                    else
+                    {
+                        animator.SetBool(isWalkingUnderLineDirectionHash, false);
+                    }
                 }
             }
             else
             {
-                if (isWalkingOnLine)
+                if (isWalkingOnLine || isWalkingUnderLine)
                 {
                     animator.SetBool(isWalkingOnLineHash, false);
+                    animator.SetBool(isWalkingUnderLineHash, false);
                 }
             }
             if (advancedClimbing.canHandle)
@@ -88,17 +113,24 @@ public class PlayerAnimationStateController : MonoBehaviour
             }
             if (ziplining.isZiplining)
             {
-                animator.SetBool(isZipLiningHash, true);
+                if (!isZipLining)
+                {
+                    animator.SetBool(isZipLiningHash, true);
+                }
             }
             else
             {
-                animator.SetBool(isZipLiningHash, false);
+                if (isZipLining)
+                {
+                    animator.SetBool(isZipLiningHash, false);
+                }
             }
         }
         else
         {
             animator.SetBool(isJumpingHash, true);
             animator.SetBool(isHangingHash, false);
+            animator.SetBool(isWalkingUnderLineHash, false);
         }
 
 

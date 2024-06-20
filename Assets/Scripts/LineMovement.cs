@@ -53,7 +53,7 @@ public class LineMovement : MonoBehaviour
     private Rigidbody playerRigidbody;
 
     /// <value><c>direction</c> is the direction in which the player is moving along the line. It is used to move the player in current looking direction.</value>
-    private int direction = 1;
+    public int direction = 1;
 
     /// <value><c>isAboveLine</c> is a flag indicating whether the player is currently above the line.</value>
     public bool isAboveLine = false;

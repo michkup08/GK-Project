@@ -240,6 +240,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 50
+  isZiplining: 0
 --- !u!114 &5616247939067976526
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -576,6 +577,7 @@ MonoBehaviour:
   playerMovement: {fileID: 5616247939067975856}
   lineMovement: {fileID: 5616247939067976520}
   advancedClimbing: {fileID: 5616247939067976524}
+  ziplining: {fileID: 5616247939067976521}
 --- !u!4 &4499949403974370788 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1852576806548013000, guid: f4a3808d42d132a4fb4e41c4230e9bfb, type: 3}
