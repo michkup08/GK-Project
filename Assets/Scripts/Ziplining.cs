@@ -1,3 +1,4 @@
+using System.IO.Pipes;
 using UnityEngine;
 
 /// <summary>
@@ -9,6 +10,11 @@ public class Ziplining : MonoBehaviour
     [SerializeField]
     /// <value><c>speed</c> is the speed at which the player moves along the zipline.</value>
     private float speed = 3.0f;
+
+    [Header("References")]
+    [SerializeField]
+    /// <value><c>camera3P</c> is reference to the Camera3P component, which is used to block the player's rotation when moving on the line.</value>
+    public Camera3P camera3P;
 
     /// <value><c>playerRigidbody</c> is the player's Rigidbody component.</value>
     private Rigidbody playerRigidbody;
@@ -27,6 +33,9 @@ public class Ziplining : MonoBehaviour
 
     /// <value><c>playerMovement</c> is the player's movement component.</value>
     private PlayerMovement playerMovement;
+
+    /// <value><c>lineDirection</c> is the direction of the line.</value>
+    private Vector3 lineDirection;
 
     /// <value><c>zipliningButtonsPrompts</c> is the button prompt displayed to the player when they are ziplining.</value>
     private readonly string[] zipliningButtonsPrompts =
@@ -81,6 +90,9 @@ public class Ziplining : MonoBehaviour
             startPoint = endPoint;
             endPoint = temp;
         }
+
+        // Calculate the direction of the line
+        lineDirection = (endPoint - startPoint).normalized;
     }
 
     /// <summary>
@@ -95,13 +107,19 @@ public class Ziplining : MonoBehaviour
             {
                 playerMovement.disableAirMovement();
                 ContactPoint contact = collision.GetContact(0);
-                isZiplining = Vector3.Dot(contact.normal, Vector3.up) > 0.7f;
+                isZiplining = Vector3.Dot(contact.normal, Vector3.up) > 0.9f;
                 playerRigidbody.useGravity = false;
                 playerRigidbody.drag = 0f;
                 isZiplining = true;
                 endLine = collision.gameObject.GetComponent<MeshRenderer>().bounds.min;
                 calculateLineDirection(collision);
                 buttonPromptsController.LoadMessage(zipliningButtonsPrompts, "ziplining");
+
+                // rotate player object to face the line direction
+                var playerObject = transform.Find("Ch24_nonPBR");
+                playerObject.transform.rotation = Quaternion.LookRotation(lineDirection);
+
+                camera3P.disableRotation = true;
             }
         }
     }
@@ -116,6 +134,9 @@ public class Ziplining : MonoBehaviour
             playerRigidbody.useGravity = true;
             isZiplining = false;
             playerMovement.enableAirMovement();
+
+            camera3P.disableRotation = false;
+            transform.Find("Ch24_nonPBR").transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
         }
     }
 

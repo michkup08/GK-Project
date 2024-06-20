@@ -110,8 +110,8 @@ public class LineMovement : MonoBehaviour
                 ContactPoint contact = collision.GetContact(0);
                 float dotUp = Vector3.Dot(contact.normal, Vector3.up);
                 float dotDown = Vector3.Dot(contact.normal, Vector3.down);
-                isAboveLine = dotUp > 0.5f;
-                bool isUnderLine = dotDown > 0.5f;
+                isAboveLine = dotUp > 0.7f;
+                bool isUnderLine = dotDown > 0.9f;
                 isMovingOnLine = isUnderLine || isAboveLine;
 
                 if (isMovingOnLine)
@@ -131,6 +131,10 @@ public class LineMovement : MonoBehaviour
                     camera3P.disableRotation = true;
                     var playerObject = transform.Find("Ch24_nonPBR");
                     playerObject.transform.rotation = Quaternion.LookRotation(lineDirection) * Quaternion.Euler(0, 90, 0);
+
+                    // rotate minimap icon
+                    var minimapIcon = transform.Find("Ch24_nonPBR/MinimapPlayer");
+                    minimapIcon.transform.rotation = Quaternion.Euler(minimapIcon.transform.rotation.eulerAngles.x, minimapIcon.transform.rotation.eulerAngles.y + 90, minimapIcon.transform.rotation.eulerAngles.z);
                 }
             }
         }
@@ -144,6 +148,13 @@ public class LineMovement : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("movableLine"))
         {
+            if (!isAboveLine)
+            {
+                // rotate minimap icon back to default
+                var minimapIcon = transform.Find("Ch24_nonPBR/MinimapPlayer");
+                minimapIcon.transform.rotation = Quaternion.Euler(minimapIcon.transform.rotation.eulerAngles.x, minimapIcon.transform.rotation.eulerAngles.y - 90, minimapIcon.transform.rotation.eulerAngles.z);
+            }
+
             playerRigidbody.useGravity = true;
             isMovingOnLine = false;
             playerMovement.enableAirMovement();
