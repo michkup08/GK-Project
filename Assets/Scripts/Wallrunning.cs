@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Wallrunning : MonoBehaviour
 {
-   [Header("Wallrunning")]
+    [Header("Wallrunning")]
     public LayerMask whatIsWall;
     public LayerMask whatIsGround;
     public float wallRunForce;
@@ -28,7 +26,7 @@ public class Wallrunning : MonoBehaviour
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody>(); 
+        rb = GetComponent<Rigidbody>();
     }
     private void Update()
     {
@@ -38,7 +36,7 @@ public class Wallrunning : MonoBehaviour
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
 
-        if((wallLeft || wallRight) && verticalInput > 0 && CanWallRun())
+        if ((wallLeft || wallRight) && verticalInput > 0 && CanWallRun())
         {
             if (!wallrunning) wallrunning = true;
         }
@@ -50,7 +48,7 @@ public class Wallrunning : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (wallrunning)WallRunningMovement();
+        if (wallrunning) WallRunningMovement();
     }
 
     private bool CanWallRun()

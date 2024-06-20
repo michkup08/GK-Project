@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.ConstrainedExecution;
 using UnityEngine;
-using static UnityEngine.EventSystems.EventTrigger;
 
 /// <summary>
 /// This class represents counting the number of collectibles the player has collected.

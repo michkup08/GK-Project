@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -143,17 +141,17 @@ public class PlayerMovement : MonoBehaviour
 
     private void groundMovement()
     {
-        moveDir = orientation.forward * verticalI + orientation.right * horizontalI;
+        moveDir = (orientation.forward * verticalI) + (orientation.right * horizontalI);
         if (moveDir != Vector3.zero && transform.parent != null)
         {
             transform.parent = null;
         }
 
-        if(onSlope())
+        if (onSlope())
         {
             playerRigidbody.AddForce(getSlopeMoveDirection() * moveSpeedMultiplier * 0.75f, ForceMode.Force);
         }
-        else if(onSteepSlope())
+        else if (onSteepSlope())
         {
             playerRigidbody.AddForce(getSteepSlopeSlideDirection() * moveSpeedMultiplier * 0.75f, ForceMode.Force);
             playerRigidbody.AddForce(moveDir.normalized * moveSpeedMultiplier * 0.5f, ForceMode.Force);
@@ -166,7 +164,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void airMovement()
     {
-        moveDir = orientation.forward * verticalI + orientation.right * horizontalI;
+        moveDir = (orientation.forward * verticalI) + (orientation.right * horizontalI);
         playerRigidbody.AddForce(moveDir.normalized * moveSpeedMultiplier * airMovementMultiplier, ForceMode.Force);
     }
 
@@ -201,7 +199,7 @@ public class PlayerMovement : MonoBehaviour
 
     private bool onSlope()
     {
-        if(Physics.Raycast(transform.position, Vector3.down, out slopeHit, capsuleCollider.height * 0.5f + 0.3f))
+        if (Physics.Raycast(transform.position, Vector3.down, out slopeHit, (capsuleCollider.height * 0.5f) + 0.3f))
         {
             float angle = Vector3.Angle(Vector3.up, slopeHit.normal);
             return angle < maxSlopeAngle && angle != 0;
@@ -211,7 +209,7 @@ public class PlayerMovement : MonoBehaviour
 
     private bool onSteepSlope()
     {
-        if (Physics.Raycast(transform.position, Vector3.down, out slopeHit, capsuleCollider.height * 0.5f + 0.3f))
+        if (Physics.Raycast(transform.position, Vector3.down, out slopeHit, (capsuleCollider.height * 0.5f) + 0.3f))
         {
             float angle = Vector3.Angle(Vector3.up, slopeHit.normal);
             return angle > maxSlopeAngle && angle != 0;

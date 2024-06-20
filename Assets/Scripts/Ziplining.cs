@@ -1,5 +1,3 @@
-using System.IO.Pipes;
-using System.Net;
 using UnityEngine;
 
 /// <summary>
@@ -57,22 +55,22 @@ public class Ziplining : MonoBehaviour
         CapsuleCollider lineCollider = collision.gameObject.GetComponent<CapsuleCollider>();
 
         // Get the line's length (subtract the diameter of the end cap spheres)
-        float lineLength = lineCollider.height - lineCollider.radius * 2;
+        float lineLength = lineCollider.height - (lineCollider.radius * 2);
 
         // Calculate the start and end points
         switch (lineCollider.direction)
         {
             case 0: // X-axis
-                startPoint = collision.transform.position - collision.transform.right * lineLength / 2;
-                endPoint = collision.transform.position + collision.transform.right * lineLength / 2;
+                startPoint = collision.transform.position - (collision.transform.right * lineLength / 2);
+                endPoint = collision.transform.position + (collision.transform.right * lineLength / 2);
                 break;
             case 1: // Y-axis
-                startPoint = collision.transform.position - collision.transform.up * lineLength / 2;
-                endPoint = collision.transform.position + collision.transform.up * lineLength / 2;
+                startPoint = collision.transform.position - (collision.transform.up * lineLength / 2);
+                endPoint = collision.transform.position + (collision.transform.up * lineLength / 2);
                 break;
             case 2: // Z-axis
-                startPoint = collision.transform.position - collision.transform.forward * lineLength / 2;
-                endPoint = collision.transform.position + collision.transform.forward * lineLength / 2;
+                startPoint = collision.transform.position - (collision.transform.forward * lineLength / 2);
+                endPoint = collision.transform.position + (collision.transform.forward * lineLength / 2);
                 break;
         }
 

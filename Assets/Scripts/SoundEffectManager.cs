@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SoundEffectManager : MonoBehaviour
@@ -37,13 +35,13 @@ public class SoundEffectManager : MonoBehaviour
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
         int stateHash = stateInfo.shortNameHash;
 
-        
 
-        if (stateHash != lastState || ((oldVelocity> walkRunLimit && playerMovement.velocity< walkRunLimit) || (oldVelocity < walkRunLimit && playerMovement.velocity > walkRunLimit) && stateHash == Animator.StringToHash("Move Blend Tree")))
+
+        if (stateHash != lastState || (oldVelocity > walkRunLimit && playerMovement.velocity < walkRunLimit) || (oldVelocity < walkRunLimit && playerMovement.velocity > walkRunLimit && stateHash == Animator.StringToHash("Move Blend Tree")))
         {
             oldVelocity = playerMovement.velocity;
             lastState = stateHash;
-            if(stateHash == Animator.StringToHash("Jumping Up"))
+            if (stateHash == Animator.StringToHash("Jumping Up"))
             {
                 source.clip = jumping;
                 source.PlayOneShot(jumping);
@@ -57,7 +55,7 @@ public class SoundEffectManager : MonoBehaviour
 
             if (stateHash == Animator.StringToHash("Move Blend Tree"))
             {
-                if(oldVelocity < walkRunLimit)
+                if (oldVelocity < walkRunLimit)
                 {
                     source.clip = walking;
                     source.Play();
@@ -71,7 +69,7 @@ public class SoundEffectManager : MonoBehaviour
             if (stateHash == Animator.StringToHash("Idle"))
             {
                 source.clip = null;
-                
+
             }
         }
 
@@ -93,10 +91,10 @@ public class SoundEffectManager : MonoBehaviour
                 if (!letTalk)
                 {
                     letTalk = true;
-                    
+
                     source.Play();
                 }
-                
+
             }
             else
             {

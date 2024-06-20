@@ -1,5 +1,3 @@
-using System;
-using System.IO.Pipes;
 using UnityEngine;
 using Vector3 = UnityEngine.Vector3;
 
@@ -66,23 +64,23 @@ public class LineMovement : MonoBehaviour
         CapsuleCollider lineCollider = collision.gameObject.GetComponent<CapsuleCollider>();
 
         // Get the line's length (subtract the diameter of the end cap spheres)
-        float lineLength = lineCollider.height - lineCollider.radius * 2;
+        float lineLength = lineCollider.height - (lineCollider.radius * 2);
 
         // Calculate the start and end points
         Vector3 startPoint = Vector3.zero, endPoint = Vector3.zero;
         switch (lineCollider.direction)
         {
             case 0: // X-axis
-                startPoint = collision.transform.position - collision.transform.right * lineLength / 2;
-                endPoint = collision.transform.position + collision.transform.right * lineLength / 2;
+                startPoint = collision.transform.position - (collision.transform.right * lineLength / 2);
+                endPoint = collision.transform.position + (collision.transform.right * lineLength / 2);
                 break;
             case 1: // Y-axis
-                startPoint = collision.transform.position - collision.transform.up * lineLength / 2;
-                endPoint = collision.transform.position + collision.transform.up * lineLength / 2;
+                startPoint = collision.transform.position - (collision.transform.up * lineLength / 2);
+                endPoint = collision.transform.position + (collision.transform.up * lineLength / 2);
                 break;
             case 2: // Z-axis
-                startPoint = collision.transform.position - collision.transform.forward * lineLength / 2;
-                endPoint = collision.transform.position + collision.transform.forward * lineLength / 2;
+                startPoint = collision.transform.position - (collision.transform.forward * lineLength / 2);
+                endPoint = collision.transform.position + (collision.transform.forward * lineLength / 2);
                 break;
         }
 
@@ -105,8 +103,8 @@ public class LineMovement : MonoBehaviour
                 ContactPoint contact = collision.GetContact(0);
                 float dotUp = Vector3.Dot(contact.normal, Vector3.up);
                 float dotDown = Vector3.Dot(contact.normal, Vector3.down);
-                isAboveLine = (dotUp > 0.5f);
-                bool isUnderLine = (dotDown > 0.5f);
+                isAboveLine = dotUp > 0.5f;
+                bool isUnderLine = dotDown > 0.5f;
                 isMovingOnLine = isUnderLine || isAboveLine;
 
                 if (isMovingOnLine)

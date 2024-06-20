@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Dash : MonoBehaviour
@@ -27,13 +25,13 @@ public class Dash : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(activeCooldown>0)
+        if (activeCooldown > 0)
         {
             activeCooldown -= Time.deltaTime;
         }
         else
         {
-            if(Input.GetKeyDown(KeyCode.C))
+            if (Input.GetKeyDown(KeyCode.C))
             {
                 DashAbility();
             }

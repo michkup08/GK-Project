@@ -112,11 +112,11 @@ public class NPCController : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-            if(soundEffectManager)
+            if (soundEffectManager)
             {
                 soundEffectManager.npcController = this;
             }
-            
+
             playerInRange = true;
             canvasText.gameObject.SetActive(true);
             canvasText.text = "Press E to talk to " + npcName;

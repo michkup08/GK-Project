@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class checkPointsMenager : MonoBehaviour
@@ -16,8 +14,8 @@ public class checkPointsMenager : MonoBehaviour
     {
         trigger = true;
         return AfterDeadPosition;
-        
-}
+
+    }
 
     public void setPosition(Vector3 position)
     {
@@ -26,6 +24,6 @@ public class checkPointsMenager : MonoBehaviour
 
     private void Update()
     {
-        
+
     }
 }

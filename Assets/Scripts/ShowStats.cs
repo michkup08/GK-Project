@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
-using Unity.VisualScripting;
+using UnityEngine;
 
 public class ShowStats : MonoBehaviour
 {
@@ -15,7 +12,7 @@ public class ShowStats : MonoBehaviour
         {
             levelInfo.gameObject.SetActive(true);
             int currentLevel = SaveSystem.Load().currentLevel;
-            if(currentLevel > level)
+            if (currentLevel > level)
             {
                 int points = SaveSystem.Load().points[level - 1];
                 levelInfo.text = "Level " + level + " completed with " + points + "/" + maxPoints;
@@ -24,9 +21,9 @@ public class ShowStats : MonoBehaviour
             {
                 levelInfo.text = "Level " + level + " incomplete";
             }
-            
+
         }
-        
+
     }
     private void OnTriggerExit(Collider other)
     {

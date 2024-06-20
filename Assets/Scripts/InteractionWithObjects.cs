@@ -1,9 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using TMPro;
-using Unity.VisualScripting;
 
 public class InteractionWithObjects : MonoBehaviour
 {
@@ -23,26 +19,26 @@ public class InteractionWithObjects : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Physics.Raycast(playerObject.transform.position, playerObject.transform.forward, out hit, rayDistance, interactable))
+        if (Physics.Raycast(playerObject.transform.position, playerObject.transform.forward, out hit, rayDistance, interactable))
         {
             Debug.Log("can interact");
             Interactinfo.gameObject.SetActive(true);
             GameObject hitted = hit.collider.transform.root.gameObject;
             Animator animator = hitted.GetComponent<Animator>();
-            if(Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.E))
             {
-                if(interaction == "animate")
+                if (interaction == "animate")
                 {
                     animator.SetTrigger("interact");
                     hitted.layer = defaultLayer;
                 }
-                else if(interaction == "exit map")
+                else if (interaction == "exit map")
                 {
                     SaveSystem.updateLevel(2, ls.collectedCount);
                     SceneManager.LoadScene("MainLocation");

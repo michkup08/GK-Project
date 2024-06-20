@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -13,31 +11,37 @@ public class EnemyMovement : MonoBehaviour
 
     public Animator animator;
 
-  
+
     private void Update()
-    { 
-        if(playerInRange){
-        animator.SetBool("isInRange", true); 
-        }else{
-        animator.SetBool("isInRange", false); 
+    {
+        if (playerInRange)
+        {
+            animator.SetBool("isInRange", true);
+        }
+        else
+        {
+            animator.SetBool("isInRange", false);
         }
 
-        if(fighting){
-        animator.SetBool("fight", true); 
-        }else{
-        animator.SetBool("fight", false); 
+        if (fighting)
+        {
+            animator.SetBool("fight", true);
+        }
+        else
+        {
+            animator.SetBool("fight", false);
         }
     }
 
     private void OnTriggerStay(Collider other)
     {
-       
+
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-            
+
             float dist = Vector3.Distance(other.transform.position, transform.position);
-            
-            if(dist>1)
+
+            if (dist > 1)
             {
                 fighting = false;
                 playerInRange = true;
@@ -46,25 +50,25 @@ public class EnemyMovement : MonoBehaviour
                 int stateHash = stateInfo.shortNameHash;
                 if (stateHash == Animator.StringToHash("Standing Melee Attack Horizontal"))
                 {
-                    
+
                     agent.SetDestination(transform.position);
                 }
                 else
                 {
-                    
+
                     agent.SetDestination(playerTransform.position);// + (transform.position.normalized*0.8f));
                 }
-                
+
             }
-            else 
+            else
             {
                 agent.SetDestination(transform.position);
                 fighting = true;
-                
+
             }
-          
+
         }
-        
+
     }
     private void OnTriggerExit(Collider other)
     {

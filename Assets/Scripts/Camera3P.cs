@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
+using Cinemachine;
 using UnityEngine;
 using UnityEngine.UI;
-using Cinemachine;
 
 public class Camera3P : MonoBehaviour
 {
@@ -40,11 +38,11 @@ public class Camera3P : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
             aim = !aim;
-            
-            
+
+
             //defaultCinemachine.SetActive(!aim);
             //aimCinemachine.SetActive(aim);
-            if(aim)
+            if (aim)
             {
                 defaultCinemachine.Priority = 0;
                 aimCinemachine.Priority = 1;
@@ -65,7 +63,7 @@ public class Camera3P : MonoBehaviour
             horizontalI = Input.GetAxis("Horizontal");
             verticalI = Input.GetAxis("Vertical");
 
-            Vector3 inputDir = orientation.forward * verticalI + orientation.right * horizontalI;
+            Vector3 inputDir = (orientation.forward * verticalI) + (orientation.right * horizontalI);
             if (inputDir.magnitude != 0)
             {
                 playerObject.forward = Vector3.Slerp(playerObject.forward, inputDir.normalized, Time.deltaTime * rotationSpeed);

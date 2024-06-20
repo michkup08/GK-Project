@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerAnimationStateController : MonoBehaviour
@@ -137,18 +135,24 @@ public class PlayerAnimationStateController : MonoBehaviour
 
 
 
-        if( Input.GetMouseButtonDown(0) ){
-            animator.SetBool("isKicking", true); 
-        }else{
-            animator.SetBool("isKicking", false); 
+        if (Input.GetMouseButtonDown(0))
+        {
+            animator.SetBool("isKicking", true);
+        }
+        else
+        {
+            animator.SetBool("isKicking", false);
         }
 
-        if( Input.GetKey(KeyCode.X) ){
+        if (Input.GetKey(KeyCode.X))
+        {
             //Debug.Log("true");
-            animator.SetBool("isFliping", true); 
-        }else{
+            animator.SetBool("isFliping", true);
+        }
+        else
+        {
             //Debug.Log("false");
-            animator.SetBool("isFliping", false); 
+            animator.SetBool("isFliping", false);
         }
 
     }
