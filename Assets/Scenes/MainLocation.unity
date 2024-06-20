@@ -538,6 +538,8 @@ MonoBehaviour:
   lineDisplayTimeSec: 5
   canvasText: {fileID: 1769603916}
   animator: {fileID: 92604359}
+  dialogueActive: 0
+  soundEffectManager: {fileID: 0}
 --- !u!95 &92604359
 Animator:
   serializedVersion: 4
@@ -1155,6 +1157,8 @@ MonoBehaviour:
   lineDisplayTimeSec: 2
   canvasText: {fileID: 1769603916}
   animator: {fileID: 221037381}
+  dialogueActive: 0
+  soundEffectManager: {fileID: 0}
 --- !u!114 &221037386
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5183,6 +5187,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5616247939067976523, guid: e6291e133664247499f495df5236d1f7, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5616247939067976524, guid: e6291e133664247499f495df5236d1f7, type: 3}
       propertyPath: cam
       value: 
@@ -5604,7 +5612,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1287372585}
-  m_LocalRotation: {x: 0.19640766, y: 0.07844775, z: -0.015766393, w: 0.977252}
+  m_LocalRotation: {x: 0.19640766, y: 0.07844773, z: -0.01576639, w: 0.977252}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5951,6 +5959,7 @@ MonoBehaviour:
   verticalI: 0
   aim: 0
   aimImage: {fileID: 916507115}
+  disableRotation: 0
   defaultCinemachine: {fileID: 1805070389}
   aimCinemachine: {fileID: 1102819231}
 --- !u!114 &1442280332
@@ -6938,6 +6947,8 @@ MonoBehaviour:
   lineDisplayTimeSec: 2
   canvasText: {fileID: 1769603916}
   animator: {fileID: 1682335729}
+  dialogueActive: 0
+  soundEffectManager: {fileID: 0}
 --- !u!135 &1682335732
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -8547,6 +8558,8 @@ MonoBehaviour:
   lineDisplayTimeSec: 2
   canvasText: {fileID: 1769603916}
   animator: {fileID: 1951256124}
+  dialogueActive: 0
+  soundEffectManager: {fileID: 0}
 --- !u!135 &1951256126
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -9132,7 +9145,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!20 &2026183729
 Camera:
   m_ObjectHideFlags: 0
@@ -9160,7 +9173,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 7
+  orthographic size: 10
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -9348,7 +9361,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2043420967
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10199,6 +10212,8 @@ MonoBehaviour:
   lineDisplayTimeSec: 3
   canvasText: {fileID: 1769603916}
   animator: {fileID: 0}
+  dialogueActive: 0
+  soundEffectManager: {fileID: 0}
 --- !u!135 &2145619008
 SphereCollider:
   m_ObjectHideFlags: 0
