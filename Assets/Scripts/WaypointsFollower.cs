@@ -16,6 +16,10 @@ public class WaypointsFollower : MonoBehaviour
     /// <value><c>nextWaypoint</c> is the index of the next waypoint in the waypoints array that the object will move towards.</value>
     private int nextWaypoint = 0;
 
+    /// <value><c>rotateTowardsWaypoint</c> is a boolean that determines whether the object should rotate to face the next waypoint.</value>
+    [SerializeField]
+    private bool rotateTowardsWaypoint = false;
+
     /// <summary>
     /// The Start method is called before after game starts. It checks if the object has a Rigidbody component and if so, multiplies the movingSpeed by 4.
     /// </summary>
@@ -42,8 +46,11 @@ public class WaypointsFollower : MonoBehaviour
             nextWaypoint = 0;
         }
 
-        // set the object's rotation to look at the next waypoint
-        transform.LookAt(waypoints[nextWaypoint]);
+        if (rotateTowardsWaypoint)
+        {
+            // set the object's rotation to look at the next waypoint
+            transform.LookAt(waypoints[nextWaypoint]);
+        }
     }
 
     /// <summary>
