@@ -131,7 +131,7 @@ Transform:
   m_Children:
   - {fileID: 5096886780289935399}
   m_Father: {fileID: 0}
-  m_RootOrder: 83
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5096886780756981107
 MonoBehaviour:
@@ -145,6 +145,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab981e9ebbe8f084e9a4213a224146a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 5
-  fastMovementSpeed: 10
+  movementSpeed: 10
+  fastMovementSpeed: 50
   rotationSpeed: 5
+  objectToFollow: {fileID: 0}

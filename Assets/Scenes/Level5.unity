@@ -1101,7 +1101,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 225241647}
-  m_LocalRotation: {x: 0.15915032, y: 0.3922097, z: -0.069097534, w: 0.90336496}
+  m_LocalRotation: {x: 0.1591503, y: 0.39220968, z: -0.06909753, w: 0.903365}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -8940,6 +8940,18 @@ PrefabInstance:
     - target: {fileID: 5096886780756981106, guid: aacfffddc9ce5244bbc5d0f36791932d, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5096886780756981107, guid: aacfffddc9ce5244bbc5d0f36791932d, type: 3}
+      propertyPath: movementSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5096886780756981107, guid: aacfffddc9ce5244bbc5d0f36791932d, type: 3}
+      propertyPath: objectToFollow
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5096886780756981107, guid: aacfffddc9ce5244bbc5d0f36791932d, type: 3}
+      propertyPath: fastMovementSpeed
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 5096886780756981109, guid: aacfffddc9ce5244bbc5d0f36791932d, type: 3}
       propertyPath: m_RootOrder
