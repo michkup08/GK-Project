@@ -127,13 +127,12 @@ public class LineMovement : MonoBehaviour
                 else if (isUnderLine)
                 {
                     buttonPromptsController.LoadMessage(movingUnderLineButtonPrompts, "underLineMovement");
+                    // disable player rotation towards the camera and set player rotation 90 degrees in y axis to the line direction
+                    camera3P.disableRotation = true;
+                    var playerObject = transform.Find("Ch24_nonPBR");
+                    playerObject.transform.rotation = Quaternion.LookRotation(lineDirection) * Quaternion.Euler(0, 90, 0);
                 }
             }
-
-            // disable player rotation towards the camera and set player rotation 80 degrees in z axis to the line direction
-            camera3P.disableRotation = true;
-            var playerObject = transform.Find("Ch24_nonPBR");
-            playerObject.transform.rotation = Quaternion.LookRotation(lineDirection) * Quaternion.Euler(0, 80, 0);
         }
     }
 
