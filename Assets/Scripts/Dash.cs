@@ -6,6 +6,7 @@ public class Dash : MonoBehaviour
     private PlayerMovement movement;
     public Transform cam;
     private Rigidbody rb;
+    public GameObject playerObject;
 
     [Header("Variables")]
     public float fullCooldown = 1.5f;
@@ -20,6 +21,7 @@ public class Dash : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         movement = GetComponent<PlayerMovement>();
+        
     }
 
     // Update is called once per frame
@@ -41,6 +43,9 @@ public class Dash : MonoBehaviour
     private void DashAbility()
     {
         movement.moveSpeedLimit = dashLimit;
+        Vector3 cameraEulerAngles = cam.eulerAngles;
+        Vector3 newRotation = new Vector3(transform.eulerAngles.x, cameraEulerAngles.y, transform.eulerAngles.z);
+        playerObject.transform.eulerAngles = newRotation;
 
         Vector3 dashVector = cam.forward * dashForce;
         rb.velocity = Vector3.zero;
