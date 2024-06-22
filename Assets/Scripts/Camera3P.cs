@@ -37,7 +37,7 @@ public class Camera3P : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse1))
+        if (Input.GetKey(KeyCode.F))
         {
             aim = !aim;
 
