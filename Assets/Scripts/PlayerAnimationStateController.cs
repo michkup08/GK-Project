@@ -135,7 +135,7 @@ public class PlayerAnimationStateController : MonoBehaviour
 
 
 
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetKey(KeyCode.F))
         {
             animator.SetBool("isKicking", true);
         }
