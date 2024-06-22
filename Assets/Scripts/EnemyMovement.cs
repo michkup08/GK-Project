@@ -9,11 +9,20 @@ public class EnemyMovement : MonoBehaviour
     public Transform playerTransform;
     private bool stand;
 
+    private bool isKicked;
+
     public Animator animator;
 
 
     private void Update()
     {
+
+        if (isKicked)
+        {
+            agent.SetDestination(transform.position);
+            return;
+        }
+
         if (playerInRange)
         {
             animator.SetBool("isInRange", true);
@@ -35,6 +44,10 @@ public class EnemyMovement : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
+
+        if (isKicked)
+            return;
+
 
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
@@ -74,4 +87,14 @@ public class EnemyMovement : MonoBehaviour
     {
         playerInRange = false;
     }
+
+    // Method to be called when the enemy gets kicked
+    public void GetKicked()
+    {
+        Debug.Log("Enemy got kicked");
+        animator.SetBool("isKicked", true);
+        isKicked = true;
+        agent.SetDestination(transform.position); // Stop moving
+    }
+
 }
