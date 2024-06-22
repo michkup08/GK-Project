@@ -194,7 +194,8 @@ MonoBehaviour:
   climbableWall:
     serializedVersion: 2
     m_Bits: 64
-  climbSpeed: 3
+  camera3P: {fileID: 0}
+  climbSpeed: 1.5
   maxClimbAngle: 30
   maxClimbTimeX: 0.1
   maxClimbTimeZ: 0.1
@@ -226,6 +227,8 @@ MonoBehaviour:
   speed: 3
   isMovingOnLine: 0
   playerOrientation: {fileID: 5616247940638229114}
+  camera3P: {fileID: 0}
+  direction: 1
   isAboveLine: 0
 --- !u!114 &5616247939067976521
 MonoBehaviour:
@@ -240,6 +243,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 50
+  camera3P: {fileID: 0}
   isZiplining: 0
 --- !u!114 &5616247939067976526
 MonoBehaviour:
@@ -268,6 +272,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 0}
+  playerObject: {fileID: 0}
   fullCooldown: 1.5
   activeCooldown: 0
   dashForce: 40

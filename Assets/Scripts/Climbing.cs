@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 /// <summary>
@@ -12,6 +13,10 @@ public class Climbing : MonoBehaviour
     /// <value><c>climbableWall</c> layer of climbable walls.</value>
     [SerializeField]
     LayerMask climbableWall;
+
+    [SerializeField]
+    /// <value><c>camera3P</c> is reference to the Camera3P component, which is used to block the player's rotation when climbing.</value>
+    Camera3P camera3P;
 
     [Header("Climbing")]
     /// <value><c>climbSpeed</c> the speed of climbing.</value>
@@ -60,6 +65,9 @@ public class Climbing : MonoBehaviour
     /// <value><c>playerRigidbody</c> the Rigidbody of the player.</value>
     Rigidbody playerRigidbody;
 
+    /// <value><c>animator</c> the Animator of the player.</value>
+    Animator animator;
+
     /// <summary>
     /// Set properties values at the start of the game.
     /// </summary>
@@ -68,6 +76,7 @@ public class Climbing : MonoBehaviour
         playerRigidbody = GetComponent<Rigidbody>();
         buttonPromptsController = GetComponent<ScreenHints>();
         playerMovement = GetComponent<PlayerMovement>();
+        animator = transform.Find("Ch24_nonPBR").GetComponent<Animator>();
     }
 
     /// <summary>
@@ -80,6 +89,8 @@ public class Climbing : MonoBehaviour
         {
             originalDrag = playerRigidbody.drag;
             Climb();
+            camera3P.disableRotation = true;
+            playerMovement.disableAirMovement();
         }
     }
 
@@ -91,9 +102,19 @@ public class Climbing : MonoBehaviour
         playerRigidbody.useGravity = true;
 
         if (!playerMovement.touchGround)
+        {
             playerRigidbody.drag = 0;
+        }
         else
+        {
             playerRigidbody.drag = originalDrag;
+        }
+
+        animator.SetBool("isClimbingUp", false);
+        animator.SetBool("isClimbingDown", false);
+        animator.SetBool("isFallingFromWall", true);
+        camera3P.disableRotation = false;
+        playerMovement.enableAirMovement();
     }
 
     /// <summary>
@@ -126,6 +147,26 @@ public class Climbing : MonoBehaviour
 
         // Apply movement along the wall
         playerRigidbody.velocity = moveDirection.normalized * climbSpeed;
+
+        if (moveDirection != Vector3.zero)
+        {
+            if (moveDirection.z > 0)
+            {
+                animator.SetBool("isClimbingUp", true);
+                animator.SetBool("isClimbingDown", false);
+            }
+            else
+            {
+                animator.SetBool("isClimbingUp", false);
+                animator.SetBool("isClimbingDown", true);
+            }
+        }
+        else
+        {
+            animator.SetBool("isFallingFromWall", false);
+            animator.SetBool("isClimbingUp", false);
+            animator.SetBool("isClimbingDown", false);
+        }
 
         // Release climbing
         if (Input.GetKey(KeyCode.E))
@@ -178,6 +219,7 @@ public class Climbing : MonoBehaviour
         else
         {
             isClimbing = false;
+            camera3P.disableRotation = false;
         }
     }
 
