@@ -89,6 +89,7 @@ public class Climbing : MonoBehaviour
         {
             originalDrag = playerRigidbody.drag;
             Climb();
+
             camera3P.disableRotation = true;
             playerMovement.disableAirMovement();
         }
@@ -137,31 +138,42 @@ public class Climbing : MonoBehaviour
 
         // Get input and set movement direction
         if (Input.GetKey(KeyCode.W))
+        {
             moveDirection += forwardDirection;
+            animator.SetBool("isClimbingUp", true);
+            animator.SetBool("isClimbingDown", false);
+            animator.SetBool("isClimbingLeft", false);
+            animator.SetBool("isClimbingRight", false);
+        }
         if (Input.GetKey(KeyCode.S))
+        {
             moveDirection -= forwardDirection;
+            animator.SetBool("isClimbingUp", false);
+            animator.SetBool("isClimbingDown", true);
+            animator.SetBool("isClimbingLeft", false);
+            animator.SetBool("isClimbingRight", false);
+        }
         if (Input.GetKey(KeyCode.A))
+        {
             moveDirection += rightDirection;
+            animator.SetBool("isClimbingUp", false);
+            animator.SetBool("isClimbingDown", false);
+            animator.SetBool("isClimbingLeft", true);
+            animator.SetBool("isClimbingRight", false);
+        }
         if (Input.GetKey(KeyCode.D))
+        {
             moveDirection -= rightDirection;
+            animator.SetBool("isClimbingUp", false);
+            animator.SetBool("isClimbingDown", false);
+            animator.SetBool("isClimbingLeft", false);
+            animator.SetBool("isClimbingRight", true);
+        }
 
         // Apply movement along the wall
         playerRigidbody.velocity = moveDirection.normalized * climbSpeed;
 
-        if (moveDirection != Vector3.zero)
-        {
-            if (moveDirection.z > 0)
-            {
-                animator.SetBool("isClimbingUp", true);
-                animator.SetBool("isClimbingDown", false);
-            }
-            else
-            {
-                animator.SetBool("isClimbingUp", false);
-                animator.SetBool("isClimbingDown", true);
-            }
-        }
-        else
+        if (moveDirection == Vector3.zero)
         {
             animator.SetBool("isFallingFromWall", false);
             animator.SetBool("isClimbingUp", false);
