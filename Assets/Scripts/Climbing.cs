@@ -129,9 +129,13 @@ public class Climbing : MonoBehaviour
         // Get the normal of the wall hit
         Vector3 wallNormal = hitWall.normal;
 
+        // Set the rotation of Ch24_nonPBR to face opposite the wall instantly
+        transform.Find("Ch24_nonPBR").rotation = Quaternion.LookRotation(-wallNormal, Vector3.up);
+
+
         // Calculate movement direction perpendicular to the wall
-        Vector3 rightDirection = Vector3.Cross(Vector3.up, wallNormal);
-        Vector3 forwardDirection = Vector3.Cross(wallNormal, rightDirection);
+        Vector3 rightDirection = Vector3.Cross(Vector3.up, wallNormal).normalized;
+        Vector3 forwardDirection = Vector3.Cross(wallNormal, rightDirection).normalized;
 
         // Calculate player's movement based on input
         Vector3 moveDirection = Vector3.zero;
@@ -145,6 +149,7 @@ public class Climbing : MonoBehaviour
             animator.SetBool("isClimbingLeft", false);
             animator.SetBool("isClimbingRight", false);
         }
+
         if (Input.GetKey(KeyCode.S))
         {
             moveDirection -= forwardDirection;
@@ -153,6 +158,7 @@ public class Climbing : MonoBehaviour
             animator.SetBool("isClimbingLeft", false);
             animator.SetBool("isClimbingRight", false);
         }
+
         if (Input.GetKey(KeyCode.A))
         {
             moveDirection += rightDirection;
@@ -161,6 +167,7 @@ public class Climbing : MonoBehaviour
             animator.SetBool("isClimbingLeft", true);
             animator.SetBool("isClimbingRight", false);
         }
+
         if (Input.GetKey(KeyCode.D))
         {
             moveDirection -= rightDirection;
@@ -169,7 +176,6 @@ public class Climbing : MonoBehaviour
             animator.SetBool("isClimbingLeft", false);
             animator.SetBool("isClimbingRight", true);
         }
-
         // Apply movement along the wall
         playerRigidbody.velocity = moveDirection.normalized * climbSpeed;
 
@@ -178,6 +184,8 @@ public class Climbing : MonoBehaviour
             animator.SetBool("isFallingFromWall", false);
             animator.SetBool("isClimbingUp", false);
             animator.SetBool("isClimbingDown", false);
+            animator.SetBool("isClimbingLeft", false);
+            animator.SetBool("isClimbingRight", false);
         }
 
         // Release climbing
@@ -202,6 +210,7 @@ public class Climbing : MonoBehaviour
             climbTimeZ = 0.0f;
         }
     }
+
 
     /// <summary>
     /// Sets the climbing state based on various conditions.
