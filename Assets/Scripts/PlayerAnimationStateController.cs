@@ -8,6 +8,7 @@ public class PlayerAnimationStateController : MonoBehaviour
     public LineMovement lineMovement;
     public advancedClimbing advancedClimbing;
     public Ziplining ziplining;
+    public GoToLastCheckpointOnMine goToLastCheckpointOnMine;
     int isCrouchingHash;
     int velocityHash;
     int isJumpingHash;
@@ -16,11 +17,11 @@ public class PlayerAnimationStateController : MonoBehaviour
     int isWalkingUnderLineDirectionHash;
     int isHangingHash;
     int isZipLiningHash;
+    int isExplodingHash;
    
     // Start is called before the first frame update
     void Start()
-    {
-        
+    {  
         animator = GetComponent<Animator>();
         isCrouchingHash = Animator.StringToHash("isCrouching");
         velocityHash = Animator.StringToHash("Velocity");
@@ -30,6 +31,7 @@ public class PlayerAnimationStateController : MonoBehaviour
         isWalkingUnderLineDirectionHash = Animator.StringToHash("isWalkingUnderLineDirection");
         isHangingHash = Animator.StringToHash("isHanging");
         isZipLiningHash = Animator.StringToHash("isZipLining");
+        isExplodingHash = Animator.StringToHash("isExploding");
     }
 
     // Update is called once per frame
@@ -42,6 +44,7 @@ public class PlayerAnimationStateController : MonoBehaviour
         bool isWalkingUnderLineDirection = animator.GetBool(isWalkingUnderLineDirectionHash);
         bool isHanging = animator.GetBool(isHangingHash);
         bool isZipLining = animator.GetBool(isZipLiningHash);
+        bool isExploding = animator.GetBool(isExplodingHash);
         if (playerMovement.touchGround || lineMovement.isMovingOnLine || advancedClimbing.canHandle || ziplining.isZiplining)
         {
             animator.SetBool(isJumpingHash, false);
@@ -132,7 +135,14 @@ public class PlayerAnimationStateController : MonoBehaviour
             animator.SetBool(isHangingHash, false);
             animator.SetBool(isWalkingUnderLineHash, false);
         }
-
+        if (goToLastCheckpointOnMine.isBeingBlownUp)
+        {
+            animator.SetBool(isExplodingHash, true);
+        }
+        else
+        {
+            animator.SetBool(isExplodingHash, false);
+        }
         
 
         if (Input.GetMouseButtonDown(1))
