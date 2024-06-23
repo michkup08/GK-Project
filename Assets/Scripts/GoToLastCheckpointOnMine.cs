@@ -8,7 +8,13 @@ public class GoToLastCheckpointOnMine : MonoBehaviour
     public PlayerMovement playerMovement;
     public Animator animator;
     public GameObject explosion;
-    public bool isBeingBlownUp;
+    int isExplodingHash;
+
+    void Start()
+    {
+        isExplodingHash = Animator.StringToHash("isExploding");
+    }
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -27,35 +33,46 @@ public class GoToLastCheckpointOnMine : MonoBehaviour
 
         if (collision.gameObject.tag == "Player")
         {
-            if (!animator)
-            {
-                if (playerMovement != null)
-                {
-                    playerMovement.enabled = false;
-                }
-                explosion.transform.position = player.transform.position;
-                explosion.transform.rotation = player.transform.rotation;
-                explosion.SetActive(true);
-                isBeingBlownUp = true;
-                StartCoroutine(RespawnPlayerWithDelay());
-            }
-            else
-            {
-                if (playerMovement != null)
-                {
-                    playerMovement.enabled = false;
-                }
-                AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-                int stateHash = stateInfo.shortNameHash;
-                if (stateHash == Animator.StringToHash("Standing Melee Attack Horizontal"))
-                {
-                    explosion.transform.position = player.transform.position;
-                    explosion.transform.rotation = player.transform.rotation;
-                    explosion.SetActive(true);
-                    isBeingBlownUp = true;
-                    StartCoroutine(RespawnPlayerWithDelay());
-                }
-            }
+            //if (!animator)
+            //{
+            //    if (playerMovement != null)
+            //    {
+            //        playerMovement.enabled = false;
+            //    }
+            //    explosion.transform.position = player.transform.position;
+            //    explosion.transform.rotation = player.transform.rotation;
+            //    explosion.SetActive(true);
+            //    animator.SetBool(isExplodingHash, true);
+            //    StartCoroutine(RespawnPlayerWithDelay());
+            //}
+            //else
+            //{
+            //    if (playerMovement != null)
+            //    {
+            //        playerMovement.enabled = false;
+            //    }
+            //    AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+            //    int stateHash = stateInfo.shortNameHash;
+            //    if (stateHash == Animator.StringToHash("Standing Melee Attack Horizontal"))
+            //    {
+            //        explosion.transform.position = player.transform.position;
+            //        explosion.transform.rotation = player.transform.rotation;
+            //        explosion.SetActive(true);
+            //        animator.SetBool(isExplodingHash, true);
+            //        StartCoroutine(RespawnPlayerWithDelay());
+            //    }
+            //}
+            //if (playerMovement != null)
+            //{
+            //    playerMovement.dead = true;
+            //}
+            playerMovement.enabled = false; //kur w   nic nie dziala na zablokowanie tej rotacji
+            player.transform.rotation = Quaternion.identity;
+            explosion.transform.position = player.transform.position;
+            explosion.transform.rotation = player.transform.rotation;
+            explosion.SetActive(true);
+            animator.SetBool(isExplodingHash, true);
+            StartCoroutine(RespawnPlayerWithDelay());
         }
     }
 
@@ -67,11 +84,13 @@ public class GoToLastCheckpointOnMine : MonoBehaviour
         player.transform.position = menager.getPosition();
         Debug.Log("colission");
         explosion.SetActive(false);
-        isBeingBlownUp = false;
-        if (playerMovement != null)
-        {
-            playerMovement.enabled = true;
-        }
+        animator.SetBool(isExplodingHash, false);
+        //if (playerMovement != null)
+        //{
+        //    playerMovement.dead = false;
+        //}
+        playerMovement.enabled = true;
+
     }
 
 }

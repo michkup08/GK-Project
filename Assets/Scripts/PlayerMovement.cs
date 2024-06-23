@@ -43,6 +43,29 @@ public class PlayerMovement : MonoBehaviour
     private float moveSpeedMultiplier;
     public bool sprinting = false;
     public bool crouching = false;
+    private bool _dead = false;
+
+    private Quaternion initialRotation;
+
+    public bool dead
+    {
+        get { return _dead; }
+        set
+        {
+            if (_dead != value)
+            {
+                _dead = value;
+                if (_dead)
+                {
+                    FreezeRotation();
+                }
+                else
+                {
+                    UnfreezeRotation();
+                }
+            }
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -60,7 +83,15 @@ public class PlayerMovement : MonoBehaviour
         //Debug.Log("level: " + SaveSystem.Load().currentLevel);
         touchGround = Physics.SphereCast(transform.position, 0.3f, Vector3.down, out RaycastHit hit, 1f, isGround);
 
-        inputControl();
+        if (!dead)
+        {
+            inputControl();
+        }
+        else
+        {
+            transform.rotation = initialRotation;
+        }
+
         speedLimit();
 
         if (touchGround)
@@ -77,13 +108,16 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (touchGround)
+        if (!dead)
         {
-            groundMovement();
-        }
-        else if (airMovementActive)
-        {
-            airMovement();
+            if (touchGround)
+            {
+                groundMovement();
+            }
+            else if (airMovementActive)
+            {
+                airMovement();
+            }
         }
     }
 
@@ -225,5 +259,16 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 getSteepSlopeSlideDirection()
     {
         return Vector3.Cross(Vector3.Cross(slopeHit.normal, Vector3.down), slopeHit.normal).normalized;
+    }
+    private void FreezeRotation()
+    {
+        initialRotation = transform.rotation;
+        verticalI = 0f;
+        horizontalI = 0f;
+    }
+
+    private void UnfreezeRotation()
+    {
+
     }
 }
