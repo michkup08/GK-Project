@@ -145,6 +145,7 @@ public class Climbing : MonoBehaviour
             animator.SetBool("isClimbingLeft", false);
             animator.SetBool("isClimbingRight", false);
         }
+
         if (Input.GetKey(KeyCode.S))
         {
             moveDirection -= forwardDirection;
@@ -153,6 +154,7 @@ public class Climbing : MonoBehaviour
             animator.SetBool("isClimbingLeft", false);
             animator.SetBool("isClimbingRight", false);
         }
+
         if (Input.GetKey(KeyCode.A))
         {
             moveDirection += rightDirection;
@@ -161,6 +163,7 @@ public class Climbing : MonoBehaviour
             animator.SetBool("isClimbingLeft", true);
             animator.SetBool("isClimbingRight", false);
         }
+
         if (Input.GetKey(KeyCode.D))
         {
             moveDirection -= rightDirection;
@@ -169,7 +172,6 @@ public class Climbing : MonoBehaviour
             animator.SetBool("isClimbingLeft", false);
             animator.SetBool("isClimbingRight", true);
         }
-
         // Apply movement along the wall
         playerRigidbody.velocity = moveDirection.normalized * climbSpeed;
 
@@ -178,6 +180,8 @@ public class Climbing : MonoBehaviour
             animator.SetBool("isFallingFromWall", false);
             animator.SetBool("isClimbingUp", false);
             animator.SetBool("isClimbingDown", false);
+            animator.SetBool("isClimbingLeft", false);
+            animator.SetBool("isClimbingRight", false);
         }
 
         // Release climbing
