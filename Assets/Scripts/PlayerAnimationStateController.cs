@@ -16,9 +16,11 @@ public class PlayerAnimationStateController : MonoBehaviour
     int isWalkingUnderLineDirectionHash;
     int isHangingHash;
     int isZipLiningHash;
+   
     // Start is called before the first frame update
     void Start()
     {
+        
         animator = GetComponent<Animator>();
         isCrouchingHash = Animator.StringToHash("isCrouching");
         velocityHash = Animator.StringToHash("Velocity");
@@ -131,9 +133,7 @@ public class PlayerAnimationStateController : MonoBehaviour
             animator.SetBool(isWalkingUnderLineHash, false);
         }
 
-
-
-
+        
 
         if (Input.GetMouseButtonDown(1))
         {
