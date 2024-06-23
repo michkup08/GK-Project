@@ -2751,6 +2751,10 @@ PrefabInstance:
       propertyPath: playerRigidbody
       value: 
       objectReference: {fileID: 126566594}
+    - target: {fileID: 5616247939067976522, guid: e6291e133664247499f495df5236d1f7, type: 3}
+      propertyPath: camera3P
+      value: 
+      objectReference: {fileID: 968054104}
     - target: {fileID: 5616247939067976524, guid: e6291e133664247499f495df5236d1f7, type: 3}
       propertyPath: cam
       value: 
@@ -3050,7 +3054,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1227802614}
-  m_LocalRotation: {x: -0.010512519, y: 0.98619384, z: -0.1501449, w: -0.06904916}
+  m_LocalRotation: {x: -0.010512523, y: 0.98619384, z: -0.1501449, w: -0.06904919}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3831,7 +3835,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1471789760}
-  m_LocalRotation: {x: 0.0030569008, y: 0.996602, z: 0.04366014, w: -0.06977792}
+  m_LocalRotation: {x: 0.0030569003, y: 0.996602, z: 0.04366014, w: -0.069777906}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

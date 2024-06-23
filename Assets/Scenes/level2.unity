@@ -6743,6 +6743,10 @@ PrefabInstance:
       propertyPath: playerRigidbody
       value: 
       objectReference: {fileID: 126566594}
+    - target: {fileID: 5616247939067976522, guid: e6291e133664247499f495df5236d1f7, type: 3}
+      propertyPath: camera3P
+      value: 
+      objectReference: {fileID: 968054104}
     - target: {fileID: 5616247939067976524, guid: e6291e133664247499f495df5236d1f7, type: 3}
       propertyPath: cam
       value: 
