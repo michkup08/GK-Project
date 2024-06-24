@@ -9,6 +9,7 @@ TagManager:
   - zippableLine
   - Interaction
   - movableLine
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -25,7 +26,7 @@ TagManager:
   - iswallrun
   - postProcessing
   - minimapPlayer
-  - 
+  - minimapCameraIgnore
   - 
   - 
   - 
