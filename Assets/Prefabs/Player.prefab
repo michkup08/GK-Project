@@ -275,8 +275,8 @@ MonoBehaviour:
   playerObject: {fileID: 0}
   fullCooldown: 1.5
   activeCooldown: 0
-  dashForce: 40
-  dashLimit: 80
+  dashForce: 25
+  dashLimit: 50
   standardLimit: 25
 --- !u!114 &5616247939067976524
 MonoBehaviour:
@@ -337,6 +337,7 @@ MonoBehaviour:
   playerObject: {fileID: 3100672541324822397}
   interaction: exit map
   ls: {fileID: 0}
+  levelUnlocked: 0
   rayDistance: 10
 --- !u!1 &5616247939436258693
 GameObject:
