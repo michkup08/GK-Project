@@ -583,6 +583,37 @@ MonoBehaviour:
   lineMovement: {fileID: 5616247939067976520}
   advancedClimbing: {fileID: 5616247939067976524}
   ziplining: {fileID: 5616247939067976521}
+--- !u!1 &3842649831424593345 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1339101018200438765, guid: f4a3808d42d132a4fb4e41c4230e9bfb, type: 3}
+  m_PrefabInstance: {fileID: 2866159556763089452}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &5837937254127833453
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3842649831424593345}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.1372896, y: 0.29421496, z: 0.015}
+  m_Center: {x: 0.018801479, y: -0.08434965, z: 0.000000006543997}
+--- !u!114 &8774379165739021618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3842649831424593345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c7a4403fa48d4d4889e4455d7d3ec6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerAnimator: {fileID: 6581600037370739338}
 --- !u!4 &4499949403974370788 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1852576806548013000, guid: f4a3808d42d132a4fb4e41c4230e9bfb, type: 3}

@@ -5,8 +5,7 @@ using UnityEngine;
 public class kickEnemy : MonoBehaviour
 {
     public Animator playerAnimator;
-    public Animator enemyAnimator;
-    public GameObject enemy;
+
  
     private bool getKicked;
 
