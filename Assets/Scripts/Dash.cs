@@ -49,7 +49,7 @@ public class Dash : MonoBehaviour
 
         Vector3 dashVector = cam.forward * dashForce;
         rb.velocity = Vector3.zero;
-        rb.AddForce(dashVector, ForceMode.Impulse);
+        rb.AddForce(new Vector3(dashVector.x, 0, dashVector.z), ForceMode.Impulse);
         activeCooldown = fullCooldown;
         Invoke(nameof(resetLimit), fullCooldown);
     }

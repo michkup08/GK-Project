@@ -67,12 +67,25 @@ public class advancedClimbing : MonoBehaviour
     {
         if (other.gameObject.layer == 8)
         {
-            Vector3 direction = other.transform.position - transform.position;
-            Vector3 currentRotation = transform.rotation.eulerAngles;
+            
 
-            Quaternion targetRotation = Quaternion.LookRotation(direction);
-            float targetYRotation = targetRotation.eulerAngles.y;
-            transform.rotation = Quaternion.Euler(currentRotation.x, targetYRotation, currentRotation.z);
+            // Pobranie pozycji obiektu, z którym dosz³o do kolizji
+            Vector3 collisionPosition = other.transform.position;
+
+            // Pobranie pozycji obiektu, do którego podpiêty jest skrypt
+            Vector3 objectPosition = transform.position;
+
+            // Obliczenie kierunku, w którym znajduje siê obiekt, z którym dosz³o do kolizji
+            Vector3 dir = collisionPosition - objectPosition;
+
+            // Ustawienie wartoœci y na 0, aby skupiæ siê tylko na rotacji wokó³ osi y
+            dir.y = 0;
+
+            // Obliczenie nowej rotacji
+            Quaternion rot = Quaternion.LookRotation(dir);
+
+            // Ustawienie nowej rotacji
+            transform.rotation = rot;
 
             canHandle = true;
         }
