@@ -2254,6 +2254,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1396811447}
     - target: {fileID: 5616247939067975858, guid: e6291e133664247499f495df5236d1f7, type: 3}
+      propertyPath: levelUnlocked
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5616247939067975858, guid: e6291e133664247499f495df5236d1f7, type: 3}
       propertyPath: defaultLayer.m_Bits
       value: 1
       objectReference: {fileID: 0}
@@ -8498,7 +8502,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2042795316}
-  m_LocalRotation: {x: 0.07916806, y: 0.6560481, z: -0.06949808, w: 0.7473308}
+  m_LocalRotation: {x: 0.07916805, y: 0.6560481, z: -0.06949807, w: 0.7473308}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
