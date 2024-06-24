@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using System;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Objects Ref")]
@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     public float airMovementMultiplier = 0.8f;
 
     public float velocity; //for ui purpose
+    public float velocityFlat; //for ui purpose
 
     private bool airMovementActive = true;
 
@@ -80,6 +81,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         //Debug.Log("level: " + SaveSystem.Load().currentLevel);
         touchGround = Physics.SphereCast(transform.position, 0.3f, Vector3.down, out RaycastHit hit, 1f, isGround);
 
@@ -104,6 +106,10 @@ public class PlayerMovement : MonoBehaviour
         }
 
         velocity = playerRigidbody.velocity.magnitude;
+        velocityFlat = Math.Abs(playerRigidbody.velocity.x) + Math.Abs(playerRigidbody.velocity.z);
+        Debug.Log(Math.Abs(playerRigidbody.velocity.x) + Math.Abs(playerRigidbody.velocity.z));
+        Debug.Log("x: " + Math.Abs(playerRigidbody.velocity.x) );
+        Debug.Log("z: " + Math.Abs(playerRigidbody.velocity.z));
     }
 
     private void FixedUpdate()

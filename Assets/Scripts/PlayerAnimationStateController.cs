@@ -17,14 +17,16 @@ public class PlayerAnimationStateController : MonoBehaviour
     int isWalkingUnderLineDirectionHash;
     int isHangingHash;
     int isZipLiningHash;
+    int velocityFlatHash;
     //int isExplodingHash;
-   
+
     // Start is called before the first frame update
     void Start()
     {  
         animator = GetComponent<Animator>();
         isCrouchingHash = Animator.StringToHash("isCrouching");
         velocityHash = Animator.StringToHash("Velocity");
+        velocityFlatHash = Animator.StringToHash("xVelocity");
         isJumpingHash = Animator.StringToHash("isJumping");
         isWalkingOnLineHash = Animator.StringToHash("isWalkingOnLine");
         isWalkingUnderLineHash = Animator.StringToHash("isWalkingUnderLine");
@@ -37,6 +39,7 @@ public class PlayerAnimationStateController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        animator.SetFloat(velocityFlatHash, playerMovement.velocityFlat / 16);
         bool isCrouching = animator.GetBool(isCrouchingHash);
         bool isJumping = animator.GetBool(isJumpingHash);
         bool isWalkingOnLine = animator.GetBool(isWalkingOnLineHash);
@@ -65,6 +68,7 @@ public class PlayerAnimationStateController : MonoBehaviour
             if (playerMovement.velocity > 0.1)
             {
                 animator.SetFloat(velocityHash, playerMovement.velocity / 16);
+                
             }
             else
             {
