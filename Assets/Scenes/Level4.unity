@@ -12530,6 +12530,7 @@ GameObject:
   - component: {fileID: 584142506}
   - component: {fileID: 584142505}
   - component: {fileID: 584142509}
+  - component: {fileID: 584142510}
   m_Layer: 3
   m_Name: LiftPlatform
   m_TagString: Untagged
@@ -12632,6 +12633,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 2
+--- !u!114 &584142510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 584142504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6265bcca2fdfb944a80fcb5cc333bd7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerAnimator: {fileID: 862557740}
+  player: {fileID: 1304532810}
 --- !u!1 &593726700
 GameObject:
   m_ObjectHideFlags: 0
@@ -12950,7 +12965,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 620028247}
-  m_LocalRotation: {x: 0.42246777, y: -0.14635779, z: 0.06933392, w: 0.8917921}
+  m_LocalRotation: {x: 0.4224678, y: -0.14635773, z: 0.06933388, w: 0.8917922}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -13742,7 +13757,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 765472163}
-  m_LocalRotation: {x: -0.041170552, y: 0.33896315, z: 0.014849523, w: 0.93978107}
+  m_LocalRotation: {x: -0.041170552, y: 0.33896312, z: 0.014849521, w: 0.93978107}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -14397,6 +14412,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: ed55b3819ac52b5449716a707ceceb34, type: 3}
+--- !u!95 &862557740 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 6581600037370739338, guid: e6291e133664247499f495df5236d1f7, type: 3}
+  m_PrefabInstance: {fileID: 483106619}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &865329356
 GameObject:
   m_ObjectHideFlags: 0
@@ -16461,6 +16481,11 @@ MonoBehaviour:
   underWaterText: {fileID: 1089019318}
   startPoint: {fileID: 593726701}
   numberOfSecondsToWait: 5
+--- !u!54 &1304532810 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 5616247939067976517, guid: e6291e133664247499f495df5236d1f7, type: 3}
+  m_PrefabInstance: {fileID: 483106619}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1337039212
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17363,7 +17388,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1598418632}
-  m_LocalRotation: {x: 0.43857664, y: -0.14507587, z: 0.07197766, w: 0.8839812}
+  m_LocalRotation: {x: 0.43857664, y: -0.14507583, z: 0.07197764, w: 0.8839812}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -19770,7 +19795,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2042795316}
-  m_LocalRotation: {x: 0.45458323, y: -0.14374258, z: 0.07460457, w: 0.8758575}
+  m_LocalRotation: {x: 0.45458326, y: -0.14374259, z: 0.07460459, w: 0.8758575}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
