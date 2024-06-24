@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
 
     public float jumpForce;
     public float jumpCooldown;
-    public float airMovementMultiplier = 0.1f;
+    public float airMovementMultiplier = 0.8f;
 
     public float velocity; //for ui purpose
 
