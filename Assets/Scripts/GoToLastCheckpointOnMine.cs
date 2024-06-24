@@ -71,6 +71,7 @@ public class GoToLastCheckpointOnMine : MonoBehaviour
             explosion.transform.position = player.transform.position;
             explosion.transform.rotation = player.transform.rotation;
             explosion.SetActive(true);
+            playerMovement.dead = true;
             animator.SetBool(isExplodingHash, true);
             StartCoroutine(RespawnPlayerWithDelay());
         }
@@ -85,10 +86,9 @@ public class GoToLastCheckpointOnMine : MonoBehaviour
         Debug.Log("colission");
         explosion.SetActive(false);
         animator.SetBool(isExplodingHash, false);
-        //if (playerMovement != null)
-        //{
-        //    playerMovement.dead = false;
-        //}
+        
+        playerMovement.dead = false;
+        
         playerMovement.enabled = true;
 
     }

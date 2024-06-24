@@ -27,6 +27,8 @@ public class PlayerMovement : MonoBehaviour
     public float maxSlopeAngle;
     private RaycastHit slopeHit;
 
+
+
     [Header("private")]
     [SerializeField]
     float horizontalI;
@@ -44,29 +46,12 @@ public class PlayerMovement : MonoBehaviour
     private float moveSpeedMultiplier;
     public bool sprinting = false;
     public bool crouching = false;
-    private bool _dead = false;
+    [SerializeField]
+    public bool dead = false;
 
     private Quaternion initialRotation;
 
-    public bool dead
-    {
-        get { return _dead; }
-        set
-        {
-            if (_dead != value)
-            {
-                _dead = value;
-                if (_dead)
-                {
-                    FreezeRotation();
-                }
-                else
-                {
-                    UnfreezeRotation();
-                }
-            }
-        }
-    }
+    
 
     // Start is called before the first frame update
     void Start()
@@ -81,39 +66,43 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
         //Debug.Log("level: " + SaveSystem.Load().currentLevel);
         touchGround = Physics.SphereCast(transform.position, 0.3f, Vector3.down, out RaycastHit hit, 1f, isGround);
 
         if (!dead)
         {
             inputControl();
+            speedLimit();
+
+            if (touchGround)
+            {
+                playerRigidbody.drag = groundDrag;
+            }
+            else
+            {
+                playerRigidbody.drag = 0;
+            }
+
+            velocity = playerRigidbody.velocity.magnitude;
+            velocityFlat = Math.Abs(playerRigidbody.velocity.x) + Math.Abs(playerRigidbody.velocity.z);
+            Debug.Log(Math.Abs(playerRigidbody.velocity.x) + Math.Abs(playerRigidbody.velocity.z));
         }
         else
         {
+            horizontalI = 0;
+            verticalI = 0;
             transform.rotation = initialRotation;
+            
         }
 
-        speedLimit();
-
-        if (touchGround)
-        {
-            playerRigidbody.drag = groundDrag;
-        }
-        else
-        {
-            playerRigidbody.drag = 0;
-        }
-
-        velocity = playerRigidbody.velocity.magnitude;
-        velocityFlat = Math.Abs(playerRigidbody.velocity.x) + Math.Abs(playerRigidbody.velocity.z);
-        Debug.Log(Math.Abs(playerRigidbody.velocity.x) + Math.Abs(playerRigidbody.velocity.z));
+        
         Debug.Log("x: " + Math.Abs(playerRigidbody.velocity.x) );
         Debug.Log("z: " + Math.Abs(playerRigidbody.velocity.z));
     }
 
     private void FixedUpdate()
     {
+        Debug.Log("dead: " + dead);
         if (!dead)
         {
             if (touchGround)
