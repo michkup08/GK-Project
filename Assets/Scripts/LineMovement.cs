@@ -60,6 +60,15 @@ public class LineMovement : MonoBehaviour
     /// <value><c>isAboveLine</c> is a flag indicating whether the player is currently above the line.</value>
     public bool isAboveLine = false;
 
+    /// <value><c>initialPlayerRotation</c> is the initial rotation of the player when moving under the line. It is used to set minimap icon rotation properly.</value>
+    private Quaternion initialPlayerRotation;
+
+    /// <value><c></c>minimapIcon</c> is the minimap icon of the player.</value>
+    Transform minimapIcon;
+
+    /// <value><c>minimapRotChangeY</c> is the rotation change in the y-axis for the minimap icon when moving under the line.</value>
+    private int minimapRotChangeY = 90;
+
     /// <summary>
     /// Calculates the direction of the line based on the collision.
     /// </summary>
@@ -106,6 +115,7 @@ public class LineMovement : MonoBehaviour
             calculateLineDirection(collision);
             if (collision.contacts.Length > 0)
             {
+                initialPlayerRotation = transform.rotation;
                 playerMovement.disableAirMovement();
                 ContactPoint contact = collision.GetContact(0);
                 float dotUp = Vector3.Dot(contact.normal, Vector3.up);
@@ -133,8 +143,8 @@ public class LineMovement : MonoBehaviour
                     playerObject.transform.rotation = Quaternion.LookRotation(lineDirection) * Quaternion.Euler(0, 90, 0);
 
                     // rotate minimap icon
-                    var minimapIcon = transform.Find("Ch24_nonPBR/MinimapPlayer");
-                    minimapIcon.transform.rotation = Quaternion.Euler(minimapIcon.transform.rotation.eulerAngles.x, minimapIcon.transform.rotation.eulerAngles.y + 90, minimapIcon.transform.rotation.eulerAngles.z);
+                    minimapRotChangeY = transform.rotation.y - initialPlayerRotation.y > 0 ? -90 : +90;
+                    minimapIcon.transform.rotation = Quaternion.Euler(minimapIcon.transform.rotation.eulerAngles.x, minimapIcon.transform.rotation.eulerAngles.y + minimapRotChangeY, minimapIcon.transform.rotation.eulerAngles.z);
                 }
             }
         }
@@ -151,8 +161,7 @@ public class LineMovement : MonoBehaviour
             if (!isAboveLine)
             {
                 // rotate minimap icon back to default
-                var minimapIcon = transform.Find("Ch24_nonPBR/MinimapPlayer");
-                minimapIcon.transform.rotation = Quaternion.Euler(minimapIcon.transform.rotation.eulerAngles.x, minimapIcon.transform.rotation.eulerAngles.y - 90, minimapIcon.transform.rotation.eulerAngles.z);
+                minimapIcon.transform.rotation = Quaternion.Euler(minimapIcon.transform.rotation.eulerAngles.x, minimapIcon.transform.rotation.eulerAngles.y - minimapRotChangeY, minimapIcon.transform.rotation.eulerAngles.z);
             }
 
             playerRigidbody.useGravity = true;
@@ -170,6 +179,7 @@ public class LineMovement : MonoBehaviour
         playerRigidbody = GetComponent<Rigidbody>();
         buttonPromptsController = GetComponent<ScreenHints>();
         playerMovement = playerOrientation.parent.GetComponent<PlayerMovement>();
+        minimapIcon = transform.Find("Ch24_nonPBR/MinimapPlayer");
     }
 
     /// <summary>
@@ -181,6 +191,7 @@ public class LineMovement : MonoBehaviour
         {
             var angle = Vector3.Angle(playerOrientation.forward, lineDirection);
             direction = angle > 90 ? -1 : 1;
+
             if (Input.GetKey(KeyCode.W))
             {
                 moveTime = 0.0f;
@@ -201,6 +212,19 @@ public class LineMovement : MonoBehaviour
                     playerRigidbody.useGravity = true;
                     isMovingOnLine = false;
                 }
+            }
+
+            // Check if the player is moving to avoid division by zero when normalizing the velocity vector
+            if (playerRigidbody.velocity != Vector3.zero)
+            {
+                // Calculate the direction from the velocity vector
+                Vector3 velocityDirection = playerRigidbody.velocity.normalized;
+
+                // Calculate the rotation that looks in the velocity direction with an up vector of Vector3.up
+                Quaternion targetRotation = Quaternion.LookRotation(velocityDirection, Vector3.up);
+
+                // Set the minimapIcon's rotation to match the target rotation, maintaining its current X and Z rotations
+                minimapIcon.transform.rotation = Quaternion.Euler(minimapIcon.transform.rotation.eulerAngles.x, targetRotation.eulerAngles.y, minimapIcon.transform.rotation.eulerAngles.z);
             }
 
             if (moveTime >= moveTimeMax)

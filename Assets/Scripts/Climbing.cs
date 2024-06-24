@@ -240,7 +240,7 @@ public class Climbing : MonoBehaviour
         else
         {
             isClimbing = false;
-            camera3P.disableRotation = false;
+            //camera3P.disableRotation = false;
         }
     }
 
