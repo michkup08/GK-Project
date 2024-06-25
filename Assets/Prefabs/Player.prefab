@@ -170,6 +170,7 @@ MonoBehaviour:
   jumpCooldown: 2
   airMovementMultiplier: 0.1
   velocity: 0
+  velocityFlat: 0
   maxSlopeAngle: 50
   horizontalI: 0
   verticalI: 0
@@ -178,6 +179,7 @@ MonoBehaviour:
   readyToJump: 0
   sprinting: 0
   crouching: 0
+  dead: 0
 --- !u!114 &5616247939067976522
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -272,11 +274,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 0}
-  playerObject: {fileID: 0}
+  playerObject: {fileID: 3100672541324822397}
   fullCooldown: 1.5
   activeCooldown: 0
-  dashForce: 25
-  dashLimit: 50
+  dashForce: 20
+  dashLimit: 400
   standardLimit: 25
 --- !u!114 &5616247939067976524
 MonoBehaviour:

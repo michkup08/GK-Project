@@ -15,7 +15,7 @@ public class MiniMapCamera : MonoBehaviour
     void LateUpdate()
     {
         // Set the position of the minimap camera to be above the player
-        transform.position = player.position + new Vector3(0, 10, 0);
+        transform.position = player.position + new Vector3(0, 15, 0);
 
         // Set the rotation of the minimap camera to match the player's y rotation
         transform.rotation = Quaternion.Euler(90, player.eulerAngles.y, 0);

@@ -85,7 +85,7 @@ public class PlayerMovement : MonoBehaviour
 
             velocity = playerRigidbody.velocity.magnitude;
             velocityFlat = Math.Abs(playerRigidbody.velocity.x) + Math.Abs(playerRigidbody.velocity.z);
-            Debug.Log(Math.Abs(playerRigidbody.velocity.x) + Math.Abs(playerRigidbody.velocity.z));
+            //Debug.Log(Math.Abs(playerRigidbody.velocity.x) + Math.Abs(playerRigidbody.velocity.z));
         }
         else
         {
@@ -96,13 +96,13 @@ public class PlayerMovement : MonoBehaviour
         }
 
         
-        Debug.Log("x: " + Math.Abs(playerRigidbody.velocity.x) );
-        Debug.Log("z: " + Math.Abs(playerRigidbody.velocity.z));
+        //Debug.Log("x: " + Math.Abs(playerRigidbody.velocity.x) );
+        //Debug.Log("z: " + Math.Abs(playerRigidbody.velocity.z));
     }
 
     private void FixedUpdate()
     {
-        Debug.Log("dead: " + dead);
+        //Debug.Log("dead: " + dead);
         if (!dead)
         {
             if (touchGround)
@@ -255,15 +255,5 @@ public class PlayerMovement : MonoBehaviour
     {
         return Vector3.Cross(Vector3.Cross(slopeHit.normal, Vector3.down), slopeHit.normal).normalized;
     }
-    private void FreezeRotation()
-    {
-        initialRotation = transform.rotation;
-        verticalI = 0f;
-        horizontalI = 0f;
-    }
 
-    private void UnfreezeRotation()
-    {
-
-    }
 }

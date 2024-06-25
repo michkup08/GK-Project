@@ -6,6 +6,7 @@ public class SoundEffectManager : MonoBehaviour
     public checkPointsMenager checkpointsmenager;
     public PlayerMovement playerMovement;
     public NPCController npcController;
+    public GoToLastCheckpointOnMine goToLastCheckpointOnMine;
     int lastState;
     float oldVelocity;
     bool letTalk = false;
@@ -17,6 +18,7 @@ public class SoundEffectManager : MonoBehaviour
     public AudioClip hanging;
     public AudioClip death;
     public AudioClip talk;
+    public AudioClip explosion;
 
     public float walkRunLimit = 10;
 
@@ -99,6 +101,14 @@ public class SoundEffectManager : MonoBehaviour
             else
             {
                 letTalk = false;
+            }
+        }
+        if (goToLastCheckpointOnMine)
+        {
+            if (goToLastCheckpointOnMine.exploding)
+            {
+                goToLastCheckpointOnMine.exploding = false;
+                source.PlayOneShot(explosion);
             }
         }
     }

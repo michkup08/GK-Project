@@ -5,9 +5,11 @@ public class GoToLastCheckpointOnMine : MonoBehaviour
 {
     public checkPointsMenager menager;
     public GameObject player;
+    public GameObject barrel;
     public PlayerMovement playerMovement;
     public Animator animator;
     public GameObject explosion;
+    public bool exploding = false;
     int isExplodingHash;
 
     void Start()
@@ -23,7 +25,10 @@ public class GoToLastCheckpointOnMine : MonoBehaviour
         if (other.tag == "Player")
         {
             StartCoroutine(RespawnPlayerWithDelay());
-            
+        }
+        if (other.tag == "Barrel")
+        {
+            StartCoroutine(RespawnBarrelWithDelay());
         }
     }
 
@@ -66,19 +71,25 @@ public class GoToLastCheckpointOnMine : MonoBehaviour
             //{
             //    playerMovement.dead = true;
             //}
-            playerMovement.enabled = false; //kur w   nic nie dziala na zablokowanie tej rotacji
-            player.transform.rotation = Quaternion.identity;
-            explosion.transform.position = player.transform.position;
-            explosion.transform.rotation = player.transform.rotation;
-            explosion.SetActive(true);
-            playerMovement.dead = true;
-            animator.SetBool(isExplodingHash, true);
+
             StartCoroutine(RespawnPlayerWithDelay());
+        }
+        if (collision.gameObject.tag == "Barrel")
+        {
+            StartCoroutine(RespawnBarrelWithDelay());
         }
     }
 
     private IEnumerator RespawnPlayerWithDelay()
     {
+        exploding = true;
+        playerMovement.enabled = false; //kur w   nic nie dziala na zablokowanie tej rotacji
+        player.transform.rotation = Quaternion.identity;
+        explosion.transform.position = player.transform.position;
+        explosion.transform.rotation = player.transform.rotation;
+        explosion.SetActive(true);
+        playerMovement.dead = true;
+        animator.SetBool(isExplodingHash, true);
         yield return new WaitForSeconds(3f);
 
         playerMovement.velocity = 0f;
@@ -90,6 +101,22 @@ public class GoToLastCheckpointOnMine : MonoBehaviour
         playerMovement.dead = false;
         
         playerMovement.enabled = true;
+
+
+    }
+
+    private IEnumerator RespawnBarrelWithDelay()
+    {
+        exploding = true;
+        explosion.transform.position = barrel.transform.position;
+        explosion.transform.rotation = barrel.transform.rotation;
+        explosion.SetActive(true);
+        barrel.SetActive(false);
+        yield return new WaitForSeconds(3f);
+        explosion.SetActive(false);
+        barrel.SetActive(true);
+        barrel.gameObject.transform.position = new Vector3(56.5f, 6, 122);
+        barrel.gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 90));
 
     }
 
