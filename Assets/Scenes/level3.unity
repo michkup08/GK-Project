@@ -5154,7 +5154,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 994579169}
-  m_LocalRotation: {x: 0.12201714, y: -0.70015407, z: 0.12334971, w: 0.6925901}
+  m_LocalRotation: {x: 0.12201712, y: -0.70015407, z: 0.12334972, w: 0.6925901}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -6024,7 +6024,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1182537624}
   - component: {fileID: 1182537623}
-  - component: {fileID: 1182537625}
   m_Layer: 0
   m_Name: checkpointsMenager
   m_TagString: Untagged
@@ -6061,20 +6060,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 39
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1182537625
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1182537622}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70a0e2c1eea977b42bed2b06a7a9211c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Player: {fileID: 126566595}
-  trigger: 0
 --- !u!1001 &1185361688
 PrefabInstance:
   m_ObjectHideFlags: 0
