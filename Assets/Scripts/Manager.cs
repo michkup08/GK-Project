@@ -1,14 +1,21 @@
 using UnityEngine;
 
+/// <summary>
+/// This class serves as a manager for general game functionalities.
+/// </summary>
 public class Manager : MonoBehaviour
 {
-    // Start is called before the first frame update
+    /// <summary>
+    /// Called before the first frame update. Uncommenting SaveSystem.Reset() would reset any necessary game state upon startup.
+    /// </summary>
     void Start()
     {
-        //SaveSystem.Reset();
+        // SaveSystem.Reset();
     }
 
-    // Update is called once per frame
+    /// <summary>
+    /// Called once per frame.
+    /// </summary>
     void Update()
     {
 
