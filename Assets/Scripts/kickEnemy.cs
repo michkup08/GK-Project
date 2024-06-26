@@ -37,7 +37,7 @@ public class kickEnemy : MonoBehaviour
                 EnemyMovement enemyMovement = other.GetComponent<EnemyMovement>();
                 if (enemyMovement != null)
                 {
-                    enemyMovement.GetKicked(); // Call the GetKicked method of the EnemyMovement script
+                    enemyMovement.GetKicked();
                 }
             }
         }
