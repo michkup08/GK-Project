@@ -2,48 +2,66 @@ using Cinemachine;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// This class controls the third-person camera behavior, including aiming and default camera modes.
+/// </summary>
 public class Camera3P : MonoBehaviour
 {
     [Header("ObjectsRef")]
+    /// <value> Reference to the orientation transform. </value>
     public Transform orientation;
+    /// <value> Reference to the player transform. </value>
     public Transform player;
+    /// <value> Reference to the player object transform. </value>
     public Transform playerObject;
+    /// <value> Reference to the Camera component. </value>
     public Camera cam;
 
     [Header("Variables")]
+    /// <value> Speed of camera rotation. </value>
     public float rotationSpeed;
+    /// <value> Direction the camera is looking at. </value>
     public Transform lookDir;
 
+    /// <value> Horizontal input value. </value>
     [SerializeField]
     float horizontalI;
+    /// <value> Vertical input value. </value>
     [SerializeField]
     float verticalI;
+    /// <value> Indicates if aiming mode is active. </value>
     public bool aim;
+    /// <value> UI Image to display when aiming. </value>
     public Image aimImage;
 
+    /// <value> Indicates if rotation is disabled. </value>
     public bool disableRotation;
 
-    public CinemachineFreeLook defaultCinemachine, aimCinemachine;
+    /// <value> Default Cinemachine camera for third-person view. </value>
+    public CinemachineFreeLook defaultCinemachine;
+    /// <value> Cinemachine camera for aiming view. </value>
+    public CinemachineFreeLook aimCinemachine;
 
+    /// <summary>
+    /// Initializes the camera settings and variables.
+    /// </summary>
     void Start()
     {
         aim = false;
         aimImage.enabled = aim;
         defaultCinemachine.Priority = 1;
         aimCinemachine.Priority = 0;
-
     }
 
-    // Update is called once per frame
+    /// <summary>
+    /// Updates the camera behavior each frame.
+    /// </summary>
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
             aim = !aim;
 
-
-            //defaultCinemachine.SetActive(!aim);
-            //aimCinemachine.SetActive(aim);
             if (aim)
             {
                 defaultCinemachine.Priority = 0;
@@ -56,7 +74,6 @@ public class Camera3P : MonoBehaviour
             }
             aimImage.enabled = aim;
         }
-
 
         if (!aim)
         {
@@ -78,5 +95,4 @@ public class Camera3P : MonoBehaviour
             playerObject.forward = lookAtDir;
         }
     }
-
 }
