@@ -1,28 +1,32 @@
 using UnityEngine;
 
+/// <summary>
+/// Controls the animation states of the player character based on various game conditions.
+/// </summary>
 public class PlayerAnimationStateController : MonoBehaviour
 {
     Animator animator;
+
     [SerializeField]
-    public PlayerMovement playerMovement;
-    public LineMovement lineMovement;
-    public advancedClimbing advancedClimbing;
-    public Ziplining ziplining;
-    //public GoToLastCheckpointOnMine goToLastCheckpointOnMine;
-    int isCrouchingHash;
-    int velocityHash;
-    int isJumpingHash;
-    int isWalkingOnLineHash;
-    int isWalkingUnderLineHash;
-    int isWalkingUnderLineDirectionHash;
-    int isHangingHash;
-    int isZipLiningHash;
-    int velocityFlatHash;
-    //int isExplodingHash;
+    public PlayerMovement playerMovement;   /// <value> Reference to the PlayerMovement script attached to the player object. </value>
+
+    public LineMovement lineMovement;       /// <value> Reference to the LineMovement script for handling line movement. </value>
+    public advancedClimbing advancedClimbing;   /// <value> Reference to the advancedClimbing script for advanced climbing behaviors. </value>
+    public Ziplining ziplining;         /// <value> Reference to the Ziplining script for handling ziplining mechanics. </value>
+
+    int isCrouchingHash;        /// <value> Hash for the "isCrouching" parameter in the animator. </value>
+    int velocityHash;           /// <value> Hash for the "Velocity" parameter in the animator. </value>
+    int isJumpingHash;          /// <value> Hash for the "isJumping" parameter in the animator. </value>
+    int isWalkingOnLineHash;    /// <value> Hash for the "isWalkingOnLine" parameter in the animator. </value>
+    int isWalkingUnderLineHash; /// <value> Hash for the "isWalkingUnderLine" parameter in the animator. </value>
+    int isWalkingUnderLineDirectionHash;    /// <value> Hash for the "isWalkingUnderLineDirection" parameter in the animator. </value>
+    int isHangingHash;          /// <value> Hash for the "isHanging" parameter in the animator. </value>
+    int isZipLiningHash;        /// <value> Hash for the "isZipLining" parameter in the animator. </value>
+    int velocityFlatHash;       /// <value> Hash for the "xVelocity" parameter in the animator. </value>
 
     // Start is called before the first frame update
     void Start()
-    {  
+    {
         animator = GetComponent<Animator>();
         isCrouchingHash = Animator.StringToHash("isCrouching");
         velocityHash = Animator.StringToHash("Velocity");
@@ -33,7 +37,6 @@ public class PlayerAnimationStateController : MonoBehaviour
         isWalkingUnderLineDirectionHash = Animator.StringToHash("isWalkingUnderLineDirection");
         isHangingHash = Animator.StringToHash("isHanging");
         isZipLiningHash = Animator.StringToHash("isZipLining");
-        //isExplodingHash = Animator.StringToHash("isExploding");
     }
 
     // Update is called once per frame
@@ -47,7 +50,7 @@ public class PlayerAnimationStateController : MonoBehaviour
         bool isWalkingUnderLineDirection = animator.GetBool(isWalkingUnderLineDirectionHash);
         bool isHanging = animator.GetBool(isHangingHash);
         bool isZipLining = animator.GetBool(isZipLiningHash);
-        //bool isExploding = animator.GetBool(isExplodingHash);
+
         if (playerMovement.touchGround || lineMovement.isMovingOnLine || advancedClimbing.canHandle || ziplining.isZiplining)
         {
             animator.SetBool(isJumpingHash, false);
@@ -68,7 +71,6 @@ public class PlayerAnimationStateController : MonoBehaviour
             if (playerMovement.velocity > 0.1)
             {
                 animator.SetFloat(velocityHash, playerMovement.velocity / 16);
-                
             }
             else
             {
@@ -139,15 +141,6 @@ public class PlayerAnimationStateController : MonoBehaviour
             animator.SetBool(isHangingHash, false);
             animator.SetBool(isWalkingUnderLineHash, false);
         }
-        //if (goToLastCheckpointOnMine.isBeingBlownUp)
-        //{
-        //    animator.SetBool(isExplodingHash, true);
-        //}
-        //else
-        //{
-        //    animator.SetBool(isExplodingHash, false);
-        //}
-        
 
         if (Input.GetMouseButtonDown(1))
         {
@@ -160,14 +153,11 @@ public class PlayerAnimationStateController : MonoBehaviour
 
         if (Input.GetKey(KeyCode.C))
         {
-            //Debug.Log("true");
             animator.SetBool("isFliping", true);
         }
         else
         {
-            //Debug.Log("false");
             animator.SetBool("isFliping", false);
         }
-
     }
 }
