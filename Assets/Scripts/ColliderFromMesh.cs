@@ -1,14 +1,23 @@
 using UnityEngine;
 
+/// <summary>
+/// This class creates a MeshCollider from a SkinnedMeshRenderer and updates it each frame.
+/// </summary>
 public class ColliderFromMesh : MonoBehaviour
 {
+    /// <value> Reference to the MeshCollider component. </value>
     private MeshCollider meshCollider;
+    /// <value> Reference to the SkinnedMeshRenderer component. </value>
     private SkinnedMeshRenderer skinnedMeshRenderer;
+    /// <value> Mesh used for the collider. </value>
     private Mesh colliderMesh;
 
+    /// <summary>
+    /// Initializes the components and sets up the MeshCollider.
+    /// </summary>
     void Start()
     {
-        // Pobierz SkinnedMeshRenderer z obiektu
+        // Get the SkinnedMeshRenderer from the object
         skinnedMeshRenderer = GetComponent<SkinnedMeshRenderer>();
         if (skinnedMeshRenderer == null)
         {
@@ -16,22 +25,25 @@ public class ColliderFromMesh : MonoBehaviour
             return;
         }
 
-        // Stwórz now¹ siatkê, która bêdzie przechowywaæ aktualn¹ pozycjê skórki
+        // Create a new mesh to hold the current skin position
         colliderMesh = new Mesh();
 
-        // Dodaj MeshCollider do obiektu
+        // Add MeshCollider to the object
         meshCollider = gameObject.AddComponent<MeshCollider>();
     }
 
+    /// <summary>
+    /// Updates the MeshCollider with the current baked mesh each frame.
+    /// </summary>
     void Update()
     {
-        // Wypiecz bie¿¹c¹ siatkê do colliderMesh
+        // Bake the current mesh into colliderMesh
         skinnedMeshRenderer.BakeMesh(colliderMesh);
 
-        // Ustaw wypieczon¹ siatkê jako sharedMesh w MeshCollider
+        // Set the baked mesh as the sharedMesh in MeshCollider
         meshCollider.sharedMesh = colliderMesh;
 
-        // Upewnij siê, ¿e collider ma odpowiedni¹ pozycjê i rotacjê
+        // Ensure the collider has the correct position and rotation
         meshCollider.transform.position = skinnedMeshRenderer.transform.position;
         meshCollider.transform.rotation = skinnedMeshRenderer.transform.rotation;
     }
